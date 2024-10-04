@@ -218,5 +218,5 @@ else
   - Логгер выведет сообщение об ошибке `['Some error 1']`, так как `proc1` добавляет ошибку в результат.
 - 
 ::: tip
-Работу с `Result` можно протестировать в [песочнице](https://github.com/bitrix24/b24jssdk/blob/main/playgrounds/jssdk/src/pages/core-result.vue).
+Работу с `Result` можно протестировать в [песочнице](https://github.com/bitrix24/b24jssdk/blob/main/playgrounds/jssdk/src/pages/2-core/use-result.vue).
 :::

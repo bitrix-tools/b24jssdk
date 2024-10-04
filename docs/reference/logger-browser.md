@@ -53,7 +53,7 @@ static build(
 
 
 ### Управление
-- `setConfig(types: LoggerType[]): void`: Устанавливает разрешенные типы сообщений.
+- `setConfig(types: Record<string|LoggerType, boolean>): void`: Устанавливает разрешенные типы сообщений.
 - `enable(type: LoggerType): boolean`: Включает конкретный тип сообщения. Возвращает `true`, если успешно, `false` в противном случае.
 - `disable(type: LoggerType): boolean`: Отключает конкретный тип сообщения. Возвращает `true`, если успешно, `false` в противном случае.
 - `isEnabled(type: LoggerType): boolean`: Проверяет, включен ли указанный тип лога. Возвращает `true`, если включен, `false` в противном случае.
@@ -97,5 +97,5 @@ logger.error('Это сообщение об ошибке.');
 Этот пример демонстрирует базовое использование `LoggerBrowser` для создания структурированного и настраиваемого журнала в браузере.
 
 ::: tip
-Работу с логгером можно протестировать в [песочнице](https://github.com/bitrix24/b24jssdk/blob/main/playgrounds/jssdk/src/pages/logger.vue).
+Работу с логгером можно протестировать в [песочнице](https://github.com/bitrix24/b24jssdk/blob/main/playgrounds/jssdk/src/pages/3-tools/use-logger.vue).
 :::

@@ -77,11 +77,27 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
 function sidebarReference(): DefaultTheme.SidebarItem[] {
 	return [
 		{
+			text: 'Использование',
+			collapsed: false,
+			items: [
+				{ text: 'Hook', link: 'hook' },
+			]
+		},
+		{
 			text: 'Ядро',
 			collapsed: false,
 			items: [
 				{ text: 'Result', link: 'core-result' },
 				{ text: 'Список языков', link: 'core-lang-list' },
+			]
+		},
+		{
+			text: 'Типы данных',
+			collapsed: false,
+			items: [
+				{ text: 'Общие', link: 'types-common' },
+				{ text: 'Сущности CRM', link: 'types-crm-entity' },
+				{ text: 'Для авторизации', link: 'types-auth' },
 			]
 		},
 		{
