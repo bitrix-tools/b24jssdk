@@ -1,0 +1,18 @@
+{
+	"name": "@bitrix24/b24jssdk-docs",
+	"private": true,
+	"version": "0.0.0",
+	"description": "",
+	"type": "module",
+	"devDependencies": {
+		"mini-svg-data-uri": "^1.4.4"
+	},
+	"dependencies": {
+		"@bitrix24/b24icons-vue": "^0.1.1",
+		"@bitrix24/b24style": "^0.1.2",
+		"tailwindcss": "^3.4.11",
+		"autoprefixer": "^10.4.20",
+		"postcss": "^8.4.47",
+		"@vueuse/core": "^11.1.0"
+	}
+}
