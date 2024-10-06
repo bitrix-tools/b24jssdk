@@ -98,6 +98,7 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 				{ text: 'Общие', link: 'types-common' },
 				{ text: 'Сущности CRM', link: 'types-crm-entity' },
 				{ text: 'Для авторизации', link: 'types-auth' },
+				{ text: 'Пользователь', link: 'types-user' },
 			]
 		},
 		{
