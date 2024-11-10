@@ -6,12 +6,12 @@ outline: deep
 
 Эти перечисления определяют типы сущностей CRM, используемые в Bitrix24.
 
-Они помогают идентифицировать различные сущности в системе CRM, такие как лиды, сделки, контакты и другие.
+Они помогают идентифицировать различные сущности в системе CRM (лиды, сделки, контакты и другие).
 
 ## EnumCrmEntityType
 
-```js
-import { EnumCrmEntityTypeId } from '@bitrix24/b24jssdk/types/crm'
+```ts
+import { EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
 
 console.log(EnumCrmEntityTypeId.deal)
 ```
@@ -32,24 +32,28 @@ console.log(EnumCrmEntityTypeId.deal)
 
 ## EnumCrmEntityTypeId
 
-```js
-import { EnumCrmEntityTypeId } from '@bitrix24/b24jssdk/types/crm'
+```ts
+import { EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
 
 console.log(EnumCrmEntityTypeId.deal)
 ```
 
 `EnumCrmEntityTypeId` представляет числовые идентификаторы типов сущностей CRM:
 
-| Ключ     | Значение | Описание                 |
-|--------------|---------------|--------------------------|
-| `undefined`  | 0             | Неопределенный тип       |
-| `lead`       | 1             | Лид                      |
-| `deal`       | 2             | Сделка                   |
-| `contact`    | 3             | Контакт                  |
-| `company`    | 4             | Компания                 |
-| `oldInvoice` | 5             | Старая версия счета      |
-| `invoice`    | 31            | Счет                     |
-| `quote`      | 7             | Коммерческое предложение |
-| `requisite`  | 8             | Реквизит                 |
+| Ключ         | Значение | Описание                 |
+|--------------|----------|--------------------------|
+| `undefined`  | 0        | Неопределенный тип       |
+| `lead`       | 1        | Лид                      |
+| `deal`       | 2        | Сделка                   |
+| `contact`    | 3        | Контакт                  |
+| `company`    | 4        | Компания                 |
+| `oldInvoice` | 5        | Старая версия счета      |
+| `invoice`    | 31       | Счет                     |
+| `quote`      | 7        | Коммерческое предложение |
+| `requisite`  | 8        | Реквизит                 |
 
 Эти перечисления могут быть использованы для работы с различными типами сущностей в CRM Bitrix24, обеспечивая удобный способ их идентификации и обработки.
+
+::: tip
+Работу с **EnumCrmEntityTypeId** можно протестировать в [примере](https://github.com/bitrix24/b24sdk-examples/blob/main/js/02-nuxt-hook/pages/hook/crm-item-list.client.vue).
+:::
