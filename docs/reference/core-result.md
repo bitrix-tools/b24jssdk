@@ -8,13 +8,13 @@ outline: deep
 
 Он аналогичен классу `\Bitrix\Main\Result` из Bitrix Framework.
 
-## Интерфейс IResult
+## Интерфейс `IResult`
 
-```js
-import { type IResult } from '@bitrix24/b24jssdk/core/result'
+```ts
+import { type IResult } from '@bitrix24/b24jssdk'
 ```
 
-Интерфейс `IResult` определяет структуру и методы объекта результата:
+Интерфейс `IResult` определяет структуру и методы объекта `Result`:
 
 - `isSuccess`: Указывает, завершилась ли операция успешно (без ошибок).
 - `setData(data: any): IResult`: Устанавливает данные, связанные с результатом.
@@ -25,10 +25,10 @@ import { type IResult } from '@bitrix24/b24jssdk/core/result'
 - `getErrorMessages(): string[]`: Возвращает массив строк с сообщениями об ошибках.
 - `[Symbol.toPrimitive](hint: string): string | number`: Преобразует объект `Result` в примитивное значение.
 
-## Класс Result
+## Класс `Result`
 
-```js
-import { Result } from '@bitrix24/b24jssdk/core/result'
+```ts
+import { Result } from '@bitrix24/b24jssdk'
 
 const result = new Result()
 ```
@@ -116,8 +116,7 @@ toString(): string
 ## Пример использования
 
 ```ts
-import { Result } from '@bitrix24/b24jssdk/core/result'
-import { LoggerBrowser } from '@bitrix24/b24jssdk/logger/browser';
+import { Result, LoggerBrowser } from '@bitrix24/b24jssdk'
 
 const logger = LoggerBrowser.build(
 	'Demo: Result',
@@ -215,8 +214,9 @@ else
       - Если `proc2` успешен, данные из `proc2` объединяются с текущими данными.
 - **Итог**
   - Функция `proc1` всегда возвращает ошибку, поэтому итоговый результат будет неуспешным.
-  - Логгер выведет сообщение об ошибке `['Some error 1']`, так как `proc1` добавляет ошибку в результат.
+  - `logger.log` выведет сообщение об ошибке `['Some error 1']`, так как `proc1` добавляет ошибку в результат.
 - 
+
 ::: tip
-Работу с `Result` можно протестировать в [песочнице](https://github.com/bitrix24/b24jssdk/blob/main/playgrounds/jssdk/src/pages/2-core/use-result.vue).
+Работу с **Result** можно протестировать в [примере](https://github.com/bitrix24/b24sdk-examples/blob/main/js/02-nuxt-hook/pages/core/use-result.client.vue).
 :::
