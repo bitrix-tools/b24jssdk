@@ -11,8 +11,8 @@ outline: deep
 
 ## Описание
 
-```js
-import { B24LangList } from '@bitrix24/b24jssdk/core/language/list'
+```ts
+import { B24LangList } from '@bitrix24/b24jssdk'
 ```
 
 Перечисление `B24LangList` содержит следующие языковые коды:
