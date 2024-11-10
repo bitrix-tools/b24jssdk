@@ -89,7 +89,7 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 			items: [
 				{ text: 'Result', link: 'core-result' },
 				{ text: 'Список языков', link: 'core-lang-list' },
-				{ text: 'Логирование в браузере', link: 'logger-browser' },
+				{ text: '(*) Логирование в браузере', link: 'logger-browser' },
 			]
 		},
 		{
