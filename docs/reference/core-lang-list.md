@@ -19,26 +19,30 @@ import { B24LangList } from '@bitrix24/b24jssdk/core/language/list'
 
 | Code | Language           |
 |------|--------------------|
-| en | English            |
-| de | Deutsch            |
-| la | Español            |
-| br | Português (Brasil) |
-| fr | Français           |
-| it | Italiano           |
-| pl | Polski             |
-| ru | Русский            |
-| ua | Українська         |
-| tr | Türkçe             |
-| sc | 中文（简体）	       |
-| tc | 中文（繁體）         |
-| ja | 日本語              |
-| vn | Tiếng Việt         |
-| id | Bahasa Indonesia   |
-| ms | Bahasa Melayu      |
-| th | ภาษาไทย            |
-| ar | عربي,              |
+| en   | English            |
+| de   | Deutsch            |
+| la   | Español            |
+| br   | Português (Brasil) |
+| fr   | Français           |
+| it   | Italiano           |
+| pl   | Polski             |
+| ru   | Русский            |
+| ua   | Українська         |
+| tr   | Türkçe             |
+| sc   | 中文（简体）             |
+| tc   | 中文（繁體）             |
+| ja   | 日本語                |
+| vn   | Tiếng Việt         |
+| id   | Bahasa Indonesia   |
+| ms   | Bahasa Melayu      |
+| th   | ภาษาไทย            |
+| ar   | عربي,              |
 
 ## Примечания
 
-- В облочной версии Bitrix24 поддерживается широкий спектр языков, как указано в перечислении.
+- В облачной версии Bitrix24 поддерживается широкий спектр языков, как указано в перечислении.
 - Для коробочной версии Bitrix24 обычно поддерживается 1-2 языка, что следует учитывать при разработке и настройке локализации.
+
+::: tip
+Работу с **B24LangList** можно протестировать в [примере](https://github.com/bitrix24/b24sdk-examples/blob/main/js/03-nuxt-frame/pages/index.client.vue).
+:::

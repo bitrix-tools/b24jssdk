@@ -97,5 +97,5 @@ logger.error('This is an error message.')
 Этот пример демонстрирует базовое использование `LoggerBrowser` для создания структурированного и настраиваемого журнала в браузере.
 
 ::: tip
-Работу с LoggerBrowser можно протестировать в [песочнице](https://github.com/bitrix24/b24jssdk/blob/main/playgrounds/jssdk/pages/tools/use-logger.client.vue).
+Работу с **LoggerBrowser** можно протестировать в [примере](https://github.com/bitrix24/b24sdk-examples/blob/main/js/02-nuxt-hook/pages/tools/use-logger.client.vue).
 :::
