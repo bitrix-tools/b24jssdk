@@ -38,7 +38,7 @@ import { LoggerBrowser } from '@bitrix24/b24jssdk/logger/browser'
 
 
 ### Создание {#LoggerBrowser-build}
-```ts
+```typescript
 static build(
 	title: string,
 	isDevelopment: boolean = false
@@ -97,5 +97,5 @@ logger.error('Это сообщение об ошибке.');
 Этот пример демонстрирует базовое использование `LoggerBrowser` для создания структурированного и настраиваемого журнала в браузере.
 
 ::: tip
-Работу с логгером можно протестировать в [песочнице](https://github.com/bitrix24/b24jssdk/blob/main/playgrounds/jssdk/src/pages/3-tools/use-logger.vue).
+Работу с LoggerBrowser можно протестировать в [песочнице](https://github.com/bitrix24/b24jssdk/blob/main/playgrounds/jssdk/pages/tools/use-logger.client.vue).
 :::
