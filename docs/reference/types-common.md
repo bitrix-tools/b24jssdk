@@ -4,9 +4,22 @@ outline: deep
 
 # Типы данных и структуры
 
-```js
-import * as TypesCommon from "@bitrix24/b24jssdk/types/common"
+```ts
+import type {
+	NumberString,
+	ISODate,
+	BoolString,
+	GenderString,
+	PlacementViewMode,
+	Fields,
+	MultiField,
+	MultiFieldArray,
+	UserFieldType
+} from '@bitrix24/b24jssdk'
+
+import { DataType } from '@bitrix24/b24jssdk'
 ```
+
 Это различные типы данных и структуры, используемые в приложениях, интегрированных с Bitrix24.
 
 Он включает в себя типы строк, представляющих числа, даты, булевы значения и другие специфические форматы данных.
@@ -51,15 +64,15 @@ import * as TypesCommon from "@bitrix24/b24jssdk/types/common"
 
 ### Fields
 
-| Поле         | Тип       | Описание           |
-|--------------|-----------|--------------------|
-| `type        | `string`  | Тип поля           |
-| `isRequired  | `boolean` | Обязательное поле  |
-| `isReadOnly  | `boolean` | Только для чтения  |
-| `isImmutable | `boolean` | Неизменяемое поле  |
-| `isMultiple  | `boolean` | Множественное поле |
-| `isDynamic   | `boolean` | Динамическое поле  |
-| `title       | `string`  | Заголовок поля     |
+| Поле          | Тип       | Описание           |
+|---------------|-----------|--------------------|
+| `type`        | `string`  | Тип поля           |
+| `isRequired`  | `boolean` | Обязательное поле  |
+| `isReadOnly`  | `boolean` | Только для чтения  |
+| `isImmutable` | `boolean` | Неизменяемое поле  |
+| `isMultiple`  | `boolean` | Множественное поле |
+| `isDynamic`   | `boolean` | Динамическое поле  |
+| `title`       | `string`  | Заголовок поля     |
 
 ### MultiField
 
@@ -112,3 +125,7 @@ import * as TypesCommon from "@bitrix24/b24jssdk/types/common"
 | `crmCurrency` | `crm_currency` | Валюта CRM      |
 
 Эти типы и структуры данных могут быть использованы для описания и работы с различными сущностями и полями в Bitrix24.
+
+::: tip
+Работу с **ISODate** можно протестировать в [примере](https://github.com/bitrix24/b24sdk-examples/blob/main/js/02-nuxt-hook/pages/hook/crm-item-list.client.vue).
+:::
