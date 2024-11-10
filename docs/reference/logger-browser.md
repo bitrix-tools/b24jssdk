@@ -12,7 +12,7 @@ outline: deep
 `LoggerType` - это перечисление (enum), которое определяет различные уровни сообщений журнала:
 
 ```js
-import { LoggerType } from '@bitrix24/b24jssdk/logger/browser'
+import { LoggerType } from '@bitrix24/b24jssdk'
 ```
 
 | Код       | По умолчанию | Описание                                                                                                       |
@@ -28,7 +28,7 @@ import { LoggerType } from '@bitrix24/b24jssdk/logger/browser'
 ## LoggerBrowser {#class-logger-browser}
 
 ```js
-import { LoggerBrowser } from '@bitrix24/b24jssdk/logger/browser'
+import { LoggerBrowser } from '@bitrix24/b24jssdk'
 ```
 
 Класс `LoggerBrowser` предоставляет методы для:
@@ -38,7 +38,7 @@ import { LoggerBrowser } from '@bitrix24/b24jssdk/logger/browser'
 
 
 ### Создание {#LoggerBrowser-build}
-```typescript
+```ts
 static build(
 	title: string,
 	isDevelopment: boolean = false
@@ -71,12 +71,12 @@ static build(
 - `trace(...params: any[]): void`: Выводит сообщение на уровне **trace**.
 
 ## Пример
-```js
-import { LoggerBrowser, LoggerType } from '@bitrix24/b24jssdk/logger/browser'
+```ts
+import { LoggerBrowser, LoggerType } from '@bitrix24/b24jssdk'
 
 const logger = LoggerBrowser.build(
 	'MyApp',
-	import.meta.env?.DEV === true // or process.env?.NODE_ENV ===  'development'
+	import.meta.env?.DEV === true // or process.env?.NODE_ENV === 'development'
 )
 
 logger.info('>> start >>>')
@@ -86,12 +86,12 @@ if(process.env.NODE_ENV === 'development')
 	logger.enable(LoggerType.log)
 }
 
-logger.log('Выполняется обработка данных');
-logger.info('Это информационное сообщение.');
-logger.warn('Возникло потенциальное предупреждение');
-logger.error('Это сообщение об ошибке.');
+logger.log('Processing data')
+logger.info('This is an informational message.')
+logger.warn('A potential warning occurred')
+logger.error('This is an error message.')
 
-// ... другие логические сообщения ////
+// ... other logical messages ////
 ```
 
 Этот пример демонстрирует базовое использование `LoggerBrowser` для создания структурированного и настраиваемого журнала в браузере.
