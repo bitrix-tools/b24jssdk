@@ -44,7 +44,8 @@ export const shared = defineConfig({
 				},
 				link: 'https://t.me/b24marketlive'
 			},
-			{icon: 'github', link: 'https://github.com/bitrix24/b24jssdk'}
+			{ icon: 'github', link: 'https://github.com/bitrix24/b24jssdk' },
+			{ icon: 'npm', link: 'https://www.npmjs.com/package/@bitrix24/b24jssdk' }
 		],
 	},
 	vite: {
