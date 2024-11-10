@@ -1,7 +1,7 @@
 ---
 outline: deep
 ---
-# Logger for browser {#logger-for-browser}
+# Логирование в браузере {#logger-for-browser}
 
 Класс `LoggerBrowser` предоставляет структурированный способ ведения логов в браузерной среде с различными уровнями логирования и стилями.
 

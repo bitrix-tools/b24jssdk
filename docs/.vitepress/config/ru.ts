@@ -89,6 +89,7 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 			items: [
 				{ text: 'Result', link: 'core-result' },
 				{ text: 'Список языков', link: 'core-lang-list' },
+				{ text: 'Логирование в браузере', link: 'logger-browser' },
 			]
 		},
 		{
@@ -100,13 +101,6 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 				{ text: 'Для авторизации', link: 'types-auth' },
 				{ text: 'Пользователь', link: 'types-user' },
 			]
-		},
-		{
-			text: 'Логгер',
-			collapsed: false,
-			items: [
-				{ text: 'Логирование в браузере', link: 'logger-browser' },
-			]
-		},
+		}
 	]
 }
