@@ -150,7 +150,7 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 				{ text: 'TypeHttp', link: 'types-type-http' },
 				{ text: 'TypeRestrictionManagerParams', link: 'types-type-restriction-manager-params' },
 				{ text: 'IRequestIdGenerator', link: 'types-interface-irequest-id-generator' },
-				{ text: 'IResult', link: 'types-type-iresult' },
+				{ text: 'IResult', link: 'types-interface-iresult' },
 				{ text: 'Общие', link: 'types-common' },
 				{ text: 'Сущности CRM', link: 'types-crm-entity' },
 			]
