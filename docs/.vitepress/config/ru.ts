@@ -47,7 +47,7 @@ export const ru = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
 	return [
 		{text: 'Быстрый старт', link: '/guide/getting-started'},
-		{text: 'Справочник', link: '/reference/abstract-b24'},
+		{text: 'Справочник', link: '/reference/core-abstract-b24'},
 		{
 			text: configParams.version,
 			items: [
