@@ -47,7 +47,7 @@ export const ru = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
 	return [
 		{text: 'Быстрый старт', link: '/guide/getting-started'},
-		{text: 'Справочник', link: '/reference/frame'},
+		{text: 'Справочник', link: '/reference/abstract-b24'},
 		{
 			text: configParams.version,
 			items: [
@@ -77,26 +77,75 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
 function sidebarReference(): DefaultTheme.SidebarItem[] {
 	return [
 		{
-			text: 'Использование',
+			text: 'Ядро',
 			collapsed: false,
 			items: [
-				{ text: '(~) Frame', link: 'frame' },
+				{ text: 'AbstractB24', link: 'core-abstract-b24' },
+				{ text: 'Http', link: 'core-http' },
+				{ text: 'Менеджер ограничений', link: 'core-restriction-manager' },
+				{ text: 'Генератор уникальных идентификаторов', link: 'core-request-id-generator' },
+				{ text: 'Result', link: 'core-result' },
+				{ text: 'AjaxResult', link: 'core-ajax-result' },
+				{ text: 'Список языков', link: 'core-lang-list' },
+				{ text: 'Логирование', link: 'core-logger-browser' },
+			]
+		},
+		{
+			text: 'Hook',
+			collapsed: false,
+			items: [
 				{ text: '(*) Hook', link: 'hook' },
 			]
 		},
 		{
-			text: 'Ядро',
+			text: 'Frame',
 			collapsed: false,
 			items: [
-				{ text: 'Result', link: 'core-result' },
-				{ text: 'Список языков', link: 'core-lang-list' },
-				{ text: 'Логирование в браузере', link: 'logger-browser' },
+				{ text: '(~) Frame', link: 'frame' },
+			]
+		},
+		{
+			text: 'Push and Pull',
+			collapsed: false,
+			items: [
+				{ text: 'pull client', link: 'pull-client' },
+			]
+		},
+		{
+			text: 'Инструменты',
+			collapsed: false,
+			items: [
+				{ text: 'Type', link: 'tools-type' },
+				{ text: 'Text', link: 'tools-text' },
+				{ text: 'Browser', link: 'tools-browser' },
+				{ text: 'useFormatter', link: 'tools-use-formatters' },
+				{ text: 'DateTime', link: 'tools-date-time' },
+			]
+		},
+		{
+			text: 'Вспомогательные методы',
+			collapsed: false,
+			items: [
+				{ text: 'useB24Helper', link: 'helper-use-b24-helper' },
+				{ text: 'B24HelperManager', link: 'helper-helper-manager' },
+				{ text: 'AbstractHelper', link: 'helper-abstract-helper' },
+				{ text: 'AppManager', link: 'helper-app-manager' },
+				{ text: 'LicenseManager', link: 'helper-license-manager' },
+				{ text: 'PaymentManager', link: 'helper-payment-manager' },
+				{ text: 'ProfileManager', link: 'helper-profile-manager' },
+				{ text: 'CurrencyManager', link: 'helper-currency-manager' },
+				{ text: 'OptionsManager', link: 'helper-options-manager' },
 			]
 		},
 		{
 			text: 'Типы данных',
 			collapsed: false,
 			items: [
+				{ text: 'TypeB24', link: 'types-type-b24' },
+				{ text: 'TypeHttp', link: 'types-type-http' },
+				{ text: 'TypeRestrictionManagerParams', link: 'types-type-restriction-manager-params' },
+				{ text: 'IRequestIdGenerator', link: 'types-interface-irequest-id-generator' },
+				{ text: 'IResult', link: 'types-type-iresult' },
 				{ text: 'Общие', link: 'types-common' },
 				{ text: 'Сущности CRM', link: 'types-crm-entity' },
 			]
