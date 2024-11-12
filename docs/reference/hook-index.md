@@ -1,26 +1,18 @@
 ---
 outline: deep
 ---
-# Hook
+# Класс `B24Hook` {#B24Hook}
 
-@todo
+Предназначен для управления вебхуками Битрикс24. Он наследует функциональность от [`AbstractB24`](core-abstract-b24) и 
+предоставляет методы для работы с аутентификацией через вебхуки.
 
-Этот код предоставляет реализацию класса `B24Hook`, который используется для работы с веб-хуками в Битрикс24.
+Реализует интерфейс [`TypeB24`](types-type-b24).
 
-## Класс `B24Hook`
+::: tip
+Работу с **B24Hook** можно протестировать в [примере](https://github.com/bitrix24/b24sdk-examples/blob/main/js/02-nuxt-hook/pages/hook/crm-item-list.client.vue).
+:::
 
-```ts
-import { B24Hook } from '@bitrix24/b24jssdk'
-const B24 = new B24Hook({
-	b24Url: 'https://your_domain.bitrix24.com',
-	userId: 123,
-	secret: 'k32t88gf3azpmwv3',
-})
-```
-
-`B24Hook` расширяет [`AbstractB24`](abstract-b24) и используется для управления веб-хуками в Битрикс24.
-
-### Конструктор
+## Конструктор {#constructor}
 
 ```ts
 constructor(b24HookParams: B24HookParams)
@@ -35,11 +27,18 @@ constructor(b24HookParams: B24HookParams)
 | `userId` | `number` | Идентификатор пользователя.                                                |
 | `secret` | `string` | Секретный ключ.                                                            |
 
-## Использование
+## Методы {#methods}
+::: info
+Реализует интерфейс [`TypeB24`](types-type-b24).
+:::
 
-Класс `B24Hook` обеспечивает взаимодействие с API Битрикс24 через веб-хуки.
+## Использование {#usage}
 
-Этот класс может быть использован для интеграции приложений с Битрикс24, обеспечивая взаимодействие с API через веб-хуки.
+Этот код создает экземпляр `B24Hook` для взаимодействия с API Битрикс24 и выполняет пакетный запрос для получения списка компаний,
+сортируя их по идентификатору в порядке убывания.
+
+Полученные данные преобразуются в массив объектов с полями `id`, `title` и `createdTime`, после чего результаты выводятся в консоль,
+а в случае ошибки выводится сообщение об ошибке.
 
 ```ts
 import { 
@@ -47,65 +46,47 @@ import {
 	Text,
 	EnumCrmEntityTypeId,
 	LoggerBrowser,
-    Result
+	Result,
+	type ISODate
 } from '@bitrix24/b24jssdk'
 
-const logger = LoggerBrowser.build(
-	'MyApp',
-	true
-)
+const $logger = LoggerBrowser.build('MyApp', true)
 
-const B24 = new B24Hook({
+const $b24 = new B24Hook({
 	b24Url: 'https://your_domain.bitrix24.com',
 	userId: 123,
 	secret: 'k32t88gf3azpmwv3',
 })
-B24.setLogger(logger)
 
-B24.callBatch(
-	{
-		CompanyList: {
-			method: 'crm.item.list',
-			params: {
-				entityTypeId: EnumCrmEntityTypeId.company,
-				order: { id: 'desc' },
-				select: [
-					'id',
-					'title',
-					'createdTime'
-				]
-			}
+$b24.callBatch({
+	CompanyList: {
+		method: 'crm.item.list',
+		params: {
+			entityTypeId: EnumCrmEntityTypeId.company,
+			order: { id: 'desc' },
+			select: [
+				'id',
+				'title',
+				'createdTime'
+			]
 		}
-	},
-	true
-)
+	}
+}, true)
 .then((response: Result) => {
 	const data = response.getData()
-	
-	const dataList = (data.CompanyList.items || []).map((item) => {
+	const dataList = (data.CompanyList.items || []).map((item: any) => {
 		return {
 			id: Number(item.id),
 			title: item.title,
 			createdTime: Text.toDateTime(item.createdTime as ISODate)
 		}
 	})
-	
-	logger.info('response >> ', dataList)
+	$logger.info('response >> ', dataList)
 })
-.catch((error: Error|string) => {
-	logger.error(error)
+.catch((error) => {
+	$logger.error(error)
 })
 .finally(() => {
-	logger.info('load >> stop ')
+	$logger.info('load >> stop ')
 })
 ```
-
-Этот код создает экземпляр `B24Hook` для взаимодействия с API Битрикс24 и выполняет пакетный запрос для получения списка компаний, 
-сортируя их по идентификатору в порядке убывания.
-
-Полученные данные преобразуются в массив объектов с полями `id`, `title` и `createdTime`, после чего результаты выводятся в консоль, 
-а в случае ошибки выводится сообщение об ошибке.
-
-::: tip
-Работу с **B24Hook** можно протестировать в [примере](https://github.com/bitrix24/b24sdk-examples/blob/main/js/02-nuxt-hook/pages/hook/crm-item-list.client.vue).
-:::

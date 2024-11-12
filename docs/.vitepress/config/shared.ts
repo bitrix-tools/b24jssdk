@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vitepress'
 import { configParams } from './params'
+import { search as ruSearch } from './ru'
 
 /**
  * @memo fix
@@ -47,6 +48,14 @@ export const shared = defineConfig({
 			{ icon: 'github', link: 'https://github.com/bitrix24/b24jssdk' },
 			{ icon: 'npm', link: 'https://www.npmjs.com/package/@bitrix24/b24jssdk' }
 		],
+		search: {
+			provider: 'local',
+			options: {
+				locales: {
+					...ruSearch,
+				}
+			}
+		},
 	},
 	vite: {
 		define: {

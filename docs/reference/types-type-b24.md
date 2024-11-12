@@ -1,19 +1,18 @@
 ---
 outline: deep
 ---
-# Тип `TypeB24`
+# Тип `TypeB24` {#TypeB24}
 
 ```ts
 import { type TypeB24 } from '@bitrix24/b24jssdk'
 ```
 
-## Свойства
-| Свойство | Тип           | Описание                                                                                                                                                 |
-|----------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `isInit` | `boolean`     | Указывает, инициализированы ли данные. Подробнее: [документация](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-init.html) |
-| `auth`   | `AuthActions` | Действия аутентификации.                                                                                                                                 |
+## Свойства {#properties}
 
-## Функции
+- **`isInit`**: `boolean` - Указывает, инициализированы ли данные. [Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-init.html)
+- **`auth`**: [`AuthActions`](https://github.com/bitrix24/b24jssdk/blob/main/packages/jssdk/src/types/auth.ts) - Возвращает интерфейс для работы с авторизацией.
+
+## Методы {#methods}
 
 ### `init(): Promise<void>`
 
@@ -38,10 +37,12 @@ import { type TypeB24 } from '@bitrix24/b24jssdk'
 ### `getTargetOrigin(): string`
 
 Возвращает адрес Битрикс24 (например, `https://name.bitrix24.com`).
+[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-get-domain.html)
 
 ### `getTargetOriginWithPath(): string`
 
 Возвращает адрес rest-api Битрикс24 (например, `https://name.bitrix24.com/rest`).
+[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-get-domain.html)
 
 ### `callMethod(method: string, params?: object, start?: number): Promise<AjaxResult>`
 
@@ -91,6 +92,8 @@ import { type TypeB24 } from '@bitrix24/b24jssdk'
 | `isHaltOnError` | `boolean`            | Прекращение выполнения при ошибке. |
 
 Возвращает `Promise`, который разрешается в [`AjaxResult`](core-ajax-result)
+
+Подробнее: [документация](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/how-to-call-rest-methods/bx24-call-batch.html)
 
 ### `callBatchByChunk(calls: Array<any>, isHaltOnError: boolean): Promise<Result>`
 

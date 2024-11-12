@@ -77,22 +77,24 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
 function sidebarReference(): DefaultTheme.SidebarItem[] {
 	return [
 		{
-			text: 'Hook',
+			text: 'Входящий вебхук',
 			collapsed: false,
 			items: [
-				{ text: '(*) Hook', link: 'hook-index' },
+				{ text: 'B24Hook', link: 'hook-index' },
 			]
 		},
 		{
-			text: 'Frame',
-			collapsed: true,
+			text: 'Приложение',
+			collapsed: false,
 			items: [
-				{ text: '(~) Frame', link: 'frame-index' },
-				{ text: 'System Functions', link: 'frame-system-functions' },
-				{ text: 'Additional Functions', link: 'frame-additional-functions' },
-				{ text: 'System Dialogues', link: 'frame-system-dialogues' },
-				{ text: 'Options', link: 'frame-options' },
-				{ text: 'Placement', link: 'frame-placement' },
+				{ text: 'Инициализации', link: 'frame-initialize-b24-frame' },
+				{ text: 'B24Frame', link: 'frame-index' },
+				{ text: 'Auth Manager', link: 'frame-auth' },
+				{ text: 'Parent Manager', link: 'frame-parent' },
+				{ text: 'Slider Manager', link: 'frame-slider' },
+				{ text: 'Placement Manager', link: 'frame-placement' },
+				{ text: 'Options Manager', link: 'frame-options' },
+				{ text: 'Dialog Manager', link: 'frame-dialog' },
 			]
 		},
 		{
@@ -156,4 +158,31 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 			]
 		}
 	]
+}
+
+export const search: DefaultTheme.LocalSearchOptions['locales'] = {
+	// ru: {
+	root: {
+		translations: {
+			button: {
+				buttonText: 'Поиск',
+				buttonAriaLabel: 'Поиск'
+			},
+			modal: {
+				displayDetails: 'Отобразить подробный список',
+				resetButtonTitle: 'Сбросить поиск',
+				backButtonTitle: 'Закрыть поиск',
+				noResultsText: 'Нет результатов по запросу',
+				footer: {
+					selectText: 'выбрать',
+					selectKeyAriaLabel: 'выбрать',
+					navigateText: 'перейти',
+					navigateUpKeyAriaLabel: 'стрелка вверх',
+					navigateDownKeyAriaLabel: 'стрелка вниз',
+					closeText: 'закрыть',
+					closeKeyAriaLabel: 'esc'
+				}
+			}
+		}
+	}
 }
