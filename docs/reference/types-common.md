@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Типы данных и структуры
+# Типы данных и структуры {#common}
 
 ```ts
 import type {
@@ -24,7 +24,7 @@ import { DataType } from '@bitrix24/b24jssdk'
 
 Он включает в себя типы строк, представляющих числа, даты, булевы значения и другие специфические форматы данных.
 
-## Типы данных
+## Типы данных {#DataTypes}
 
 ### NumberString
 
@@ -37,6 +37,10 @@ import { DataType } from '@bitrix24/b24jssdk'
 | Тип      | Описание                                                          |
 |----------|-------------------------------------------------------------------|
 | `string` | Строка в формате ISO даты, например, `2018-06-07T03:00:00+03:00`. |
+
+::: tip
+Работу с **ISODate** можно протестировать в [примере](https://github.com/bitrix24/b24sdk-examples/blob/main/js/02-nuxt-hook/pages/hook/crm-item-list.client.vue).
+:::
 
 ### BoolString
 
@@ -60,7 +64,7 @@ import { DataType } from '@bitrix24/b24jssdk'
 | `view`   | Режим просмотра      |
 | `edit`   | Режим редактирования |
 
-## Структуры данных
+## Структуры данных {#DataStructures}
 
 ### Fields
 
@@ -100,7 +104,7 @@ import { DataType } from '@bitrix24/b24jssdk'
 | `DESCRIPTION`  | `string` | Описание                             |
 | `OPTIONS`      | `object` | Опции (например, высота)             |
 
-## Перечисление DataType
+## Перечисление DataType {#EnumDataType}
 
 `DataType` определяет различные типы данных, используемые в Bitrix24:
 
@@ -126,6 +130,3 @@ import { DataType } from '@bitrix24/b24jssdk'
 
 Эти типы и структуры данных могут быть использованы для описания и работы с различными сущностями и полями в Bitrix24.
 
-::: tip
-Работу с **ISODate** можно протестировать в [примере](https://github.com/bitrix24/b24sdk-examples/blob/main/js/02-nuxt-hook/pages/hook/crm-item-list.client.vue).
-:::

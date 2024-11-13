@@ -151,7 +151,7 @@ $logger.info(Text.numberFormat(15678.984, 2, ',', ' ')) // '15 678,98' ////
 
 Преобразует строку в объект [`DateTime`](tools-date-time) из ISO 8601 или по заданному шаблону.
 
-[Подробнее](https://moment.github.io/luxon/#/parsing?id=parsing-technical-formats) про декодирование
+[Аналог функции](https://moment.github.io/luxon/#/parsing?id=parsing-technical-formats) про декодирование
 
 ```ts
 $logger.info(Text.toDateTime('2012-04-12T09:53:51').toFormat('HH:mm:ss y-MM-dd'))

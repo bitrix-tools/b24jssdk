@@ -1,7 +1,7 @@
 ---
 outline: deep
 ---
-# Тип `TypeRestrictionManagerParams`
+# Тип `TypeRestrictionManagerParams` {#TypeRestrictionManagerParams}
 
 Используется для определения параметров [менеджера ограничений](core-restriction-manager).
 
@@ -9,7 +9,7 @@ outline: deep
 import { type TypeRestrictionManagerParams } from '@bitrix24/b24jssdk'
 ```
 
-## Свойства
+## Свойства {#properties}
 
 | Свойство | Тип      | Описание                             |
 |----------|----------|--------------------------------------|

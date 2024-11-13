@@ -1,13 +1,13 @@
 ---
 outline: deep
 ---
-# Тип `TypeHttp`
+# Тип `TypeHttp` {#TypeHttp}
 
 ```ts
 import { type TypeHttp } from '@bitrix24/b24jssdk'
 ```
 
-## Функции
+## Методы {#methods}
 
 ### `setLogger(logger: LoggerBrowser): void`
 

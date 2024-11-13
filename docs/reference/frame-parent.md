@@ -23,17 +23,17 @@ await $b24.parent.fitWindow()
 ### `async closeApplication(): Promise<void>`
 
 Закрывает открытое модальное окно с приложением.
-[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-close-application.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-close-application.html)
 
 ### `async fitWindow(): Promise<any>`
 
 Устанавливает размер фрейма приложения в соответствии с размерами его содержимого.
-[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-fit-window.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-fit-window.html)
 
 ### `async resizeWindow(width: number, height: number): Promise<void>`
 
 Изменяет размер фрейма приложения на указанные ширину и высоту.
-[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-resize-window.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-resize-window.html)
 
 ### `async resizeWindowAuto(appNode: null|HTMLElement = null, minHeight: number = 0, minWidth: number = 0): Promise<void>`
 
@@ -48,27 +48,27 @@ await $b24.parent.fitWindow()
 ### `getScrollSize(): { scrollWidth: number, scrollHeight: number }`
 
 Возвращает внутренние размеры фрейма приложения.
-[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-get-scroll-size.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-get-scroll-size.html)
 
 ### `async scrollParentWindow(scroll: number): Promise<void>`
 
 Прокручивает родительское окно до указанной позиции.
-[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-scroll-parent-window.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-scroll-parent-window.html)
 
 ### `async reloadWindow(): Promise<void>`
 
 Перезагружает страницу с приложением.
-[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-reload-window.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-reload-window.html)
 
 ### `async setTitle(title: string): Promise<void>`
 
 Устанавливает заголовок страницы.
-[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-set-title.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-set-title.html)
 
 ### `async imCallTo(userId: number, isVideo: boolean = true): Promise<void>`
 
 Инициирует звонок через внутреннюю связь.
-[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-im-call-to.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-im-call-to.html)
 
 | Параметр  | Тип       | Описание                                         |
 |-----------|-----------|--------------------------------------------------|
@@ -78,7 +78,7 @@ await $b24.parent.fitWindow()
 ### `async imPhoneTo(phone: string): Promise<void>`
 
 Совершает звонок на указанный номер телефона.
-[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-im-phone-to.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-im-phone-to.html)
 
 | Параметр | Тип      | Описание        |
 |----------|----------|-----------------|
@@ -87,7 +87,7 @@ await $b24.parent.fitWindow()
 ### `async imOpenMessenger(dialogId: number|'chat${number}'|'sg${number}'|'imol|${number}'|undefined): Promise<void>`
 
 Открывает окно мессенджера.
-[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-im-open-messenger.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-im-open-messenger.html)
 
 | Параметр   | Тип                                                              | Описание               |
 |------------|------------------------------------------------------------------|------------------------|
@@ -96,7 +96,7 @@ await $b24.parent.fitWindow()
 ### `async imOpenHistory(dialogId: number|'chat${number}'|'imol|${number}'): Promise<void>`
 
 Открывает окно истории сообщений.
-[Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-im-open-history.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-im-open-history.html)
 
 | Параметр   | Тип                                      | Описание               |
 |------------|------------------------------------------|------------------------|

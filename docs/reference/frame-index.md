@@ -31,9 +31,9 @@ constructor(queryParams: B24FrameQueryParams)
 
 ## Свойства {#properties}
 
-- **`isInit`**: `boolean` - Указывает, инициализированы ли данные. [Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-init.html)
-- **`isFirstRun`**: `boolean` - Возвращает флаг, указывающий, является ли это первым запуском приложения. [Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-install.html)
-- **`isInstallMode`**: `boolean` - Возвращает флаг, указывающий, находится ли приложение в режиме установки. [Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-install.html)
+- **`isInit`**: `boolean` - Указывает, инициализированы ли данные. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-init.html)
+- **`isFirstRun`**: `boolean` - Возвращает флаг, указывающий, является ли это первым запуском приложения. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-install.html)
+- **`isInstallMode`**: `boolean` - Возвращает флаг, указывающий, находится ли приложение в режиме установки. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-install.html)
 - **`auth`**: `authManager` - Возвращает [менеджер авторизации](frame-auth).
 - **`parent`**: `ParentManager` - Возвращает [менеджер родительского окна](frame-parent).
 - **`slider:`**: `SliderManager` - Возвращает [менеджер слайдеров](frame-slider).
@@ -48,7 +48,7 @@ constructor(queryParams: B24FrameQueryParams)
 
 ### `async installFinish(): Promise<any>`
 
-Сигнализирует о завершении установки приложения. [Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-install-finish.html)
+Сигнализирует о завершении установки приложения. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-install-finish.html)
 
 ### `getAppSid(): string`
 
@@ -56,7 +56,7 @@ constructor(queryParams: B24FrameQueryParams)
 
 ### `getLang(): B24LangList`
 
-Возвращает [локализацию](core-lang-list) интерфейса Битрикс24. [Подробнее](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-get-lang.html)
+Возвращает [локализацию](core-lang-list) интерфейса Битрикс24. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-get-lang.html)
 
 ## Использование {#usage}
 

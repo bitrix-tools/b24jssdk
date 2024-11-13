@@ -64,11 +64,11 @@ function nav(): DefaultTheme.NavItem[] {
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
 	return [
 		{
-			text: 'Руководство',
+			text: '(-) Руководство',
 			collapsed: false,
 			items: [
-				{ text: 'Быстрый старт', link: 'getting-started' },
-				{ text: 'Vue', link: 'vue' }
+				{ text: '(-) Быстрый старт', link: 'getting-started' },
+				{ text: '(-) Vue', link: 'vue' }
 			]
 		},
 	]
@@ -84,17 +84,17 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 			]
 		},
 		{
-			text: 'Приложение',
+			text: '(-) Приложение',
 			collapsed: false,
 			items: [
 				{ text: 'Инициализации', link: 'frame-initialize-b24-frame' },
 				{ text: 'B24Frame', link: 'frame-index' },
 				{ text: 'Auth Manager', link: 'frame-auth' },
 				{ text: 'Parent Manager', link: 'frame-parent' },
-				{ text: 'Slider Manager', link: 'frame-slider' },
-				{ text: 'Placement Manager', link: 'frame-placement' },
-				{ text: 'Options Manager', link: 'frame-options' },
-				{ text: 'Dialog Manager', link: 'frame-dialog' },
+				{ text: '(-) Slider Manager', link: 'frame-slider' },
+				{ text: '(-) Placement Manager', link: 'frame-placement' },
+				{ text: '(-) Options Manager', link: 'frame-options' },
+				{ text: '(-) Dialog Manager', link: 'frame-dialog' },
 			]
 		},
 		{
@@ -112,7 +112,7 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 			]
 		},
 		{
-			text: 'Push and Pull',
+			text: '(-) Push and Pull',
 			collapsed: true,
 			items: [
 				{ text: 'pull client', link: 'pull-client' },
@@ -130,7 +130,7 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 			]
 		},
 		{
-			text: 'Вспомогательные методы',
+			text: '(-) Вспомогательные методы',
 			collapsed: true,
 			items: [
 				{ text: 'useB24Helper', link: 'helper-use-b24-helper' },

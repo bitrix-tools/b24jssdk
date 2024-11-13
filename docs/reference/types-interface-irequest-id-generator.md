@@ -9,7 +9,7 @@ outline: deep
 import { type IRequestIdGenerator } from '@bitrix24/b24jssdk'
 ```
 
-## Методы
+## Методы {#methods}
 
 ### `getRequestId(): string`
 
