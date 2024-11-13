@@ -84,7 +84,7 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 			]
 		},
 		{
-			text: '(-) Приложение',
+			text: 'Приложение',
 			collapsed: false,
 			items: [
 				{ text: 'Инициализации', link: 'frame-initialize-b24-frame' },
@@ -95,6 +95,28 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 				{ text: 'Placement Manager', link: 'frame-placement' },
 				{ text: 'Options Manager', link: 'frame-options' },
 				{ text: 'Dialog Manager', link: 'frame-dialog' },
+			]
+		},
+		{
+			text: '(-) Вспомогательные методы',
+			collapsed: true,
+			items: [
+				{ text: 'useB24Helper', link: 'helper-use-b24-helper' },
+				{ text: 'B24HelperManager', link: 'helper-helper-manager' },
+				{ text: 'AbstractHelper', link: 'helper-abstract-helper' },
+				{ text: 'AppManager', link: 'helper-app-manager' },
+				{ text: 'LicenseManager', link: 'helper-license-manager' },
+				{ text: 'PaymentManager', link: 'helper-payment-manager' },
+				{ text: 'ProfileManager', link: 'helper-profile-manager' },
+				{ text: 'CurrencyManager', link: 'helper-currency-manager' },
+				{ text: 'OptionsManager', link: 'helper-options-manager' },
+			]
+		},
+		{
+			text: '(-) Push and Pull',
+			collapsed: true,
+			items: [
+				{ text: 'pull client', link: 'pull-client' },
 			]
 		},
 		{
@@ -112,13 +134,6 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 			]
 		},
 		{
-			text: '(-) Push and Pull',
-			collapsed: true,
-			items: [
-				{ text: 'pull client', link: 'pull-client' },
-			]
-		},
-		{
 			text: 'Инструменты',
 			collapsed: true,
 			items: [
@@ -127,21 +142,6 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 				{ text: 'Browser', link: 'tools-browser' },
 				{ text: 'useFormatter', link: 'tools-use-formatters' },
 				{ text: 'DateTime', link: 'tools-date-time' },
-			]
-		},
-		{
-			text: '(-) Вспомогательные методы',
-			collapsed: true,
-			items: [
-				{ text: 'useB24Helper', link: 'helper-use-b24-helper' },
-				{ text: 'B24HelperManager', link: 'helper-helper-manager' },
-				{ text: 'AbstractHelper', link: 'helper-abstract-helper' },
-				{ text: 'AppManager', link: 'helper-app-manager' },
-				{ text: 'LicenseManager', link: 'helper-license-manager' },
-				{ text: 'PaymentManager', link: 'helper-payment-manager' },
-				{ text: 'ProfileManager', link: 'helper-profile-manager' },
-				{ text: 'CurrencyManager', link: 'helper-currency-manager' },
-				{ text: 'OptionsManager', link: 'helper-options-manager' },
 			]
 		},
 		{
