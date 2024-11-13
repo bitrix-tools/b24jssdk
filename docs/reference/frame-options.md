@@ -2,12 +2,69 @@
 outline: deep
 ---
 
-# Frame Options
+# Класс `OptionsManager` {#OptionsManager}
 
-@todo
+Используется для управления настройками приложения и пользователя в приложении Битрикс24. 
+Он позволяет инициализировать данные, получать и устанавливать опции через сообщения родительскому окну.
 
-[ory.Api](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/options/index.html)
-- BX24.userOption.set - `B24.options.userSet`
-- BX24.userOption.get - `B24.options.userGet`
-- BX24.appOption.set - `B24.options.appSet`
-- BX24.appOption.get - `B24.options.appGet`
+## Методы {#methods}
+
+### `appGet(option: string): any`
+
+Получает значение опции приложения. 
+
+Возвращает значение опции или выбрасывает ошибку, если опция не установлена.
+
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/options/bx24-app-option-get.html)
+
+```ts
+// ... /////
+$b24 = await initializeB24Frame()
+// ... /////
+const value: any = $b24.options.appGet('test')
+```
+
+### `async appSet(option: string, value: any): Promise<void>`
+
+Получает значение опции приложения. 
+
+Возвращает значение опции или выбрасывает ошибку, если опция не установлена.
+
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/options/bx24-app-option-set.html)
+
+```ts
+// ... /////
+$b24 = await initializeB24Frame()
+// ... /////
+await $b24.options.appSet('test', 123)
+```
+
+### `userGet(option: string): any`
+
+Получает значение пользовательской опции. 
+
+Возвращает значение опции или выбрасывает ошибку, если опция не установлена.
+
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/options/bx24-user-option-get.html)
+
+```ts
+// ... /////
+$b24 = await initializeB24Frame()
+// ... /////
+const value: any = $b24.options.userGet('test')
+```
+
+### `async userSet(option: string, value: any): Promise<void>`
+
+Получает значение пользовательской опции. 
+
+Возвращает значение опции или выбрасывает ошибку, если опция не установлена.
+
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/options/bx24-user-option-set.html)
+
+```ts
+// ... /////
+$b24 = await initializeB24Frame()
+// ... /////
+await $b24.options.userSet('test', 123)
+```

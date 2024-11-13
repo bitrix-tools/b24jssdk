@@ -22,7 +22,7 @@ await $b24.parent.fitWindow()
 
 ### `async closeApplication(): Promise<void>`
 
-Закрывает открытое модальное окно с приложением.
+Закрывает слайдер с приложением.
 [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-close-application.html)
 
 ### `async fitWindow(): Promise<any>`
