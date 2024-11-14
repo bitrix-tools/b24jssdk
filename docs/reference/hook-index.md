@@ -50,7 +50,7 @@ import {
 	type ISODate
 } from '@bitrix24/b24jssdk'
 
-const $logger = LoggerBrowser.build('MyApp', true)
+const $logger = LoggerBrowser.build('MyApp', import.meta.env?.DEV === true)
 
 const $b24 = new B24Hook({
 	b24Url: 'https://your_domain.bitrix24.com',

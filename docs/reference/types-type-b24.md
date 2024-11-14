@@ -7,59 +7,95 @@ outline: deep
 import { type TypeB24 } from '@bitrix24/b24jssdk'
 ```
 
-## Свойства {#properties}
+Реализация:
+- [AbstractB24](core-abstract-b24)
+  - [Hook](hook-index)
+  - [Frame](frame-index)
 
-- **`isInit`**: `boolean` - Указывает, инициализированы ли данные. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-init.html)
-- **`auth`**: [`AuthActions`](https://github.com/bitrix24/b24jssdk/blob/main/packages/jssdk/src/types/auth.ts) - Возвращает интерфейс для работы с авторизацией.
+
+## Геттеры {#getters}
+
+### `isInit` {#isInit}
+```ts
+get isInit(): boolean
+```
+Указывает, инициализированы ли данные. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-init.html)
+
+### `auth` {#auth}
+```ts
+get auth(): AuthActions
+```
+Возвращает интерфейс [`AuthActions`](https://github.com/bitrix24/b24jssdk/blob/main/packages/jssdk/src/types/auth.ts) для работы с авторизацией.
 
 ## Методы {#methods}
 
-### `init(): Promise<void>`
-
+### `init` {#init}
+```ts
+init(): Promise<void>
+```
 Используется для инициализации данных.
 
-### `destroy(): void`
-
+### `destroy` {#destroy}
+```ts
+destroy(): void
+```
 Используется для удаления.
 
-### `getLogger(): LoggerBrowser`
+### `getLogger` {#getLogger}
+```ts
+getLogger(): LoggerBrowser
+```
 
 Возвращает текущий [логгер](core-logger-browser).
 
-### `setLogger(logger: LoggerBrowser): void`
+### `setLogger` {#setLogger}
+```ts
+setLogger(
+	logger: LoggerBrowser
+): void
+```
 
 Устанавливает [логгер](core-logger-browser).
 
-| Параметр | Тип             | Описание              |
-|----------|-----------------|-----------------------|
-| `logger` | `LoggerBrowser` | Логгер для установки. |
-
-### `getTargetOrigin(): string`
+### `getTargetOrigin` {#getTargetOrigin}
+```ts
+getTargetOrigin(): string
+```
 
 Возвращает адрес Битрикс24 (например, `https://name.bitrix24.com`).
 [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-get-domain.html)
 
-### `getTargetOriginWithPath(): string`
+### `getTargetOriginWithPath` {#getTargetOriginWithPath}
+```ts
+getTargetOriginWithPath(): string
+```
 
 Возвращает адрес rest-api Битрикс24 (например, `https://name.bitrix24.com/rest`).
 [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-get-domain.html)
 
-### `callMethod(method: string, params?: object, start?: number): Promise<AjaxResult>`
-
+### `callMethod` {#callMethod}
+```ts
+callMethod(
+	method: string,
+    params?: object,
+    start?: number
+): Promise<AjaxResult>
+```
 Вызывает метод rest-api с указанными параметрами.
-
-| Параметр | Тип      | Описание           |
-|----------|----------|--------------------|
-| `method` | `string` | Метод для вызова.  |
-| `params` | `object` | Параметры запроса. |
-| `start`  | `number` | Начальная позиция. |
 
 Возвращает `Promise`, который разрешается в [`AjaxResult`](core-ajax-result)
 
-Аналог функции: [документация](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/how-to-call-rest-methods/bx24-call-method.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/how-to-call-rest-methods/bx24-call-method.html)
 
-### `callListMethod(method: string, params?: object, progress?: null|((progress: number) => void), customKeyForResult?: string|null): Promise<Result>`
-
+### `callListMethod` {#callListMethod}
+```ts
+callListMethod(
+    method: string,
+    params?: object,
+    progress?: null|((progress: number) => void),
+    customKeyForResult?: string|null
+): Promise<Result>
+```
 Вызывает метод rest-api для списочного метода с указанными параметрами.
 
 | Параметр             | Тип                                  | Описание                               |
@@ -71,8 +107,15 @@ import { type TypeB24 } from '@bitrix24/b24jssdk'
 
 Возвращает `Promise`, который разрешается в [`Result`](core-result)
 
-### `fetchListMethod(method: string, params?: any, idKey?: string, customKeyForResult?: string|null): AsyncGenerator<any[]>`
-
+### `fetchListMethod` {#fetchListMethod}
+```ts
+fetchListMethod(
+	method: string,
+    params?: any,
+    idKey?: string,
+    customKeyForResult?: string|null
+): AsyncGenerator<any[]>
+```
 Вызывает метод rest-api для списочного метода и возвращает объект-генератор.
 
 | Параметр             | Тип            | Описание                               |
@@ -82,8 +125,13 @@ import { type TypeB24 } from '@bitrix24/b24jssdk'
 | `idKey`              | `string`       | Имя поля ID сущности ('ID' или 'id').  |
 | `customKeyForResult` | `string\|null` | Пользовательское поле для группировки. |
 
-### `callBatch(calls: Array<any>|object, isHaltOnError?: boolean): Promise<Result>`
-
+### `callBatch` {#callBatch}
+```ts
+callBatch(
+	calls: Array<any>|object,
+    isHaltOnError?: boolean
+): Promise<Result>
+```
 Вызывает пакетный запрос с максимальным количеством команд не более 50.
 
 | Параметр        | Тип                  | Описание                           |
@@ -93,10 +141,15 @@ import { type TypeB24 } from '@bitrix24/b24jssdk'
 
 Возвращает `Promise`, который разрешается в [`AjaxResult`](core-ajax-result)
 
-Аналог функции: [документация](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/how-to-call-rest-methods/bx24-call-batch.html)
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/how-to-call-rest-methods/bx24-call-batch.html)
 
-### `callBatchByChunk(calls: Array<any>, isHaltOnError: boolean): Promise<Result>`
-
+### `callBatchByChunk` {#callBatchByChunk}
+```ts
+callBatchByChunk(
+	calls: Array<any>,
+    isHaltOnError: boolean
+): Promise<Result>
+```
 Вызывает пакетный запрос с любым количеством команд.
 
 | Параметр        | Тип          | Описание                           |
@@ -106,6 +159,8 @@ import { type TypeB24 } from '@bitrix24/b24jssdk'
 
 Возвращает `Promise`, который разрешается в [`AjaxResult`](core-ajax-result)
 
-### `getHttpClient(): TypeHttp`
-
+### `getHttpClient` {#getHttpClient}
+```ts
+getHttpClient(): TypeHttp
+```
 Возвращает HTTP клиент реализующий интерфейс [TypeHttp](types-type-http) для запросов.

@@ -11,18 +11,30 @@ import { type IRequestIdGenerator } from '@bitrix24/b24jssdk'
 
 ## Методы {#methods}
 
-### `getRequestId(): string`
+### `getRequestId`
+```ts
+getRequestId(): string
+```
 
 Генерирует и возвращает уникальный идентификатор запроса.
 
-### `getHeaderFieldName(): string`
+### `getHeaderFieldName`
+```ts
+getHeaderFieldName(): string
+```
 
 Возвращает имя поля заголовка, используемого для передачи идентификатора запроса.
 
-### `getQueryStringParameterName(): string`
+### `getQueryStringParameterName`
+```ts
+getQueryStringParameterName(): string
+```
 
 Возвращает имя параметра строки запроса, используемого для передачи идентификатора запроса.
 
-### `getQueryStringSdkParameterName(): string`
+### `getQueryStringSdkParameterName`
+```ts
+getQueryStringSdkParameterName(): string
+```
 
 Возвращает имя параметра строки запроса, используемого для передачи идентификатора SDK.

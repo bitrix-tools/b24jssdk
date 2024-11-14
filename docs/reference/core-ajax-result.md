@@ -6,41 +6,65 @@ outline: deep
 Класс `AjaxResult` представляет собой результат запроса к REST API и расширяет класс [`Result`](core-result), реализуя 
 интерфейс [`IResult`](types-interface-iresult).
 
-## Конструктор
+## Конструктор {#constructor}
 
 ```ts
-constructor(answer: AjaxResultParams, query: AjaxQuery, status: number)
+constructor(
+	answer: AjaxResultParams,
+	query: AjaxQuery,
+	status: number
+)
 ```
 
 - **`answer`**: [`AjaxResultParams`](#AjaxResultParams) - Параметры ответа.
 - **`query`**: [`AjaxQuery`](#AjaxQuery) - Запрос, который был выполнен.
 - **`status`**: `number` - Статус ответа.
 
-## Методы
+## Методы {#methods}
 
 > **Примечание**: Метод `setData` не поддерживается в `AjaxResult` и вызовет ошибку при попытке использования.
 
-##### `getData(): Payload<unknown>`
+##### `getData` {#getData}
+```ts
+getData(): Payload<unknown>
+```
 
 Извлекает данные, связанные с результатом.
 
-##### `isMore(): boolean`
+##### `isMore` {#isMore}
+```ts
+isMore(): boolean
+```
 
 Проверяет, есть ли еще данные для запроса.
 
-##### `getTotal(): number`
+##### `getTotal` {#getTotal}
+```ts
+getTotal(): number
+```
 
 Возвращает общее количество элементов.
 
-##### `getStatus(): number`
+##### `getStatus` {#getStatus}
+```ts
+getStatus(): number
+```
 
 Возвращает статус ответа.
 
-##### `getQuery(): AjaxQuery`
+##### `getQuery` {#getQuery}
+```ts
+getQuery(): AjaxQuery
+```
 
 Возвращает [запрос](#AjaxQuery), который был выполнен.
 
-##### `getNext(http: TypeHttp): Promise<false|AjaxResult>`
+##### `getNext` {#getNext}
+```ts
+getNext(
+	http: TypeHttp
+): Promise<false|AjaxResult>
+```
 
 Асинхронно получает следующий результат, если он доступен.
 
@@ -50,11 +74,10 @@ constructor(answer: AjaxResultParams, query: AjaxQuery, status: number)
 
 Возвращает `Promise`, который разрешается в `AjaxResult` или `false`, если больше данных нет.
 
-## Описание типа `AjaxResultParams` {#AjaxResultParams}
+## Типы данных {#types}
+### `AjaxResultParams` {#AjaxResultParams}
 
 Тип `AjaxResultParams` используется для представления параметров результата запроса к API.
-
-### Свойства
 
 | Свойство            | Тип                                                  | Описание                                |
 |---------------------|------------------------------------------------------|-----------------------------------------|
@@ -64,11 +87,9 @@ constructor(answer: AjaxResultParams, query: AjaxQuery, status: number)
 | `next`              | `NumberString`                                       | Следующий элемент (если есть).          |
 | `total`             | `NumberString`                                       | Общее количество элементов (если есть). |
 
-## Описание типа `AjaxQuery` {#AjaxQuery}
+### `AjaxQuery` {#AjaxQuery}
 
 Тип `AjaxQuery` используется для представления запроса к API.
-
-### Свойства
 
 | Свойство | Тип      | Описание           |
 |----------|----------|--------------------|

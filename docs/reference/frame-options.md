@@ -9,7 +9,10 @@ outline: deep
 
 ## Методы {#methods}
 
-### `appGet(option: string): any`
+### `appGet` {#appGet}
+```ts
+appGet(option: string): any
+```
 
 Получает значение опции приложения. 
 
@@ -24,7 +27,13 @@ $b24 = await initializeB24Frame()
 const value: any = $b24.options.appGet('test')
 ```
 
-### `async appSet(option: string, value: any): Promise<void>`
+### `appSet` {#appSet}
+```ts
+async appSet(
+	option: string,
+	value: any
+): Promise<void>
+```
 
 Получает значение опции приложения. 
 
@@ -39,7 +48,12 @@ $b24 = await initializeB24Frame()
 await $b24.options.appSet('test', 123)
 ```
 
-### `userGet(option: string): any`
+### `userGet` {#userGet}
+```ts
+userGet(
+	option: string
+): any
+```
 
 Получает значение пользовательской опции. 
 
@@ -54,7 +68,13 @@ $b24 = await initializeB24Frame()
 const value: any = $b24.options.userGet('test')
 ```
 
-### `async userSet(option: string, value: any): Promise<void>`
+### `userSet` {#userSet}
+```ts
+async userSet(
+	option: string,
+	value: any
+): Promise<void>
+```
 
 Получает значение пользовательской опции. 
 

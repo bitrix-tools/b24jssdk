@@ -22,16 +22,63 @@ $logger.info(formatterNumber.format(15678.987, B24LangList.de)) // 15.678,99 ///
 Предоставляет методы для работы с IBAN, включая валидацию и преобразование в BBAN.
 
 ### Методы {#methods-formatterIban}
+#### isValid
+```ts
+isValid(
+	iban: string
+): boolean
+```
+Проверяет, является ли IBAN валидным.
 
-- **`isValid(iban: string): boolean`**: Проверяет, является ли IBAN валидным.
-- **`printFormat(iban: string, separator?: string): string`**: Форматирует IBAN с указанным разделителем.
-- **`electronicFormat(iban: string): string`**: Преобразует IBAN в электронный формат.
-- **`toBBAN(iban: string, separator?: string): string`**: Конвертирует IBAN в BBAN.
-- **`fromBBAN(countryCode: string, bban: string): string`**: Конвертирует BBAN в IBAN.
-- **`isValidBBAN(countryCode: string, bban: string): boolean`**: Проверяет, является ли BBAN валидным.
+#### printFormat
+```ts
+printFormat(
+	iban: string,
+	separator?: string
+): string
+```
+Форматирует IBAN с указанным разделителем.
+
+#### electronicFormat
+```ts
+electronicFormat(
+	iban: string
+): string
+```
+
+Преобразует IBAN в электронный формат.
+
+#### toBBAN
+```ts
+toBBAN(
+	iban: string,
+	separator?: string
+): string
+```
+Конвертирует IBAN в BBAN.
+
+#### fromBBAN
+```ts
+fromBBAN(
+	countryCode: string,
+	bban: string
+): string
+```
+Конвертирует BBAN в IBAN.
+
+#### isValidBBAN
+```ts
+isValidBBAN(
+	countryCode: string,
+	bban: string
+): boolean
+```
+Проверяет, является ли BBAN валидным.
 
 ```ts
-$logger.info(formatterIban.printFormat('IT60X0542811101000000123456', ' '))
+$logger.info(
+	formatterIban.printFormat('IT60X0542811101000000123456', ' ')
+)
 // IT60 X054 2811 1010 0000 0123 456 ////
 ```
 
@@ -45,11 +92,33 @@ $logger.info(formatterIban.printFormat('IT60X0542811101000000123456', ' '))
 
 ### Методы {#methods-formatterNumbers}
 
-- **`setDefLocale(locale: string): void`**: Устанавливает локаль по умолчанию.
-- **`format(value: number, locale?: string): string`**: Форматирует число в зависимости от указанной локали.
+#### setDefLocale
+```ts
+setDefLocale(
+	locale: string
+): void
+```
+Устанавливает локаль по умолчанию.
+
+#### format
+```ts
+format(
+	value: number,
+	locale?: string
+): string
+```
+Форматирует число в зависимости от указанной локали.
 
 ```ts
-$logger.info(formatterNumber.format(15678.987, B24LangList.en)) // 15,678.99 ///
-$logger.info(formatterNumber.format(15678.987, B24LangList.de)) // 15.678,99 ///
-$logger.info(formatterNumber.format(15678.987, B24LangList.ru)) // 15 678.99 ///
+$logger.info(
+	formatterNumber.format(15678.987, B24LangList.en)
+) // 15,678.99 ///
+
+$logger.info(
+	formatterNumber.format(15678.987, B24LangList.de)
+) // 15.678,99 ///
+
+$logger.info(
+	formatterNumber.format(15678.987, B24LangList.ru)
+) // 15 678.99 ///
 ```

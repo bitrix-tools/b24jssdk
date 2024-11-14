@@ -18,3 +18,5 @@ outline: deep
 ::: tip
 Работу с **Http** можно протестировать в [примере](https://github.com/bitrix24/b24sdk-examples/blob/main/js/02-nuxt-hook/pages/hook/testing-rest-api-calls.client.vue).
 :::
+
+Через [`LicenseManager`](helper-license-manager) автоматически устанавливаются параметры ограничений. 

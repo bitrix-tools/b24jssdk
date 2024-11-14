@@ -20,9 +20,14 @@ if($b24.auth.isAdmin)
 Работу с **B24Frame.auth** можно протестировать в [примере](https://github.com/bitrix24/b24sdk-examples/blob/main/js/03-nuxt-frame/pages/index.client.vue).
 :::
 
+## Геттеры {#getters}
+### `isAdmin` {#isAdmin}
+```ts
+get isAdmin(): boolean
+```
 
-## Свойства {#properties}
-- **`isAdmin`**: `boolean` - Возвращает `true`, если текущий пользователь имеет права администратора, иначе `false`. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-is-admin.html)
+Возвращает `true`, если текущий пользователь имеет права администратора, иначе `false`.
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-is-admin.html)
 
 ## Методы {#methods}
 
@@ -30,18 +35,27 @@ if($b24.auth.isAdmin)
 Реализует интерфейс [`AuthActions`](https://github.com/bitrix24/b24jssdk/blob/main/packages/jssdk/src/types/auth.ts).
 :::
 
-### `getAuthData(): false|AuthData`
+### `getAuthData` {#getAuthData}
+```ts
+getAuthData(): false|AuthData
+```
 
 Возвращает данные аутентификации ([`AuthData`](https://github.com/bitrix24/b24jssdk/blob/main/packages/jssdk/src/types/auth.ts)), если они еще не истекли.
 Если срок действия истек, возвращает `false`.
 [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-get-auth.html)
 
-### `async refreshAuth(): Promise<AuthData>`
+### `refreshAuth` {#refreshAuth}
+```ts
+async refreshAuth(): Promise<AuthData>
+```
 
 Обновляет данные аутентификации через родительское окно и возвращает обновленные данные ([`AuthData`](https://github.com/bitrix24/b24jssdk/blob/main/packages/jssdk/src/types/auth.ts)).
 [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-refresh-auth.html)
 
-### `getUniq(prefix: string): string`
+### `getUniq` {#getUniq}
+```ts
+getUniq(prefix: string): string
+```
 
 Возвращает уникальную строку, состоящую из заданного префикса и `AuthData.memberId`.
 

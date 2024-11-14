@@ -37,8 +37,12 @@ const makeOpenSliderForUser = async(userId: number) =>
 
 ## Методы {#methods}
 
-### `getUrl(path: string = '/'): URL`
-
+### `getUrl` {#getUrl}
+```ts
+getUrl(
+	path: string = '/'
+): URL
+```
 Возвращает URL, относительный к доменному имени и пути.
 
 ```ts
@@ -48,12 +52,20 @@ $b24 = await initializeB24Frame()
 const url = $b24.slider.getUrl('/settings/configs/userfield_list.php')
 ```
 
-### `getTargetOrigin(): string`
+### `getTargetOrigin` {#getTargetOrigin}
+```ts
+getTargetOrigin(): string
+```
 
 Возвращает адрес Битрикс24 (например, `https://name.bitrix24.com`).
 [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-get-domain.html)
 
-### `async openSliderAppPage(params: any = {}): Promise<any>`
+### `openSliderAppPage` {#openSliderAppPage}
+```ts
+async openSliderAppPage(
+	params: any = {}
+): Promise<any>
+```
 
 Открывает слайдер с фреймом приложения.
 [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-open-application.html)
@@ -78,7 +90,10 @@ const makeOpenAppOptions = async() => {
 }
 ```
 
-### `async closeSliderAppPage(): Promise<void>`
+### `closeSliderAppPage` {#closeSliderAppPage}
+```ts
+async closeSliderAppPage(): Promise<void>
+```
 
 Закрывает слайдер с приложением.
 [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-close-application.html)
@@ -92,7 +107,13 @@ const makeClosePage = async (): Promise<void> => {
 }
 ```
 
-### `async openPath(url: URL, width: number = 1640): Promise<StatusClose>`
+### `openPath` {#openPath}
+```ts
+async openPath(
+	url: URL,
+	width: number = 1640
+): Promise<StatusClose>
+```
 
 Открывает указанный путь внутри портала в слайдере.
 [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-open-path.html)

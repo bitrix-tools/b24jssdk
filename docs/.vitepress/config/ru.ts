@@ -64,11 +64,12 @@ function nav(): DefaultTheme.NavItem[] {
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
 	return [
 		{
-			text: '(-) Руководство',
+			text: 'Руководство',
 			collapsed: false,
 			items: [
-				{ text: '(-) Быстрый старт', link: 'getting-started' },
-				{ text: '(-) Vue', link: 'vue' }
+				{ text: 'Node.js', link: 'getting-started' },
+				{ text: 'UMD', link: 'getting-started-umd' },
+				{ text: 'Nuxt', link: 'getting-started-nuxt' }
 			]
 		},
 	]
@@ -98,7 +99,7 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 			]
 		},
 		{
-			text: '(-) Вспомогательные методы',
+			text: 'Вспомогательные методы',
 			collapsed: true,
 			items: [
 				{ text: 'useB24Helper', link: 'helper-use-b24-helper' },
@@ -113,10 +114,10 @@ function sidebarReference(): DefaultTheme.SidebarItem[] {
 			]
 		},
 		{
-			text: '(-) Push and Pull',
+			text: 'Интерактивность',
 			collapsed: true,
 			items: [
-				{ text: 'pull client', link: 'pull-client' },
+				{ text: 'Push&Pull', link: 'pull-client' },
 			]
 		},
 		{

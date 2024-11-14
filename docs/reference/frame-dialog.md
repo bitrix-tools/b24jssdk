@@ -1,5 +1,5 @@
 ---
-
+outline: deep
 ---
 
 # Класс `DialogManager` {#DialogManager}
@@ -12,7 +12,10 @@
 
 ## Методы {#methods}
 
-### `async selectUser(): Promise<null|SelectedUser>`
+### `selectUser` {#selectUser}
+```ts
+async selectUser(): Promise<null|SelectedUser>
+```
 
 Отображает стандартный диалог выбора одного пользователя.
 
@@ -32,7 +35,10 @@ const makeSelectUsers = async() => {
 }
 ```
 
-### `async selectUsers(): Promise<SelectedUser[]>`
+### `selectUsers` {#selectUsers}
+```ts
+async selectUsers(): Promise<SelectedUser[]>
+```
 
 Отображает стандартный диалог выбора нескольких пользователей.
 
@@ -57,14 +63,13 @@ const makeSelectUsers = async() => {
 }
 ```
 
-## Тип `SelectedUser` {#selectedUser}
+## Типы данных {#types}
+### `SelectedUser` {#selectedUser}
 
 Используется для представления информации о выбранном пользователе в приложении Битрикс24. Он содержит несколько полей, 
 которые описывают идентификатор пользователя, его имя, фото, должность и другие характеристики.
 
 > Поля `sub` и `sup` помогают определить иерархические отношения между текущим пользователем и выбранным пользователем.
-
-#### Поля {#selectedUser-fields}
 
 - **`id: NumberString`**: Идентификатор пользователя. Представлен в виде строки, содержащей числовое значение.
 - **`name: string`**: Отформатированное имя пользователя.

@@ -29,32 +29,87 @@ constructor(queryParams: B24FrameQueryParams)
 | `LANG`     | `string`  | Язык интерфейса Битрикс24.       |
 | `APP_SID`  | `string`  | Идентификатор сессии приложения. |
 
-## Свойства {#properties}
+## Геттеры {#getters}
+### `isInit` {#isInit}
+```ts
+get isInit(): boolean
+```
+Указывает, инициализированы ли данные.
+[Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-init.html)
 
-- **`isInit`**: `boolean` - Указывает, инициализированы ли данные. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-init.html)
-- **`isFirstRun`**: `boolean` - Возвращает флаг, указывающий, является ли это первым запуском приложения. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-install.html)
-- **`isInstallMode`**: `boolean` - Возвращает флаг, указывающий, находится ли приложение в режиме установки. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-install.html)
-- **`auth`**: `authManager` - Возвращает [менеджер авторизации](frame-auth).
-- **`parent`**: `ParentManager` - Возвращает [менеджер родительского окна](frame-parent).
-- **`slider:`**: `SliderManager` - Возвращает [менеджер слайдеров](frame-slider).
-- **`placement`**: `PlacementManager` - Возвращает [менеджер встроек](frame-placement).
-- **`options`**: `OptionsManager` - Возвращает [менеджер опций](frame-options).
-- **`dialog`**: `DialogManager` - Возвращает [менеджер диалогов](frame-dialog).
+### `isFirstRun` {#isFirstRun}
+```ts
+get isFirstRun(): boolean
+```
+Возвращает флаг, указывающий, является ли это первым запуском приложения. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-install.html)
+
+### `isInstallMode` {#isInstallMode}
+```ts
+get isInstallMode(): boolean
+```
+Возвращает флаг, указывающий, находится ли приложение в режиме установки. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-install.html)
+
+### `auth` {#auth}
+```ts
+get auth(): AuthManager
+```
+Возвращает [менеджер авторизации](frame-auth).
+
+
+### `parent` {#parent}
+```ts
+get parent(): ParentManager
+```
+Возвращает [менеджер родительского окна](frame-parent).
+
+### `slider` {#slider}
+```ts
+get slider(): SliderManager
+```
+Возвращает [менеджер слайдеров](frame-slider).
+
+
+### `placement` {#placement}
+```ts
+get placement(): PlacementManager
+```
+Возвращает [менеджер встроек](frame-placement).
+
+### `options` {#options}
+```ts
+get options(): OptionsManager
+```
+Возвращает [менеджер опций](frame-options).
+
+### `dialog` {#dialog}
+```ts
+get dialog(): DialogManager
+```
+Возвращает [менеджер диалогов](frame-dialog).
 
 ## Методы {#methods}
 ::: info
 Реализует интерфейс [`TypeB24`](types-type-b24).
 :::
 
-### `async installFinish(): Promise<any>`
+### `installFinish` {#installFinish}
+```ts
+async installFinish(): Promise<any>
+```
 
 Сигнализирует о завершении установки приложения. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/system-functions/bx24-install-finish.html)
 
-### `getAppSid(): string`
+### `getAppSid` {#getAppSid}
+```ts
+getAppSid(): string
+```
 
 Возвращает идентификатор приложения относительно родительского окна.
 
-### `getLang(): B24LangList`
+### `getLang` {#getLang}
+```ts
+getLang(): B24LangList
+````
 
 Возвращает [локализацию](core-lang-list) интерфейса Битрикс24. [Аналог функции](https://apidocs.bitrix24.com/api-reference/bx24-js-sdk/additional-functions/bx24-get-lang.html)
 
@@ -82,7 +137,7 @@ import {
 	type ISODate
 } from '@bitrix24/b24jssdk'
 	
-const $logger = LoggerBrowser.build('MyApp', true)
+const $logger = LoggerBrowser.build('MyApp', import.meta.env?.DEV === true)
 let $b24: B24Frame
 
 initializeB24Frame()
@@ -190,7 +245,7 @@ import {
 	type ISODate
 } from '@bitrix24/b24jssdk'
 
-const $logger = LoggerBrowser.build('MyApp', true)
+const $logger = LoggerBrowser.build('MyApp', import.meta.env?.DEV === true)
 let $b24: B24Frame
 
 onMounted(async () => {

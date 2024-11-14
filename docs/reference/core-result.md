@@ -15,7 +15,7 @@ import { Result, LoggerBrowser } from '@bitrix24/b24jssdk'
 
 const logger = LoggerBrowser.build(
 	'Demo: Result',
-	true
+	import.meta.env?.DEV === true
 );
 
 // This function contains errors ////

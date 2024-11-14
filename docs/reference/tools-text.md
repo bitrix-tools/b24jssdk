@@ -20,7 +20,12 @@ $logger.info(`${Text.getDateForLog()} UuidRfc4122:`, Text.getUuidRfc4122())
 
 ## Методы {#methods}
 
-### `getRandom(length = 8): string`
+### `getRandom`
+```ts
+getRandom(
+	length = 8
+): string
+```
 
 Генерирует случайную строку заданной длины, состоящую из символов [a-z0-9].
 
@@ -29,7 +34,10 @@ $logger.info(Text.getRandom(15))
 // cavomfautfjwr7n ////
 ```
 
-### `getUniqId(): string`
+### `getUniqId`
+```ts
+getUniqId(): string
+```
 
 Генерирует уникальный идентификатор в формате UUID.
 
@@ -38,7 +46,10 @@ $logger.info(Text.getUniqId())
 // 212c0ca2-4lse-4e03-b0a8-adc1f661d64b ////
 ```
 
-### `getUuidRfc4122(): string`
+### `getUuidRfc4122`
+```ts
+getUuidRfc4122(): string
+```
 
 Генерирует UUID версии 7.
 
@@ -47,7 +58,12 @@ $logger.info(Text.getUuidRfc4122())
 // 019323b3-7926-70c1-9e2a-81c2e48fb04c ////
 ```
 
-### `encode(value: string): string`
+### `encode`
+```ts
+encode(
+	value: string
+): string
+```
 
 Кодирует все небезопасные HTML-сущности в строке.
 
@@ -57,7 +73,12 @@ $logger.info(Text.encode(testString))
 // &ltscript&gtalert(&#39test&#39);&lt/script&gt ////
 ```
 
-### `decode(value: string): string`
+### `decode`
+```ts
+decode(
+	value: string
+): string
+```
 
 Декодирует все закодированные HTML-сущности в строке.
 
@@ -66,7 +87,12 @@ const testString =  `&ltscript&gtalert(&#39test&#39);&lt/script&gt`
 $logger.info(Text.decode(testString)) // <script>alert('test');</script> ////
 ```
 
-### `toNumber(value: any): number`
+### `toNumber`
+```ts
+toNumber(
+	value: any
+): number
+```
 
 Преобразует значение в число. Возвращает 0.0, если преобразование невозможно.
 
@@ -74,7 +100,12 @@ $logger.info(Text.decode(testString)) // <script>alert('test');</script> ////
 $logger.info(Text.toNumber(`123.44`)) // 123.44 ////
 ```
 
-### `toInteger(value: any): number`
+### `toInteger`
+```ts
+toInteger(
+	value: any
+): number
+```
 
 Преобразует значение в целое число.
 
@@ -83,7 +114,13 @@ $logger.info(Text.toInteger(`123.44`)) // 123 ////
 $logger.info(Text.toInteger(123.44)) // 123 ////
 ```
 
-### `toBoolean(value: any, trueValues = []): boolean`
+### `toBoolean`
+```ts
+toBoolean(
+	value: any,
+	trueValues = []
+): boolean
+```
 
 Преобразует значение в булево. Сравнивает значение с `'true'`, `y`, `1`, `true`, а также с дополнительными значениями из `trueValues`.
 
@@ -101,7 +138,12 @@ $logger.info(Text.toBoolean('success', ['ok', 'success'])) // true ////
 $logger.info(Text.toBoolean('fail', ['ok', 'success'])) // false ////
 ```
 
-### `toCamelCase(str: string): string`
+### `toCamelCase`
+```ts
+toCamelCase(
+	str: string
+): string
+```
 
 Преобразует строку в camelCase.
 
@@ -109,7 +151,12 @@ $logger.info(Text.toBoolean('fail', ['ok', 'success'])) // false ////
 $logger.info(Text.toCamelCase('sOmE StrIng')) // someString ////
 ```
 
-### `toPascalCase(str: string): string`
+### `toPascalCase`
+```ts
+toPascalCase(
+	str: string
+): string
+```
 
 Преобразует строку в PascalCase.
 
@@ -117,7 +164,12 @@ $logger.info(Text.toCamelCase('sOmE StrIng')) // someString ////
 $logger.info(Text.toPascalCase('sOmE StrIng')) // SomeString ////
 ```
 
-### `toKebabCase(str: string): string`
+### `toKebabCase`
+```ts
+toKebabCase(
+	str: string
+): string
+```
 
 Преобразует строку в kebab-case.
 
@@ -127,7 +179,12 @@ $logger.info(Text.toKebabCase('some string')) // some-string ////
 $logger.info(Text.toKebabCase('someString')) // some-string ////
 ```
 
-### `capitalize(str: string): string`
+### `capitalize`
+```ts
+capitalize(
+	str: string
+): string
+```
 
 Возвращает строку с заглавной первой буквой.
 
@@ -135,7 +192,15 @@ $logger.info(Text.toKebabCase('someString')) // some-string ////
 $logger.info(Text.capitalize('some string')) // Some string ////
 ```
 
-### `numberFormat(number: number, decimals: number = 0, decPoint: string = '.', thousandsSep: string = ','): string`
+### `numberFormat`
+```ts
+numberFormat(
+	number: number,
+	decimals: number = 0,
+	decPoint: string = '.',
+	thousandsSep: string = ','
+): string
+```
 
 Форматирует число с заданным количеством десятичных знаков, разделителем десятичных знаков и разделителем тысяч.
 
@@ -146,17 +211,29 @@ $logger.info(Text.numberFormat(15678.987, 2, ',', ' ')) // '15 678,99' ////
 $logger.info(Text.numberFormat(15678.984, 2, ',', ' ')) // '15 678,98' ////
 ```
 
-### `toDateTime(dateString: string, template?: string, opts?: DateTimeOptions): DateTime`
+### `toDateTime`
+```ts
+toDateTime(
+	dateString: string,
+	template?: string,
+	opts?: DateTimeOptions
+): DateTime
+```
 
 Преобразует строку в объект [`DateTime`](tools-date-time) из ISO 8601 или по заданному шаблону.
 
 [Аналог функции](https://moment.github.io/luxon/#/parsing?id=parsing-technical-formats) про декодирование
 
 ```ts
-$logger.info(Text.toDateTime('2012-04-12T09:53:51').toFormat('HH:mm:ss y-MM-dd'))
+$logger.info(
+	Text.toDateTime('2012-04-12T09:53:51').toFormat('HH:mm:ss y-MM-dd')
+)
 // '09:53:51 2012-04-12' ////
 ```
-### `getDateForLog(): string`
+### `getDateForLog`
+```ts
+getDateForLog(): string
+```
 
 Возвращает текущую дату и время.
 
@@ -165,7 +242,12 @@ $logger.info(Text.getDateForLog())
 // '2012-04-12 09:53:51' ////
 ```
 
-### `buildQueryString(params: any): string`
+### `buildQueryString`
+```ts
+buildQueryString(
+	params: any
+): string
+```
 
 Создает строку запроса из объекта параметров.
 

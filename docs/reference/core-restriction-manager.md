@@ -14,17 +14,10 @@ outline: deep
 
 Подключается в классе [`Http`](core-http)
 
-### Свойства
-
-- **`params`**: [`TypeRestrictionManagerParams`](types-type-restriction-manager-params) - Параметры менеджера ограничений.
-
-Можно получить и установить любые параметры.
-
 > По умолчанию используются [`RestrictionManagerParamsBase`](#RestrictionManagerParamsBase). 
 > 
 > В редакциях Битрикс24 `Enterprise` стоит использовать [`RestrictionManagerParamsForEnterprise`](#RestrictionManagerParamsForEnterprise).
 
-#### Пример
 ::: code-group
 
 ```ts [RestrictionManagerParamsForEnterprise]
@@ -66,19 +59,10 @@ $b24.getHttpClient().setRestrictionManagerParams({
 
 ### Методы
 
-#### `setLogger(logger: LoggerBrowser): void`
-
-Устанавливает [логгер](core-logger-browser) для менеджера ограничений.
-
-| Параметр | Тип             | Описание              |
-|----------|-----------------|-----------------------|
-| `logger` | `LoggerBrowser` | Логгер для установки. |
-
-#### `getLogger(): LoggerBrowser`
-
-Возвращает текущий [логгер](core-logger-browser). Если логгер не установлен, создается и возвращается `NullLogger`.
-
-#### `check(hash: string = ''): Promise<null>`
+#### `check` {#check}
+```ts
+check(hash: string = ''): Promise<null>
+````
 
 Проверяет возможность выполнения запроса без превышения лимитов. Если лимиты превышены, выполняется ожидание.
 

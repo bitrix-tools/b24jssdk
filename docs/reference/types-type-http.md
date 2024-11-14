@@ -7,21 +7,35 @@ outline: deep
 import { type TypeHttp } from '@bitrix24/b24jssdk'
 ```
 
+Реализация:
+- [Http](core-http)
+
 ## Методы {#methods}
 
-### `setLogger(logger: LoggerBrowser): void`
-
-Устанавливает [логгер](core-logger-browser).
-
-| Параметр | Тип             | Описание              |
-|----------|-----------------|-----------------------|
-| `logger` | `LoggerBrowser` | Логгер для установки. |
-
-### `getLogger(): LoggerBrowser`
+### `getLogger` {#getLogger}
+```ts
+getLogger(): LoggerBrowser
+```
 
 Возвращает текущий [логгер](core-logger-browser).
 
-### `batch(calls: any[]|object, isHaltOnError: boolean): Promise<Result>`
+### `setLogger` {#setLogger}
+
+```ts
+setLogger(
+	logger: LoggerBrowser
+): void
+```
+
+Устанавливает [логгер](core-logger-browser).
+
+### `batch` {#batch}
+```ts
+batch(
+	calls: any[]|object,
+	isHaltOnError: boolean
+): Promise<Result>
+```
 
 Выполняет пакетный запрос.
 
@@ -32,8 +46,14 @@ import { type TypeHttp } from '@bitrix24/b24jssdk'
 
 Возвращает `Promise`, который разрешается в объект [`Result`](core-result).
 
-### `call(method: string, params: object, start: number): Promise<AjaxResult>`
-
+### `call` {#call}
+```ts
+call(
+	method: string,
+	params: object,
+	start: number
+): Promise<AjaxResult>
+```
 Вызывает метод с указанными параметрами.
 
 | Параметр | Тип      | Описание           |
@@ -44,7 +64,12 @@ import { type TypeHttp } from '@bitrix24/b24jssdk'
 
 Возвращает `Promise`, который разрешается в объект [`AjaxResult`](core-ajax-result).
 
-### `setRestrictionManagerParams(params: TypeRestrictionManagerParams): void`
+### `setRestrictionManagerParams` {#setRestrictionManagerParams}
+```ts
+setRestrictionManagerParams(
+	params: TypeRestrictionManagerParams
+): void
+```
 
 Устанавливает [параметры](types-type-restriction-manager-params) для [менеджера ограничений](core-restriction-manager).
 
@@ -52,18 +77,24 @@ import { type TypeHttp } from '@bitrix24/b24jssdk'
 |----------|--------------------------------|--------------------------|
 | `params` | `TypeRestrictionManagerParams` | Параметры для установки. |
 
-### `getRestrictionManagerParams(): TypeRestrictionManagerParams`
+### `getRestrictionManagerParams` {#getRestrictionManagerParams}
+```ts
+getRestrictionManagerParams(): TypeRestrictionManagerParams
+```
 
 Возвращает [параметры](types-type-restriction-manager-params) для [менеджера ограничений](core-restriction-manager).
 
-### `setLogTag(logTag?: string): void`
-
+### `setLogTag` {#setLogTag}
+```ts
+setLogTag(
+	logTag?: string
+): void
+```
 Устанавливает тег для логирования.
 
-| Параметр | Тип      | Описание             |
-|----------|----------|----------------------|
-| `logTag` | `string` | Тег для логирования. |
-
-### `clearLogTag(): void`
+### `clearLogTag` {#clearLogTag}
+```ts
+clearLogTag(): void
+```
 
 Очищает установленный тег для логирования.
