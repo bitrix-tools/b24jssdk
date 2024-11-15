@@ -66,7 +66,6 @@ export const shared = defineConfig({
 		},
 	},
 	transformHtml: (html) => {
-		//return html.replace(/apidocs\.bitrix24.\com/g, 'apidocs.bitrix24.ru');
-		return html.replaceAll('apidocs.bitrix24.com', 'apidocs.bitrix24.ru');
+		return html.replace(/apidocs\.bitrix24.\com/g, 'apidocs.bitrix24.ru');
 	}
 })
