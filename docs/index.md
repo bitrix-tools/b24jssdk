@@ -5,6 +5,9 @@ hero:
   name: "@bitrix24/b24jssdk"
   text: "JS SDK для Битрикс24 REST API"
   tagline: в локальных, тиражных приложениях или через вебхуки
+  image:
+    src: /bitrix24_b24jssdk-logo-lage.webp
+    alt: '@bitrix24/b24style'
   actions:
     - theme: brand
       text: B24.Hook
@@ -15,6 +18,7 @@ hero:
     - theme: alt
       text: GitHub
       link: https://github.com/bitrix24/b24jssdk
+
 
 features:
   - title: Легкость в использовании
