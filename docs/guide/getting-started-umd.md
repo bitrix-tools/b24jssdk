@@ -17,7 +17,7 @@ outline: deep
 
 ### Локальное подключение {#import-local}
 
-Скачайте UMD-версию библиотеки с [www.npmjs.com](https://www.npmjs.com/package/@bitrix24/b24jssdk) и добавьте её в ваш проект.
+Скачайте UMD-версию библиотеки с [unpkg.com](https://unpkg.com/browse/@bitrix24/b24jssdk@latest/dist/) и добавьте её в ваш проект.
 
 Затем подключите её в вашем HTML-файле:
 
