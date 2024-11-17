@@ -20,7 +20,7 @@ npx nuxi module add @bitrix24/b24jssdk-nuxt
 После настройки модуля вы можете использовать его в компонентах вашего приложения. Вот пример:
 
 ```vue
-<script setup>
+<script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
 import { B24Frame } from '@bitrix24/b24jssdk'
 
