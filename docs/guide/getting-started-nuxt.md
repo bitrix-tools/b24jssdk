@@ -9,7 +9,7 @@ outline: deep
 
 Перед началом работы убедитесь, что у вас установлен Nuxt 3.
 
-Затем выполните следующую команду для установки модуля:
+Затем выполните следующую команду для установки [модуля](https://www.npmjs.com/package/@bitrix24/b24jssdk-nuxt):
 
 ```bash
 npx nuxi module add @bitrix24/b24jssdk-nuxt
