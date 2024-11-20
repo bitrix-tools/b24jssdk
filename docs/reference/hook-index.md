@@ -32,6 +32,20 @@ constructor(b24HookParams: B24HookParams)
 Реализует интерфейс [`TypeB24`](types-type-b24).
 :::
 
+### `offClientSideWarning` {#offClientSideWarning}
+```ts
+offClientSideWarning(): void
+```
+
+Отключает предупреждение о выполнении запроса на стороне клиента.
+
+::: warning
+Не следует использовать хук-запросы на стороне front-end. 
+Эта операция небезопасна. 
+Вместо этого используйте back-end.
+:::
+
+
 ## Использование {#usage}
 
 Этот код создает экземпляр `B24Hook` для взаимодействия с API Битрикс24 и выполняет пакетный запрос для получения списка компаний,
@@ -58,6 +72,9 @@ const $b24 = new B24Hook({
 	secret: 'k32t88gf3azpmwv3',
 })
 
+/**
+ * @memo You should not use hook requests on the front-end side. This operation is unsafe. Instead, use the back-end.
+ */
 $b24.callBatch({
 	CompanyList: {
 		method: 'crm.item.list',

@@ -98,3 +98,9 @@ clearLogTag(): void
 ```
 
 Очищает установленный тег для логирования.
+
+### `setClientSideWarning` {#setClientSideWarning}
+```ts
+setClientSideWarning(value: boolean, message: string): void
+```
+Управляет предупреждением о выполнении запроса на стороне front-end. Используется в [B4Hook](hook-index#offClientSideWarning).
