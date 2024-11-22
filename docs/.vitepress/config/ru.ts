@@ -72,6 +72,13 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
 				{ text: 'Nuxt', link: 'getting-started-nuxt' }
 			]
 		},
+		{
+			text: 'Примеры',
+			collapsed: false,
+			items: [
+				{ text: 'Node + Ts + Hook', link: 'example-hook-node-work' }
+			]
+		},
 	]
 }
 
