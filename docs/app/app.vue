@@ -113,7 +113,7 @@ provide('files', files)
 
 @media (min-width: 1024px) {
   .root {
-    --b24ui-header-height: 712px;
+    --b24ui-header-height: 112px;
   }
 }
 </style>
