@@ -61,6 +61,6 @@ name: 'tools-ping'
 
 ## Alternatives and Recommendations
 
-* **For availability check**: Use [`HealthCheck`](/docs/working-with-the-rest-api/tools-ping/).
-* **For checking specific permissions**: Perform a test request to the required API method.
+* **For availability check**: Use [`HealthCheck`](/docs/working-with-the-rest-api/tools-health-check/).
+* **For measuring operation performance**: Perform time measurements for specific API methods.
 * **On the client-side (browser):** Use the built-in [`B24Frame`](/docs/getting-started/installation/vue/#init) object.
