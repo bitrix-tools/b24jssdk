@@ -1,8 +1,13 @@
 # dependencies
 /node_modules
+/docs/**/node_modules
 
 # testing
 /coverage
+
+# yarn
+**/.yarn/cache
+**/.yarn/*state*
 
 # logs
 logs
@@ -13,25 +18,58 @@ yarn-error.log*
 
 # misc
 .vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+*.iml
 .idea
 .DS_Store
+.fleet
+.AppleDouble
+.LSOverride
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 *.pem
+.temp
+.tmp
 .cache
 Thumbs.db
-/@tmp
 
 # production
-docs/.vitepress/dist
-docs/.vitepress/cache
+/dist
+docs/dist
+docs/auto-imports.d.ts
+docs/components.d.ts
 
 # TypeScript
 *.tsbuildinfo
 
 # local env files
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# vercel
+# nuxt
+.nuxt
+.output
+.data
+.vercel_build_output
+.build-*
+.netlify
 .vercel
+
+.todo.md
+/@tmp
+
+# AI
+.claude/settings.local.json
+.claude/channels/
+.claude/debug/
