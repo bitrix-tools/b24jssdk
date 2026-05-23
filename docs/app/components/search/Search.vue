@@ -34,5 +34,5 @@ watchDebounced(searchTerm, (term) => {
     :navigation="navigation"
     :color-mode="false"
     :fuse="{ resultLimit: 30 }"
-  </B24ContentSearch>
+  />
 </template>
