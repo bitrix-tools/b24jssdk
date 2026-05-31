@@ -1,8 +1,13 @@
 # dependencies
 /node_modules
+/docs/**/node_modules
 
 # testing
 /coverage
+
+# yarn
+**/.yarn/cache
+**/.yarn/*state*
 
 # logs
 logs
@@ -13,25 +18,61 @@ yarn-error.log*
 
 # misc
 .vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+*.iml
 .idea
 .DS_Store
+.fleet
+.AppleDouble
+.LSOverride
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 *.pem
+.temp
+.tmp
 .cache
 Thumbs.db
-/@tmp
 
 # production
-docs/.vitepress/dist
-docs/.vitepress/cache
+/dist
+docs/dist
+docs/auto-imports.d.ts
+docs/components.d.ts
 
 # TypeScript
 *.tsbuildinfo
 
-# local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# local env files (все варианты — .env, .env.local, .env.staging, .env.docker и т.д.)
+.env
+.env.*
+!.env.example
 
-# vercel
+# nuxt
+.nuxt
+.output
+.data
+.vercel_build_output
+.build-*
+.netlify
 .vercel
+
+.todo.md
+/@tmp
+
+# AI
+.claude/settings.local.json
+# VibeCode docs snapshot — temporary working file, never commit
+/docs/llms-full.txt
+.claude/channels/
+.claude/debug/
+
+# docs-typecheck generated temp files (scripts/docs-typecheck.mjs)
+.docs-typecheck/tmp/
