@@ -3,7 +3,7 @@
   "description": "Russian documentation for @bitrix24/b24jssdk",
   "version": "1.1.2",
   "author": "Bitrix",
-  "packageManager": "pnpm@10.33.2",
+  "packageManager": "pnpm@11.4.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bitrix-tools/b24jssdk.git"

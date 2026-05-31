@@ -34,4 +34,4 @@ pnpm run docs:dev
 
 ## Лицензия
 
-MIT — см. [LICENSE](./LICENSE). © Bitrix24.
+MIT — см. [LICENSE](./LICENSE). © Bitrix.

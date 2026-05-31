@@ -14,7 +14,7 @@ const { b24DocsLink, tgLink } = useHeader()
   <B24Footer>
     <template #left>
       <ProseP small accent="less">
-        Copyright © 2024-present Bitrix24
+        Copyright © 2024 – настоящее время Битрикс
       </ProseP>
     </template>
 
