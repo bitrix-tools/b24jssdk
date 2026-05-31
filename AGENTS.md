@@ -8,6 +8,40 @@
 
 Публикация: <https://bitrix-tools.github.io/b24jssdk/>.
 
+## Язык UI-строк (важно)
+
+**Все видимые пользователю фразы в `docs/app/**` и `docs/modules/**` — на русском.** При копировании компонентов из upstream проверять каждый текстовый слот/свойство в `<template>` и переводить.
+
+### Что переводить
+
+- Содержимое тегов `<ProseP>`, `<NuxtLink>`, `<span>`, `<p>` и пр. — видимый текст.
+- Атрибуты `label`, `placeholder`, `title`, `tooltip`, `description` (видимые надписи).
+- Строки в реактивных выражениях (`{{ ... }}`), результаты composables, вывод toast/notification.
+- Frontmatter в markdown (`title`, `description`, `navigation.title`, `badge`, текстовые поля) — этап 3.
+
+### Что НЕ переводить
+
+- `aria-label`, `alt`, `title` с названием продукта — сохраняем оригинал (`"Bitrix24 REST API"`, `"Bitrix24 UI on Telegram"`).
+- Имена компонентов и иконок (`Bitrix24Icon`, `B24Button`).
+- Импорты, названия npm-пакетов (`@bitrix24/b24jssdk`, `@bitrix24/b24icons-vue/...`).
+- CSS-классы, ID, data-атрибуты.
+- Строки в логах (`console.log`, `logger.debug`) — остаются английскими для отладки.
+
+### Готовые переводы типовых фраз
+
+| Английский | Русский |
+|---|---|
+| `Copyright © 2024-present Bitrix24` | `Copyright © 2024 – настоящее время Битрикс` |
+| `Published under MIT License.` | `Распространяется под лицензией MIT.` |
+| `Get started` | `Начать` |
+| `Search` | `Поиск` |
+| `Edit this page` | `Редактировать страницу` |
+| `On this page` | `На этой странице` |
+| `Previous` / `Next` | `Назад` / `Далее` |
+| `Releases` | `Релизы` |
+| `Copy code` | `Копировать код` |
+| `Loading...` | `Загрузка…` |
+
 ## Брендинг и копирайт (важно)
 
 Имя правообладателя — **«Bitrix» / «Битрикс» без цифры**. Это отличается от upstream `bitrix24/b24jssdk`, где в LICENSE используется `Bitrix24`.
@@ -61,7 +95,6 @@ pnpm run lint:fix
 - **Код-стайл:** ESLint `@nuxt/eslint-config` (flat), 2-space indent, без trailing commas, 1tbs скобки. `.editorconfig` фиксирует LF + UTF-8.
 - **Commits:** Conventional Commits (`feat`, `fix`, `docs`, `chore`, `ci`). Язык коммитов — английский.
 - **Язык контента `docs/content/`:** русский. При первичном импорте из upstream (этап 2) — временно английский, перевод на этапе 3.
-- **Язык UI-строк в `docs/app/**`:** русский для видимых пользователю фраз (Footer, подписи, плейсхолдеры). `aria-label`/`alt` с названием продукта — остаются английскими (`Bitrix24 REST API`).
 - **Якоря заголовков в markdown:** явные `## Заголовок {#en-anchor}` с английским slug (равным оригинальному) — чтобы при переводе на русский внешние ссылки не ломались.
 - **Ссылки в markdown:**
   - `https://apidocs.bitrix24.com/...` → `https://apidocs.bitrix24.ru/...` (русскоязычный хост).

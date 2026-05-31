@@ -44,7 +44,7 @@ const { b24DocsLink, tgLink } = useHeader()
     </template>
 
     <NuxtLink :to="config.public.gitUrl" target="_blank" class="text-legend text-(length:--ui-font-size-sm) hover:underline">
-      Published under MIT License.
+      Распространяется под лицензией MIT.
     </NuxtLink>
   </B24Footer>
 </template>
