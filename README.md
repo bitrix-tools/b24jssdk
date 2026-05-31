@@ -23,6 +23,7 @@ pnpm run docs:dev
 │   ├── app/             # компоненты, layouts, plugins
 │   ├── content/         # русскоязычные .md (Stage 3)
 │   ├── modules/         # кастомные Nuxt-модули (bx-assistant, md-rewrite)
+│   ├── nuxt.config.ts   # конфигурация Nuxt
 │   ├── public/          # статические ассеты
 │   └── server/          # SSR-маршруты, MCP-инструменты
 └── package.json         # docs:* скрипты
@@ -31,6 +32,13 @@ pnpm run docs:dev
 ## Синхронизация с английской версией
 
 Структура контента 1:1 повторяет оригинал. При изменениях в upstream `bitrix24/b24jssdk` соответствующие страницы переводятся и переносятся сюда без изменения URL.
+
+## Обратная связь и issues
+
+Этот репозиторий — только документация. Поэтому:
+
+- **Баги и замечания по русскому переводу, опечатки, оформление сайта** → [bitrix-tools/b24jssdk/issues](https://github.com/bitrix-tools/b24jssdk/issues).
+- **Баги в самом SDK** (поведение методов, API, типы) → [bitrix24/b24jssdk/issues](https://github.com/bitrix24/b24jssdk/issues). `package.json` `bugs.url` этого репозитория указывает именно туда — SDK лежит там.
 
 ## Лицензия
 

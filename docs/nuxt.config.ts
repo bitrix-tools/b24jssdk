@@ -113,6 +113,13 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/x-icon', href: `${baseUrl}/favicon.ico?v=2` }
       ],
+      // Security headers for static GitHub Pages (CSP via meta; X-Frame-Options/HSTS must be HTTP-level
+      // and are not configurable on GitHub Pages — documented as accepted limitation).
+      meta: [
+        { 'http-equiv': 'Content-Security-Policy', 'content': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'" },
+        { 'http-equiv': 'X-Content-Type-Options', 'content': 'nosniff' },
+        { 'http-equiv': 'Referrer-Policy', 'content': 'strict-origin-when-cross-origin' }
+      ],
       htmlAttrs: { lang: 'ru-RU', class: 'edge-dark' }
     },
     rootAttrs: { 'data-vaul-drawer-wrapper': '' }
@@ -285,32 +292,32 @@ export default defineNuxtConfig({
 
   llms: {
     domain: `${prodUrl}${baseUrl}`,
-    title: 'Bitrix24 JS SDK',
-    description: 'A comprehensive JavaScript library integrated with Bitrix24, providing a powerful and convenient toolkit for interacting with the Bitrix24 REST API, enabling secure and efficient management of data and processes in web application development.',
+    title: 'Bitrix24 JS SDK — документация (RU)',
+    description: 'Русскоязычная версия документации Bitrix24 JS SDK — полнофункциональной JavaScript-библиотеки для работы с REST API Bitrix24, включая вызовы методов, батчинг, фреймы, хуки и OAuth.',
     // Disable content module's built-in raw markdown route - we use our own custom handler
     // in server/routes/raw/[...slug].md.get.ts that applies MDC transformations
     contentRawMarkdown: false,
     full: {
-      title: 'Bitrix24 JS SDK Full Documentation',
-      description: 'This is the full documentation for Bitrix24 JS SDK. It includes all the Markdown files written with the MDC syntax.'
+      title: 'Полная документация Bitrix24 JS SDK',
+      description: 'Полный корпус документации Bitrix24 JS SDK на русском в виде Markdown-файлов с MDC-синтаксисом.'
     },
     sections: [
       {
-        title: 'Installation (Nuxt, Vue, React, Node.js, UMD)',
+        title: 'Установка (Nuxt, Vue, React, Node.js, UMD)',
         contentCollection: 'docs',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/docs/getting-started/installation%' }
         ]
       },
       {
-        title: 'Getting Started',
+        title: 'Начало работы',
         contentCollection: 'docs',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/docs/getting-started%' }
         ]
       },
       {
-        title: 'Working',
+        title: 'Работа с REST API',
         contentCollection: 'docs',
         contentFilters: [
           { field: 'path', operator: 'LIKE', value: '/docs/working-with-the-rest-api/%' }
@@ -325,7 +332,7 @@ export default defineNuxtConfig({
       // }
     ],
     notes: [
-      'The content is automatically generated from the same source as the official documentation.'
+      'Контент генерируется из того же источника, что и верстка публичной документации. Переводы синхронизируются с upstream `bitrix24/b24jssdk`.'
     ]
   },
 
@@ -347,10 +354,11 @@ export default defineNuxtConfig({
   schemaOrg: {
     identity: {
       type: 'Organization',
-      name: 'Bitrix24',
+      name: 'Bitrix',
       logo: '/b24-logo.svg',
       sameAs: [
-        'https://github.com/bitrix24'
+        'https://github.com/bitrix-tools',
+        'https://github.com/bitrix24/b24jssdk'
       ]
     }
   }
