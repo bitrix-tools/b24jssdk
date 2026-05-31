@@ -8,6 +8,16 @@
 
 Публикация: <https://bitrix-tools.github.io/b24jssdk/>.
 
+## Отношения с upstream (важно)
+
+Этот репозиторий — **зеркало + перевод**, не место для исправления багов SDK или докум-приложения. Поведенческие правила:
+
+- **Баги SDK / поведения методов / типов** → escalate в `bitrix24/b24jssdk` issues. Здесь не правим, фикс прилетит через очередной sync.
+- **Баги Vue-кода `docs/app/**`, `docs/server/**`, `docs/modules/**`** (упомянутые в апстрим-PR) → escalate в `bitrix24/b24jssdk`. Здесь только зеркалим.
+- **Адаптации под bitrix-tools** (наш скоуп) — это: `nuxt.config.ts` env-defaults и `@bitrix24/b24jssdk-nuxt` через npm, `docs/package.json` без `workspace:*`, `pnpm-workspace.yaml` только с `docs`, корневой `package.json` с `docs:*`-скриптами, `README.md`/`LICENSE` под bitrix-tools, копирайт-строки на «Bitrix / Битрикс», русские UI-фразы.
+- **Тесты, JSDoc, security-фиксы api-routes** — это всё upstream-вопросы. Не наш скоуп.
+- **Развёртывание** — статика на GitHub Pages (`nuxt generate`). API-routes (`/api/ai`, `/api/component-example`) и MCP в prod **не работают** — это dev-only. Соответствующие security-риски касаются только локальной разработки.
+
 ## Доставка файлов, которые агент не может запушить сам (важно)
 
 Некоторые файлы НЕВОЗМОЖНО заливать через GitHub MCP инструменты (`push_files`, `create_or_update_file`):
@@ -105,6 +115,7 @@
 | `LICENSE` (юридический текст) | `Copyright (c) 2024 Bitrix` | `... Bitrix24` |
 | `README.md`, блок лицензии | `© Bitrix` | `© Bitrix24` |
 | `package.json` `author` | `Bitrix` | `Bitrix24` |
+| `schemaOrg.identity.name` в `nuxt.config.ts` | `Bitrix` | `Bitrix24` |
 | UI-строки в русских компонентах (Footer, frontmatter, переводы) | `Битрикс` | `Bitrix24`, `Битрикс24` |
 | Год в footer | `Copyright © 2024 – настоящее время Битрикс` | `2024-present Bitrix24` |
 | Название продукта/бренд («Bitrix24 REST API», «Bitrix24 JS SDK», «Портал Bitrix24») | `Bitrix24` | `Bitrix` |
@@ -116,18 +127,21 @@
 
 При копировании файлов из `bitrix24/b24jssdk` — вручную проверять каждый `Bitrix24` в этих позициях:
 
-1. **Копирайт-строки** (`Copyright`, `©`, footer сайта, frontmatter `author`) → `Bitrix` (в юр. тексте) или `Битрикс` (в UI на русском).
+1. **Копирайт-строки** (`Copyright`, `©`, footer сайта, frontmatter `author`, `schemaOrg.identity.name`) → `Bitrix` (в юр. тексте) или `Битрикс` (в UI на русском).
 2. **Название продукта/бренд** («Bitrix24 REST API», `Bitrix24Icon`, названия классов) → не трогать.
 3. **Названия npm-пакетов, импорты** (`@bitrix24/b24jssdk`, `@bitrix24/b24icons-vue/...`) → не трогать.
 
 ## Структура репозитория
 
 - `docs/` — Nuxt 4 приложение документации (`@nuxt/content` + `@bitrix24/b24ui-nuxt`).
+  - `docs/nuxt.config.ts` — конфигурация Nuxt-приложения.
   - `docs/app/` — компоненты, layouts, pages, composables.
   - `docs/content/` — русскоязычные markdown (после Stage 3).
   - `docs/modules/` — кастомные Nuxt-модули.
-  - `docs/server/` — SSR-маршруты, MCP-инструменты, raw-markdown routes.
-- Корневые конфиги: `package.json` (только `docs:*` скрипты), `pnpm-workspace.yaml` (единственный участник — `docs`), `nuxt.config.ts`, `eslint.config.mjs`.
+  - `docs/server/` — SSR-маршруты, MCP-инструменты, raw-markdown routes (dev-only при static export).
+  - `docs/public/` — статические ассеты.
+  - `docs/package.json` — зависимости Nuxt-приложения.
+- **Корневые конфиги** (репо-уровень, не Nuxt): `package.json` (только `docs:*` скрипты), `pnpm-workspace.yaml` (единственный участник — `docs`), `eslint.config.mjs`, `.editorconfig`, `.npmrc`, `.nuxtrc`, `.gitignore`, `LICENSE`, `README.md`, `AGENTS.md`.
 
 ## Команды
 
@@ -153,7 +167,7 @@ pnpm run lint:fix
   - `https://github.com/bitrix24/b24jssdk/...` — НЕ переписывать (SDK лежит в upstream).
   - Внутренние `/docs/...` — зеркалируются 1:1, URL не меняются.
 - **`docs/package.json`:** `@bitrix24/b24jssdk` и `-nuxt` идут как npm-версии (`^x.y.z`), а не `workspace:*`.
-- **`package.json` `homepage`** — `https://bitrix-tools.github.io/b24jssdk/`. **`repository`/`bugs`** — остаются на `bitrix24/b24jssdk` (там исходники SDK).
+- **`package.json` `homepage`** — `https://bitrix-tools.github.io/b24jssdk/`. **`repository`/`bugs`** — остаются на `bitrix24/b24jssdk` (там исходники SDK; баги перевода в issues этого репо, баги SDK — в upstream).
 
 ## Этапы миграции
 
