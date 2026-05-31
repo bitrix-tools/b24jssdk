@@ -71,5 +71,10 @@ docs/components.d.ts
 
 # AI
 .claude/settings.local.json
+# VibeCode docs snapshot — temporary working file, never commit
+/docs/llms-full.txt
 .claude/channels/
 .claude/debug/
+
+# docs-typecheck generated temp files (scripts/docs-typecheck.mjs)
+.docs-typecheck/tmp/
