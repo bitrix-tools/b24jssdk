@@ -271,14 +271,12 @@ export default defineNuxtConfig({
         '@bitrix24/b24icons-vue/social/GitHubIcon',
         '@bitrix24/b24icons-vue/social/MdnwebdocsIcon',
         '@bitrix24/b24icons-vue/solid/EnterpriseIcon',
+        '@bitrix24/b24jssdk',
         '@comark/vue',
         '@comark/vue/plugins/highlight',
         '@vueuse/core',
         'ai',
-        'axios',
-        'luxon',
         'prettier',
-        'qs-esm',
         'tailwindcss/colors'
       ]
     }
