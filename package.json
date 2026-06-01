@@ -30,7 +30,12 @@
     "preview": "pnpm run docs:preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "pnpm run docs:typecheck"
+    "typecheck": "pnpm run docs:typecheck",
+    "i18n:add-anchors": "node scripts/add-anchors.mjs",
+    "i18n:add-anchors:dry": "node scripts/add-anchors.mjs --dry-run",
+    "i18n:swap-apidocs": "node scripts/swap-apidocs.mjs",
+    "i18n:swap-apidocs:dry": "node scripts/swap-apidocs.mjs --dry-run",
+    "i18n:prep": "pnpm run i18n:add-anchors && pnpm run i18n:swap-apidocs"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^1.15.2",
