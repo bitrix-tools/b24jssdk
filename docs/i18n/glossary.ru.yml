@@ -1,0 +1,275 @@
+# Translation glossary EN → RU
+#
+# Используется при переводе docs/content/**/*.md на русский.
+# AI или человек должен следовать этому словарю для консистентности.
+# При возникновении новых терминов — добавляйте их сюда в том же PR.
+#
+# Формат:
+#   - en: <англ. термин>
+#     ru: <рекомендуемый перевод>
+#     note: <когда использовать, альтернативы, исключения>
+#     keep_en: true       # опционально — оставляем английский во всех контекстах
+
+version: 1
+
+terms:
+  # —— Ключевые SDK-сущности (имена классов — не переводить) ——
+  - en: B24Hook
+    ru: B24Hook
+    note: Имя класса SDK — НЕ переводить.
+    keep_en: true
+  - en: B24Frame
+    ru: B24Frame
+    keep_en: true
+  - en: B24OAuth
+    ru: B24OAuth
+    keep_en: true
+
+  # —— Бренд / платформа ——
+  - en: Bitrix24
+    ru: Bitrix24
+    note: Бренд платформы — НЕ переводить на «Битрикс24» в теле текста. Исключение — блоки копирайта в footer/LICENSE (там «Bitrix» или «Битрикс»).
+    keep_en: true
+  - en: Bitrix24 REST API
+    ru: REST API Bitrix24
+    note: При прилагательной форме («Bitrix24 REST API method») — «метод REST API Bitrix24».
+  - en: Bitrix24 webhook URL
+    ru: URL вебхука Bitrix24
+
+  # —— Общие понятия интеграции ——
+  - en: webhook
+    ru: вебхук
+    note: Устоявшийся русский вариант. Не «хук».
+  - en: hook
+    ru: hook
+    note: В контексте B24Hook — оставляем «hook» («инициализация hook»). В общих фразах («set up a hook») — «вебхук».
+    keep_en: true
+  - en: callback
+    ru: callback
+    note: Не переводить на «обратный вызов» — устоявшийся тех. термин.
+    keep_en: true
+  - en: frame
+    ru: фрейм
+    note: Контекст — iframe-приложение Bitrix24. При прямом указании на HTML iframe — сохранять «iframe».
+  - en: iframe
+    ru: iframe
+    keep_en: true
+  - en: slider
+    ru: слайдер
+    note: UI-элемент Bitrix24.
+  - en: placement
+    ru: placement
+    note: Термин Bitrix24 (место размещения приложения). Сохраняем английский, в прямой речи можно «место вставки» в скобках.
+    keep_en: true
+
+  # —— Автентификация ——
+  - en: OAuth
+    ru: OAuth
+    keep_en: true
+  - en: OAuth 2.0
+    ru: OAuth 2.0
+    keep_en: true
+  - en: scope
+    ru: scope
+    note: В контексте OAuth — «scope» без перевода. Альтернативно: «область доступа» (редко).
+    keep_en: true
+  - en: token
+    ru: токен
+  - en: access token
+    ru: access token
+    note: Не «токен доступа». Оставляем английский термин.
+    keep_en: true
+  - en: refresh token
+    ru: refresh token
+    keep_en: true
+  - en: application token
+    ru: application token
+    keep_en: true
+  - en: secret
+    ru: секрет
+  - en: client ID
+    ru: client ID
+    keep_en: true
+  - en: client secret
+    ru: client secret
+    keep_en: true
+
+  # —— HTTP / запросы ——
+  - en: request
+    ru: запрос
+  - en: response
+    ru: ответ
+  - en: payload
+    ru: payload
+    note: Альтернатива: «полезная нагрузка» (редко). Чаще оставляем «payload».
+    keep_en: true
+  - en: endpoint
+    ru: endpoint
+    keep_en: true
+  - en: header
+    ru: заголовок
+    note: В контексте HTTP-заголовков.
+  - en: status code
+    ru: код статуса
+  - en: HTTP method
+    ru: HTTP-метод
+  - en: method (REST)
+    ru: метод
+    note: В контексте REST API — «метод». Не «вызов» (call) и не «функция».
+
+  # —— Пагинация и фильтрация ——
+  - en: pagination
+    ru: пагинация
+  - en: filter
+    ru: фильтр
+  - en: sort
+    ru: сортировка
+  - en: order
+    ru: порядок
+    note: В запросах — синоним сортировки. В REST параметре `order` оставляем как есть.
+  - en: limit
+    ru: лимит
+  - en: offset
+    ru: offset
+    keep_en: true
+  - en: select
+    ru: выборка
+    note: В SQL/REST смысле. Параметр `select` в коде не трогать.
+
+  # —— Батчинг / пакетные операции ——
+  - en: batch
+    ru: батч
+    note: Альтернатива: «пакетный запрос» (в первом вхождении). Дальше — «батч».
+  - en: batch request
+    ru: пакетный запрос
+  - en: chunk
+    ru: чанк
+    note: При первом вхождении — «чанк (chunk)». Дальше «чанк».
+  - en: bulk
+    ru: массовый
+    note: «Bulk update» → «массовое обновление».
+
+  # —— Ограничения и ретраи ——
+  - en: rate limit
+    ru: rate limit
+    note: Оставляем английский. При первом вхождении — «ограничение частоты запросов (rate limit)».
+    keep_en: true
+  - en: throttle
+    ru: throttle
+    keep_en: true
+  - en: debounce
+    ru: debounce
+    keep_en: true
+  - en: retry
+    ru: повторный запрос
+    note: «retry on error» → «повторный запрос при ошибке». Бывает »ретрай».
+  - en: backoff
+    ru: backoff
+    note: Альтернатива: «экспоненциальная задержка».
+    keep_en: true
+  - en: timeout
+    ru: таймаут
+
+  # —— Асинхронность и потоки ——
+  - en: async
+    ru: async
+    note: «sync/async function» → «синхронная/асинхронная функция».
+    keep_en: true
+  - en: promise
+    ru: Promise
+    keep_en: true
+  - en: generator
+    ru: генератор
+  - en: stream
+    ru: поток
+  - en: streaming
+    ru: потоковая обработка
+  - en: queue
+    ru: очередь
+
+  # —— Логирование / ошибки ——
+  - en: logger
+    ru: логгер
+  - en: log
+    ru: лог
+  - en: error
+    ru: ошибка
+  - en: warning
+    ru: предупреждение
+  - en: handler
+    ru: обработчик
+  - en: formatter
+    ru: форматтер
+  - en: processor
+    ru: процессор
+
+  # —— Общие эффекты и модификаторы ——
+  - en: deprecated
+    ru: устаревший
+    note: Часто в оборотах «устарел», «устаревший метод». Слово »deprecated» в коде не трогаем.
+  - en: legacy
+    ru: legacy
+    note: «Legacy code» → «legacy-код». «Legacy method» → «метод из legacy API».
+    keep_en: true
+  - en: optional
+    ru: опциональный
+  - en: required
+    ru: обязательный
+  - en: default
+    ru: по умолчанию
+  - en: by default
+    ru: по умолчанию
+  - en: production
+    ru: production
+    keep_en: true
+  - en: development
+    ru: dev / development
+    note: «development mode» → «режим разработки».
+    keep_en: true
+  - en: runtime
+    ru: runtime
+    keep_en: true
+  - en: build
+    ru: сборка
+  - en: bundle
+    ru: бандл
+
+  # —— Стандартные обороты docа ——
+  - en: Note
+    ru: Примечание
+  - en: Tip
+    ru: Совет
+  - en: Warning
+    ru: Предупреждение
+  - en: Caution
+    ru: Внимание
+  - en: Example
+    ru: Пример
+  - en: Quick Start
+    ru: Быстрый старт
+  - en: Get Started
+    ru: Начать
+  - en: Overview
+    ru: Обзор
+  - en: See Also
+    ru: См. также
+  - en: Limitations
+    ru: Ограничения
+  - en: Key Concepts
+    ru: Ключевые понятия
+  - en: Method Signature
+    ru: Сигнатура метода
+  - en: Parameters
+    ru: Параметры
+  - en: Returns
+    ru: Возвращает
+  - en: Throws
+    ru: Выбрасывает
+  - en: Error Handling
+    ru: Обработка ошибок
+  - en: Usage
+    ru: Использование
+  - en: Installation
+    ru: Установка
+  - en: Configuration
+    ru: Настройка
