@@ -14,9 +14,28 @@
 
 - **Баги SDK / поведения методов / типов** → escalate в `bitrix24/b24jssdk` issues. Здесь не правим, фикс прилетит через очередной sync.
 - **Баги Vue-кода `docs/app/**`, `docs/server/**`, `docs/modules/**`** (упомянутые в апстрим-PR) → escalate в `bitrix24/b24jssdk`. Здесь только зеркалим.
-- **Адаптации под bitrix-tools** (наш скоуп) — это: `nuxt.config.ts` env-defaults и `@bitrix24/b24jssdk-nuxt` через npm, `docs/package.json` без `workspace:*`, `pnpm-workspace.yaml` только с `docs`, корневой `package.json` с `docs:*`-скриптами, `README.md`/`LICENSE` под bitrix-tools, копирайт-строки на «Bitrix / Битрикс», русские UI-фразы.
+- **Адаптации под bitrix-tools** (наш скоуп) — это:
+  - `nuxt.config.ts` env-defaults и `@bitrix24/b24jssdk-nuxt` через npm;
+  - `docs/package.json` без `workspace:*`;
+  - `pnpm-workspace.yaml` только с `docs`;
+  - **Корневые `docs:*`-скрипты делегируют в `docs/` через `pnpm --filter ./docs run <cmd>`** (upstream вызывает `nuxt` напрямую через хоистинг — у нас не работает на Windows pnpm 11, см. PR #8);
+  - `docs/package.json` `lint` использует `eslint --config ../eslint.config.mjs .` (ESLint 9 flat-config не walking-up; явный путь обязателен при вызове из воркспейса);
+  - `README.md`/`LICENSE` под bitrix-tools;
+  - копирайт-строки на «Bitrix / Битрикс»;
+  - русские UI-фразы.
 - **Тесты, JSDoc, security-фиксы api-routes** — это всё upstream-вопросы. Не наш скоуп.
 - **Развёртывание** — статика на GitHub Pages (`nuxt generate`). API-routes (`/api/ai`, `/api/component-example`) и MCP в prod **не работают** — это dev-only. Соответствующие security-риски касаются только локальной разработки.
+
+### При sync из upstream — НЕ восстанавливать
+
+Эти файлы у нас намеренно отличаются от upstream:
+
+- `package.json` (корневой) — все `docs:*` скрипты через `pnpm --filter ./docs run X`. У upstream это `nuxt X docs` напрямую. **Не откатывать.**
+- `docs/package.json` `lint` — `eslint --config ../eslint.config.mjs .`. У upstream нет `lint` в docs (линт из корня). **Не убирать.**
+- `docs/nuxt.config.ts` `optimizeDeps.include` — включает `@bitrix24/b24jssdk`, не включает транзитивы (`axios`, `luxon`, `qs-esm`). См. PR #8.
+- `docs/nuxt.config.ts` `app.head.meta` — CSP / X-Content-Type-Options / Referrer-Policy. **Не убирать.**
+- `docs/nuxt.config.ts` `schemaOrg.identity.name` = `Bitrix` (без цифры). **Не переписывать.**
+- `LICENSE` — `Copyright (c) <год> Bitrix`. **Не возвращать на `Bitrix24`.**
 
 ## Доставка файлов, которые агент не может запушить сам (важно)
 
@@ -141,15 +160,17 @@
   - `docs/server/` — SSR-маршруты, MCP-инструменты, raw-markdown routes (dev-only при static export).
   - `docs/public/` — статические ассеты.
   - `docs/package.json` — зависимости Nuxt-приложения.
-- **Корневые конфиги** (репо-уровень, не Nuxt): `package.json` (только `docs:*` скрипты), `pnpm-workspace.yaml` (единственный участник — `docs`), `eslint.config.mjs`, `.editorconfig`, `.npmrc`, `.nuxtrc`, `.gitignore`, `LICENSE`, `README.md`, `AGENTS.md`.
+- **Корневые конфиги** (репо-уровень, не Nuxt): `package.json` (только `docs:*` скрипты через `pnpm --filter ./docs run`), `pnpm-workspace.yaml` (единственный участник — `docs`), `eslint.config.mjs`, `.editorconfig`, `.npmrc`, `.nuxtrc`, `.gitignore`, `LICENSE`, `README.md`, `AGENTS.md`.
 
 ## Команды
 
 ```bash
 pnpm install
+pnpm run docs:prepare      # обязательно после install и после изменений docs/nuxt.config.ts
 pnpm run docs:dev          # http://localhost:3000/b24jssdk/
 pnpm run docs:build        # production build
 pnpm run docs:generate     # static export (для GitHub Pages)
+pnpm run docs:preview      # превью собранного сайта
 pnpm run typecheck
 pnpm run lint
 pnpm run lint:fix
@@ -158,6 +179,8 @@ pnpm run lint:fix
 ## Конвенции
 
 - **Пакетный менеджер:** только `pnpm` 11.x (зафиксировано в `package.json` `packageManager`). Никакого `npm`/`yarn`.
+- **Скрипты:** корневые `docs:*` всегда делегируют в воркспейс через `pnpm --filter ./docs run <cmd>`. Не вызывать `nuxt` напрямую из корня — хоистинг workspace-deps не работает на Windows pnpm 11 (см. PR #8).
+- **ESLint:** конфиг живёт только в `eslint.config.mjs` корня. Скрипты в `docs/package.json` должны использовать `eslint --config ../eslint.config.mjs .` — flat-config не поднимается вверх по иерархии.
 - **Код-стайл:** ESLint `@nuxt/eslint-config` (flat), 2-space indent, без trailing commas, 1tbs скобки. `.editorconfig` фиксирует LF + UTF-8.
 - **Commits:** Conventional Commits (`feat`, `fix`, `docs`, `chore`, `ci`). Язык коммитов — английский.
 - **Язык контента `docs/content/`:** русский. При первичном импорте из upstream (этап 2) — временно английский, перевод на этапе 3.
