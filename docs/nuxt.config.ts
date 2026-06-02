@@ -134,6 +134,9 @@ export default defineNuxtConfig({
   content: {
     build: {
       markdown: {
+        remarkPlugins: {
+          'remark-custom-heading-id': {}
+        },
         highlight: {
           langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'tsx', 'jsx', 'json', 'yml', 'css', 'mdc', 'blade', 'edge']
         }
@@ -277,6 +280,7 @@ export default defineNuxtConfig({
         '@vueuse/core',
         'ai',
         'prettier',
+        'remark-custom-heading-id',
         'tailwindcss/colors'
       ]
     }

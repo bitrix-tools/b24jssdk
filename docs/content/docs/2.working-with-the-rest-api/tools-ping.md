@@ -10,7 +10,7 @@ links:
     to: https://github.com/bitrix24/b24jssdk/blob/main/packages/jssdk/src/core/tools/ping.ts
 ---
 
-## Overview
+## Overview {#overview}
 
 Use `Ping.make()`{lang="ts-type"} to measure the response time of Bitrix24 REST API. The method returns a `Promise` with a numeric value of the response time in milliseconds.
 
@@ -25,7 +25,7 @@ if (responseTime >= 0) {
 }
 ```
 
-## Method Signature
+## Method Signature {#method-signature}
 
 ```ts-type
 make(
@@ -33,26 +33,26 @@ make(
 ): Promise<number>
 ```
 
-### Parameters
+### Parameters {#parameters}
 
 | Parameter | Type | Required | Description |
 |----|----|----|----|
 | **`requestId`** | `string`{lang="ts-type"} | No | Unique request identifier for tracking. Used for request deduplication and debugging. |
 
-### Return Value
+### Return Value {#return-value}
 
 `Promise<number>`{lang="ts-type"} — a promise that resolves to a numeric value:
 
 - **Positive number** — response time in milliseconds from sending the request to receiving the response.
 - **`-1`** — in case of error or timeout.
 
-## Error Handling
+## Error Handling {#error-handling}
 
 `Ping.make()`{lang="ts-type"} never throws. Network failures, HTTP errors, invalid credentials, and timeouts are all swallowed internally and surfaced as a return value of `-1`. There is no way to distinguish between failure modes from the call site — for that, use [`HealthCheck.make()`](/docs/working-with-the-rest-api/tools-health-check/) or call the underlying method directly with [`CallV2.make()`](/docs/working-with-the-rest-api/call-rest-api-ver2/) and inspect `AjaxResult`.
 
-## Examples
+## Examples {#examples}
 
-### Measuring response time
+### Measuring response time {#measuring-response-time}
 
 ::code-example
 ---
@@ -60,7 +60,7 @@ name: 'tools-ping'
 ---
 ::
 
-## Alternatives and Recommendations
+## Alternatives and Recommendations {#alternatives-and-recommendations}
 
 * **For availability check**: Use [`HealthCheck`](/docs/working-with-the-rest-api/tools-health-check/).
 * **For measuring operation performance**: Perform time measurements for specific API methods.
