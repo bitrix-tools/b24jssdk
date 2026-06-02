@@ -115,8 +115,9 @@ export default defineNuxtConfig({
       ],
       // Security headers for static GitHub Pages (CSP via meta; X-Frame-Options/HSTS must be HTTP-level
       // and are not configurable on GitHub Pages — documented as accepted limitation).
+      // CSP-строка в backticks (template literal) — внутри одиночные кавычки вокруг 'self'.
       meta: [
-        { 'http-equiv': 'Content-Security-Policy', 'content': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'" },
+        { 'http-equiv': 'Content-Security-Policy', 'content': `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'` },
         { 'http-equiv': 'X-Content-Type-Options', 'content': 'nosniff' },
         { 'http-equiv': 'Referrer-Policy', 'content': 'strict-origin-when-cross-origin' }
       ],
