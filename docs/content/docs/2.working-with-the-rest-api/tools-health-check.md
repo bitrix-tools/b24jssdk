@@ -10,7 +10,7 @@ links:
     to: https://github.com/bitrix24/b24jssdk/blob/main/packages/jssdk/src/core/tools/healthcheck.ts
 ---
 
-## Overview
+## Overview {#overview}
 
 Use `HealthCheck.make()`{lang="ts-type"} to check the availability of Bitrix24 REST API. The method returns a `Promise` with a boolean value indicating API availability.
 
@@ -25,7 +25,7 @@ if (isHealthy) {
 }
 ```
 
-## Method Signature
+## Method Signature {#method-signature}
 
 ```ts-type
 make(
@@ -33,26 +33,26 @@ make(
 ): Promise<boolean>
 ```
 
-### Parameters
+### Parameters {#parameters}
 
 | Parameter | Type | Required | Description |
 |----|----|----|----|
 | **`requestId`** | `string`{lang="ts-type"} | No | Unique request identifier for tracking. Used for request deduplication and debugging. |
 
-### Return Value
+### Return Value {#return-value}
 
 `Promise<boolean>`{lang="ts-type"} — a promise that resolves to a boolean value:
 
 - **`true`** — REST API is available and responding, webhook is configured correctly.
 - **`false`** — REST API is unavailable, an error occurred, or necessary access rights are missing.
 
-## Error Handling
+## Error Handling {#error-handling}
 
 `HealthCheck.make()`{lang="ts-type"} never throws. Network failures, HTTP errors, missing scopes, and timeouts are all collapsed into a return value of `false`. The method is intentionally a black-box probe — for actionable error information, call the underlying method directly with [`CallV2.make()`](/docs/working-with-the-rest-api/call-rest-api-ver2/) and inspect `AjaxResult` (`isSuccess`, `getErrorMessages()`).
 
-## Examples
+## Examples {#examples}
 
-### Availability check
+### Availability check {#availability-check}
 
 ::code-example
 ---
@@ -60,7 +60,7 @@ name: 'tools-health-check'
 ---
 ::
 
-## Alternatives and Recommendations
+## Alternatives and Recommendations {#alternatives-and-recommendations}
 
 * **For measuring response speed**: Use [`Ping`](/docs/working-with-the-rest-api/tools-ping/).
 * **For checking specific permissions**: Perform a test request to the required API method.
