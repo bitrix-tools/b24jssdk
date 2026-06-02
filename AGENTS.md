@@ -22,6 +22,7 @@
   - `pnpm-workspace.yaml` только с `docs`;
   - **Корневые `docs:*`-скрипты делегируют в `docs/` через `pnpm --filter ./docs run <cmd>`** (upstream вызывает `nuxt` напрямую через хоистинг — у нас не работает на Windows pnpm 11, см. PR #8);
   - `docs/package.json` `lint` использует `eslint --config ../eslint.config.mjs .` (ESLint 9 flat-config не walking-up; явный путь обязателен при вызове из воркспейса);
+  - **`remark-custom-heading-id`** в корневом `package.json` + подключение в `docs/nuxt.config.ts` (`content.build.markdown.remarkPlugins`) — критично для синтаксиса `## Заголовок {#anchor}`, который **не работает из коробки** в `@nuxt/content` v3. Без плагина текст `{#anchor}` рендерится в DOM, а `id` получает дублированный slug. См. раздел «Кастомные якоря заголовков» ниже;
   - `README.md`/`LICENSE` под bitrix-tools;
   - копирайт-строки на «Bitrix / Битрикс»;
   - русские UI-фразы;
@@ -34,14 +35,38 @@
 
 Эти файлы у нас намеренно отличаются от upstream:
 
-- `package.json` (корневой) — все `docs:*` скрипты через `pnpm --filter ./docs run X` + `i18n:*` скрипты. У upstream это `nuxt X docs` напрямую. **Не откатывать.**
+- `package.json` (корневой) — все `docs:*` скрипты через `pnpm --filter ./docs run X` + `i18n:*` скрипты + **`dependencies.remark-custom-heading-id`** (см. ниже «Кастомные якоря заголовков»). У upstream это `nuxt X docs` напрямую и нет `dependencies`. **Не откатывать.**
 - `docs/package.json` `lint` — `eslint --config ../eslint.config.mjs .`. У upstream нет `lint` в docs (линт из корня). **Не убирать.**
 - `docs/nuxt.config.ts` `optimizeDeps.include` — включает `@bitrix24/b24jssdk`, не включает транзитивы (`axios`, `luxon`, `qs-esm`). См. PR #8.
+- `docs/nuxt.config.ts` `content.build.markdown.remarkPlugins['remark-custom-heading-id']` — **обязательно**. Без него `{#anchor}` ломает заголовки. **Не убирать.**
 - `docs/nuxt.config.ts` `app.head.meta` — CSP / X-Content-Type-Options / Referrer-Policy. **Не убирать.**
 - `docs/nuxt.config.ts` `schemaOrg.identity.name` = `Bitrix` (без цифры). **Не переписывать.**
 - `LICENSE` — `Copyright (c) <год> Bitrix`. **Не возвращать на `Bitrix24`.**
 - `docs/i18n/` — translation-kit, **не сносить и не синхронизировать с upstream** (его там нет).
 - `scripts/add-anchors.mjs`, `scripts/swap-apidocs.mjs` — i18n утилиты, **не сносить**.
+
+## Кастомные якоря заголовков (`{#anchor}`)
+
+Для стабильных URL-якорей при переводе текста заголовков мы используем синтаксис `## Текст {#stable-slug}`. В `@nuxt/content` v3 этот синтаксис **не поддерживается из коробки** — встроенный парсер воспринимает `{#...}` как обычный текст и:
+
+- рендерит фрагмент `{#stable-slug}` прямо в содержимое заголовка (видно в браузере);
+- генерирует `id` из всего текста, включая `{#...}`, — получается дубль вида `id="add-to-a-vue-project-add-to-a-vue-project"`.
+
+Решение — плагин [`remark-custom-heading-id`](https://www.npmjs.com/package/remark-custom-heading-id), подключённый в `docs/nuxt.config.ts`:
+
+```ts
+content: {
+  build: {
+    markdown: {
+      remarkPlugins: {
+        'remark-custom-heading-id': {}
+      }
+    }
+  }
+}
+```
+
+Плагин — runtime-зависимость (не dev), лежит в `dependencies` **корневого** `package.json`. Через pnpm hoisting доступен из `docs/`. При локальной отладке (если плагин «не нашёлся»): убедиться, что `pnpm install` был запущен из корня, а не `pnpm --filter ./docs install`.
 
 ## Доставка файлов, которые агент не может запушить сам (важно)
 
@@ -168,7 +193,7 @@
   - `docs/public/` — статические ассеты.
   - `docs/package.json` — зависимости Nuxt-приложения.
 - `scripts/` — одноразовые i18n/migration утилиты: `add-anchors.mjs`, `swap-apidocs.mjs`. Вызываются через `pnpm run i18n:*`. Не часть Nuxt-приложения.
-- **Корневые конфиги** (репо-уровень, не Nuxt): `package.json` (только `docs:*` + `i18n:*` скрипты), `pnpm-workspace.yaml` (единственный участник — `docs`), `eslint.config.mjs`, `.editorconfig`, `.npmrc`, `.nuxtrc`, `.gitignore`, `LICENSE`, `README.md`, `AGENTS.md`.
+- **Корневые конфиги** (репо-уровень, не Nuxt): `package.json` (только `docs:*` + `i18n:*` скрипты + `remark-custom-heading-id` зависимость для `@nuxt/content`), `pnpm-workspace.yaml` (единственный участник — `docs`), `eslint.config.mjs`, `.editorconfig`, `.npmrc`, `.nuxtrc`, `.gitignore`, `LICENSE`, `README.md`, `AGENTS.md`.
 
 ## Команды
 
@@ -199,7 +224,7 @@ pnpm run i18n:swap-apidocs:dry # сухой прогон
 - **Код-стайл:** ESLint `@nuxt/eslint-config` (flat), 2-space indent, без trailing commas, 1tbs скобки. `.editorconfig` фиксирует LF + UTF-8.
 - **Commits:** Conventional Commits (`feat`, `fix`, `docs`, `chore`, `ci`). Язык коммитов — английский.
 - **Язык контента `docs/content/`:** русский (после Stage 3). Подробности — `docs/i18n/style-guide.md` и `docs/i18n/glossary.ru.yml`.
-- **Якоря заголовков в markdown:** явные `## Заголовок {#en-anchor}` с английским slug (равным оригинальному). Добавляются автоматически через `pnpm run i18n:add-anchors` (см. Stage 3a). При ручной правке заголовка — якорь не трогать.
+- **Якоря заголовков в markdown:** явные `## Заголовок {#en-anchor}` с английским slug (равным оригинальному). Добавляются автоматически через `pnpm run i18n:add-anchors` (см. Stage 3a). При ручной правке заголовка — якорь не трогать. Синтаксис поддерживается плагином `remark-custom-heading-id` (см. раздел выше); без него `@nuxt/content` v3 не парсит `{#...}`.
 - **Ссылки в markdown:**
   - `https://apidocs.bitrix24.com/...` → `https://apidocs.bitrix24.ru/...` (русскоязычный хост; автоматизировано через `pnpm run i18n:swap-apidocs`).
   - `https://github.com/bitrix24/b24jssdk/...` — НЕ переписывать (SDK лежит в upstream).
@@ -212,7 +237,7 @@ pnpm run i18n:swap-apidocs:dry # сухой прогон
 1. **Stage 1 (инфра)** — замена VitePress на Nuxt 4 + b24ui, конфиги, `docs/app/`, `docs/modules/`, `docs/server/`. ✅ PR #5.
 2. **Stage 2 (англ. контент)** — импорт `docs/content/**` из upstream вербатим. ✅ PR #7.
 3. **Stage 3 (перевод)** разбит на под-этапы:
-   - **Stage 3a (kit + механика)** — `docs/i18n/` (glossary, style-guide, prompt) + `scripts/add-anchors.mjs` + `scripts/swap-apidocs.mjs` + прогон скриптов на 87 файлах. PR #9.
+   - **Stage 3a (kit + механика)** — `docs/i18n/` (glossary, style-guide, prompt) + `scripts/add-anchors.mjs` + `scripts/swap-apidocs.mjs` + `remark-custom-heading-id` для `@nuxt/content` + прогон скриптов на 87 файлах. PR #9.
    - **Stage 3b (getting-started)** — перевод 12 файлов `docs/content/docs/1.getting-started/**` на русский.
    - **Stage 3c (working-with-rest-api)** — перевод 53 файла `docs/content/docs/2.working-with-the-rest-api/**`.
    - **Stage 3d (examples)** — перевод 22 файла `docs/content/docs/99.examples/**`.
