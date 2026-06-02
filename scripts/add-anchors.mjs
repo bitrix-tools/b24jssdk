@@ -91,8 +91,8 @@ export function processFile(content) {
     }
     if (inFence) return line
 
-    // заголовок h2/h3 — жадный квантор + .trimEnd(), чтобы избежать overlap \s+ и \s*
-    const m = line.match(/^(#{2,3})[ \t]+(.+)$/)
+    // заголовок h2/h3 — после [ \t]+ обязательно \S, чтобы regexp не имел backtracking overlap
+    const m = line.match(/^(#{2,3})[ \t]+(\S.*)$/)
     if (!m) return line
     const [, hashes, rawHeading] = m
     const headingText = rawHeading.trimEnd()

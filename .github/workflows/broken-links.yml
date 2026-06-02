@@ -28,7 +28,7 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           # --exclude '^https?://' и '^mailto:' оставляет только относительные/якорные ссылки
-          # --include-fragments проверяет #anchor (нужно для проверки {#en-anchor} якорей)
+          # --include-fragments проверяет #anchor (работает по собранному HTML, в .md ограниченно — см. issue)
           # --cache ускоряет повторные прогоны
           args: >-
             --no-progress
@@ -40,12 +40,31 @@ jobs:
             './docs/content/**/*.md'
           fail: false
 
+      # Санитайз lychee-вывода перед созданием issue:
+      # 1. Оборачиваем сырой lychee/out.md в ```-блок — защита от markdown-injection
+      # из враждебных URL-ов в исходных .md (mention @user, ссылки-приманки и пр.).
+      # 2. head -300 ограничивает размер issue body на случай тысяч сломанных ссылок.
+      - name: Sanitize lychee output for issue body
+        if: steps.lychee.outputs.exit_code != '0'
+        run: |
+          {
+            echo '⚠️ Автоматический отчёт broken-link checker (lychee) о внутренних ссылках docs/content/**.'
+            echo ''
+            echo 'Сырой вывод lychee в блоке ниже — внешний контент из исходных markdown-файлов.'
+            echo 'Не доверяйте ссылкам внутри. Сообщения вида @mention или вызовы ботов не сработают (всё внутри code-fence).'
+            echo ''
+            echo '```'
+            head -300 ./lychee/out.md
+            echo ''
+            echo '```'
+          } > ./lychee/issue-body.md
+
       - name: Create issue from failure
-        if: env.lychee_exit_code != 0
+        if: steps.lychee.outputs.exit_code != '0'
         uses: peter-evans/create-issue-from-file@v5
         with:
           title: 'Broken internal links detected (weekly check)'
-          content-filepath: ./lychee/out.md
+          content-filepath: ./lychee/issue-body.md
           labels: |
             broken-links
             ci

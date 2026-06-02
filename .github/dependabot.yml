@@ -23,6 +23,16 @@ updates:
       day: "monday"
       time: "06:00"
       timezone: "Europe/Moscow"
+    # Major-обновления Nuxt/Vue и их соседей обычно требуют миграции (проверяем руками):
+    ignore:
+      - dependency-name: "nuxt"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nuxt/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vue"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vue-tsc"
+        update-types: ["version-update:semver-major"]
     groups:
       bitrix24:
         patterns:
