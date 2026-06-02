@@ -52,5 +52,8 @@
     "docs",
     "russian",
     "jssdk"
-  ]
+  ],
+  "dependencies": {
+    "remark-custom-heading-id": "^2.0.0"
+  }
 }

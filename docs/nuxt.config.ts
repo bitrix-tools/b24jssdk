@@ -134,6 +134,9 @@ export default defineNuxtConfig({
   content: {
     build: {
       markdown: {
+        remarkPlugins: {
+          'remark-custom-heading-id': {}
+        },
         highlight: {
           langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'tsx', 'jsx', 'json', 'yml', 'css', 'mdc', 'blade', 'edge']
         }
