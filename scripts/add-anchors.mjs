@@ -39,8 +39,8 @@ async function* walk(dir) {
 function slugify(text) {
   return text
     .toLowerCase()
-    .replace(/&[a-z]+;/g, '')          // HTML entities
-    .replace(/[^\w\s-]/g, '')          // non-word/space/dash
+    .replace(/&[a-z]+;/g, '') // HTML entities
+    .replace(/[^\w\s-]/g, '') // non-word/space/dash
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-+|-+$/g, '')
@@ -55,7 +55,7 @@ function slugify(text) {
 export function processFile(content) {
   const lines = content.split('\n')
   let inFence = false
-  let fenceMarker = ''      // запоминаем, чем открыли (``` или ~~~)
+  let fenceMarker = '' // запоминаем, чем открыли (``` или ~~~)
   let inFrontmatter = false
   let frontmatterClosed = false
   let modified = false
@@ -91,18 +91,19 @@ export function processFile(content) {
     }
     if (inFence) return line
 
-    // заголовок h2/h3
-    const m = line.match(/^(#{2,3})\s+(.+?)\s*$/)
+    // заголовок h2/h3 — после [ \t]+ обязательно \S, чтобы regexp не имел backtracking overlap
+    const m = line.match(/^(#{2,3})[ \t]+(\S.*)$/)
     if (!m) return line
-    const [, hashes, headingText] = m
+    const [, hashes, rawHeading] = m
+    const headingText = rawHeading.trimEnd()
 
     // уже есть якорь В ЛЮБОМ месте строки — и `## Foo {#x}`, и `## Foo {.cls} {#x}`, и `## Foo {#x} {.cls}`
-    if (/\{#[A-Za-z0-9_-]+\}/.test(headingText)) return line
+    if (/\{#[\w-]+\}/.test(headingText)) return line
 
     // снимаем любые MDC-модификаторы вида {.class} или inline-код для слага
     const cleanText = headingText
-      .replace(/`([^`]+)`/g, '$1')   // inline-код — берём внутренний текст
-      .replace(/\{[^}]+\}/g, '')     // MDC модификаторы
+      .replace(/`([^`]+)`/g, '$1') // inline-код — берём внутренний текст
+      .replace(/\{[^}]+\}/g, '') // MDC модификаторы
       .trim()
 
     const slug = slugify(cleanText)

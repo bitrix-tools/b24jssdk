@@ -1,0 +1,71 @@
+name: Broken links (internal only)
+
+on:
+  schedule:
+    # Каждый понедельник в 06:00 UTC (09:00 MSK)
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
+      - name: Link Checker (internal only)
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # --exclude '^https?://' и '^mailto:' оставляет только относительные/якорные ссылки
+          # --include-fragments проверяет #anchor (работает по собранному HTML, в .md ограниченно — см. issue)
+          # --cache ускоряет повторные прогоны
+          args: >-
+            --no-progress
+            --cache
+            --max-cache-age 1d
+            --include-fragments
+            --exclude '^https?://'
+            --exclude '^mailto:'
+            './docs/content/**/*.md'
+          fail: false
+
+      # Санитайз lychee-вывода перед созданием issue:
+      # 1. Оборачиваем сырой lychee/out.md в ```-блок — защита от markdown-injection
+      # из враждебных URL-ов в исходных .md (mention @user, ссылки-приманки и пр.).
+      # 2. head -300 ограничивает размер issue body на случай тысяч сломанных ссылок.
+      - name: Sanitize lychee output for issue body
+        if: steps.lychee.outputs.exit_code != '0'
+        run: |
+          {
+            echo '⚠️ Автоматический отчёт broken-link checker (lychee) о внутренних ссылках docs/content/**.'
+            echo ''
+            echo 'Сырой вывод lychee в блоке ниже — внешний контент из исходных markdown-файлов.'
+            echo 'Не доверяйте ссылкам внутри. Сообщения вида @mention или вызовы ботов не сработают (всё внутри code-fence).'
+            echo ''
+            echo '```'
+            head -300 ./lychee/out.md
+            echo ''
+            echo '```'
+          } > ./lychee/issue-body.md
+
+      - name: Create issue from failure
+        if: steps.lychee.outputs.exit_code != '0'
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: 'Broken internal links detected (weekly check)'
+          content-filepath: ./lychee/issue-body.md
+          labels: |
+            broken-links
+            ci
+            automated

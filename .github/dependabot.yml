@@ -1,0 +1,85 @@
+version: 2
+updates:
+  # Корневой package.json: только remark-custom-heading-id + devDeps
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Moscow"
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    open-pull-requests-limit: 3
+
+  # docs/package.json: основное Nuxt-приложение — группируем по логике
+  - package-ecosystem: "npm"
+    directory: "/docs"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Moscow"
+    # Major-обновления Nuxt/Vue и их соседей обычно требуют миграции (проверяем руками):
+    ignore:
+      - dependency-name: "nuxt"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nuxt/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vue"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vue-tsc"
+        update-types: ["version-update:semver-major"]
+    groups:
+      bitrix24:
+        patterns:
+          - "@bitrix24/*"
+      nuxt:
+        patterns:
+          - "nuxt"
+          - "@nuxt/*"
+          - "nuxt-*"
+          - "@nuxtjs/*"
+      vue:
+        patterns:
+          - "vue"
+          - "@vue/*"
+          - "vue-*"
+          - "@vueuse/*"
+      ai-sdk:
+        patterns:
+          - "@ai-sdk/*"
+          - "ai"
+      content-tooling:
+        patterns:
+          - "remark-*"
+          - "shiki"
+          - "@shikijs/*"
+          - "minimark"
+          - "@comark/*"
+          - "tiptap-*"
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    open-pull-requests-limit: 5
+
+  # GitHub Actions — обновление версий actions/*
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Moscow"
+    labels:
+      - "dependencies"
+      - "ci"
+    commit-message:
+      prefix: "chore(ci)"
+      include: "scope"
+    open-pull-requests-limit: 3
