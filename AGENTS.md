@@ -1,5 +1,7 @@
 # AGENTS.md
 
+<sub>Last reviewed: 2026-06-02 (Stage 3a merge)</sub>
+
 Правила и конвенции для AI-агентов (Claude Code, Cursor, Codex и др.) при работе в этом репозитории.
 
 ## О проекте
