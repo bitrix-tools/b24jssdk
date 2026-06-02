@@ -280,6 +280,7 @@ export default defineNuxtConfig({
         '@vueuse/core',
         'ai',
         'prettier',
+        'remark-custom-heading-id',
         'tailwindcss/colors'
       ]
     }
