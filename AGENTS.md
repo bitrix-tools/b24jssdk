@@ -8,6 +8,8 @@
 
 Публикация: <https://bitrix-tools.github.io/b24jssdk/>.
 
+Сайт **только русскоязычный** (RU-only), без переключателя языков и без `alternate` frontmatter. Кому нужен оригинал — идут на <https://bitrix24.github.io/b24jssdk/>.
+
 ## Отношения с upstream (важно)
 
 Этот репозиторий — **зеркало + перевод**, не место для исправления багов SDK или докум-приложения. Поведенческие правила:
@@ -22,7 +24,9 @@
   - `docs/package.json` `lint` использует `eslint --config ../eslint.config.mjs .` (ESLint 9 flat-config не walking-up; явный путь обязателен при вызове из воркспейса);
   - `README.md`/`LICENSE` под bitrix-tools;
   - копирайт-строки на «Bitrix / Битрикс»;
-  - русские UI-фразы.
+  - русские UI-фразы;
+  - **`docs/i18n/`** — translation-kit (glossary, style-guide, prompt) — нет в upstream;
+  - **`scripts/`** — i18n/migration утилиты — нет в upstream.
 - **Тесты, JSDoc, security-фиксы api-routes** — это всё upstream-вопросы. Не наш скоуп.
 - **Развёртывание** — статика на GitHub Pages (`nuxt generate`). API-routes (`/api/ai`, `/api/component-example`) и MCP в prod **не работают** — это dev-only. Соответствующие security-риски касаются только локальной разработки.
 
@@ -30,12 +34,14 @@
 
 Эти файлы у нас намеренно отличаются от upstream:
 
-- `package.json` (корневой) — все `docs:*` скрипты через `pnpm --filter ./docs run X`. У upstream это `nuxt X docs` напрямую. **Не откатывать.**
+- `package.json` (корневой) — все `docs:*` скрипты через `pnpm --filter ./docs run X` + `i18n:*` скрипты. У upstream это `nuxt X docs` напрямую. **Не откатывать.**
 - `docs/package.json` `lint` — `eslint --config ../eslint.config.mjs .`. У upstream нет `lint` в docs (линт из корня). **Не убирать.**
 - `docs/nuxt.config.ts` `optimizeDeps.include` — включает `@bitrix24/b24jssdk`, не включает транзитивы (`axios`, `luxon`, `qs-esm`). См. PR #8.
 - `docs/nuxt.config.ts` `app.head.meta` — CSP / X-Content-Type-Options / Referrer-Policy. **Не убирать.**
 - `docs/nuxt.config.ts` `schemaOrg.identity.name` = `Bitrix` (без цифры). **Не переписывать.**
 - `LICENSE` — `Copyright (c) <год> Bitrix`. **Не возвращать на `Bitrix24`.**
+- `docs/i18n/` — translation-kit, **не сносить и не синхронизировать с upstream** (его там нет).
+- `scripts/add-anchors.mjs`, `scripts/swap-apidocs.mjs` — i18n утилиты, **не сносить**.
 
 ## Доставка файлов, которые агент не может запушить сам (важно)
 
@@ -155,12 +161,14 @@
 - `docs/` — Nuxt 4 приложение документации (`@nuxt/content` + `@bitrix24/b24ui-nuxt`).
   - `docs/nuxt.config.ts` — конфигурация Nuxt-приложения.
   - `docs/app/` — компоненты, layouts, pages, composables.
-  - `docs/content/` — русскоязычные markdown (после Stage 3).
+  - `docs/content/` — markdown-контент (после Stage 3 — на русском; сейчас английский исходник в процессе перевода).
+  - `docs/i18n/` — translation-kit: `glossary.ru.yml`, `style-guide.md`, `prompt.md`. Источник истины для переводчика (человек+AI).
   - `docs/modules/` — кастомные Nuxt-модули.
   - `docs/server/` — SSR-маршруты, MCP-инструменты, raw-markdown routes (dev-only при static export).
   - `docs/public/` — статические ассеты.
   - `docs/package.json` — зависимости Nuxt-приложения.
-- **Корневые конфиги** (репо-уровень, не Nuxt): `package.json` (только `docs:*` скрипты через `pnpm --filter ./docs run`), `pnpm-workspace.yaml` (единственный участник — `docs`), `eslint.config.mjs`, `.editorconfig`, `.npmrc`, `.nuxtrc`, `.gitignore`, `LICENSE`, `README.md`, `AGENTS.md`.
+- `scripts/` — одноразовые i18n/migration утилиты: `add-anchors.mjs`, `swap-apidocs.mjs`. Вызываются через `pnpm run i18n:*`. Не часть Nuxt-приложения.
+- **Корневые конфиги** (репо-уровень, не Nuxt): `package.json` (только `docs:*` + `i18n:*` скрипты), `pnpm-workspace.yaml` (единственный участник — `docs`), `eslint.config.mjs`, `.editorconfig`, `.npmrc`, `.nuxtrc`, `.gitignore`, `LICENSE`, `README.md`, `AGENTS.md`.
 
 ## Команды
 
@@ -174,6 +182,13 @@ pnpm run docs:preview      # превью собранного сайта
 pnpm run typecheck
 pnpm run lint
 pnpm run lint:fix
+
+# i18n / Stage 3 утилиты
+pnpm run i18n:add-anchors      # добавить {#en-anchor} к каждому h2/h3
+pnpm run i18n:swap-apidocs     # apidocs.bitrix24.com → apidocs.bitrix24.ru
+pnpm run i18n:prep             # обе утилиты подряд
+pnpm run i18n:add-anchors:dry  # сухой прогон (только показать)
+pnpm run i18n:swap-apidocs:dry # сухой прогон
 ```
 
 ## Конвенции
@@ -183,10 +198,10 @@ pnpm run lint:fix
 - **ESLint:** конфиг живёт только в `eslint.config.mjs` корня. Скрипты в `docs/package.json` должны использовать `eslint --config ../eslint.config.mjs .` — flat-config не поднимается вверх по иерархии.
 - **Код-стайл:** ESLint `@nuxt/eslint-config` (flat), 2-space indent, без trailing commas, 1tbs скобки. `.editorconfig` фиксирует LF + UTF-8.
 - **Commits:** Conventional Commits (`feat`, `fix`, `docs`, `chore`, `ci`). Язык коммитов — английский.
-- **Язык контента `docs/content/`:** русский. При первичном импорте из upstream (этап 2) — временно английский, перевод на этапе 3.
-- **Якоря заголовков в markdown:** явные `## Заголовок {#en-anchor}` с английским slug (равным оригинальному) — чтобы при переводе на русский внешние ссылки не ломались.
+- **Язык контента `docs/content/`:** русский (после Stage 3). Подробности — `docs/i18n/style-guide.md` и `docs/i18n/glossary.ru.yml`.
+- **Якоря заголовков в markdown:** явные `## Заголовок {#en-anchor}` с английским slug (равным оригинальному). Добавляются автоматически через `pnpm run i18n:add-anchors` (см. Stage 3a). При ручной правке заголовка — якорь не трогать.
 - **Ссылки в markdown:**
-  - `https://apidocs.bitrix24.com/...` → `https://apidocs.bitrix24.ru/...` (русскоязычный хост).
+  - `https://apidocs.bitrix24.com/...` → `https://apidocs.bitrix24.ru/...` (русскоязычный хост; автоматизировано через `pnpm run i18n:swap-apidocs`).
   - `https://github.com/bitrix24/b24jssdk/...` — НЕ переписывать (SDK лежит в upstream).
   - Внутренние `/docs/...` — зеркалируются 1:1, URL не меняются.
 - **`docs/package.json`:** `@bitrix24/b24jssdk` и `-nuxt` идут как npm-версии (`^x.y.z`), а не `workspace:*`.
@@ -194,9 +209,14 @@ pnpm run lint:fix
 
 ## Этапы миграции
 
-1. **Stage 1 (инфра)** — замена VitePress на Nuxt 4 + b24ui, конфиги, `docs/app/`, `docs/modules/`, `docs/server/`.
-2. **Stage 2 (англ. контент)** — импорт `docs/content/**` из upstream вербатим.
-3. **Stage 3 (перевод)** — русский перевод + якоря + `apidocs.bitrix24.ru` + `alternate` frontmatter + переключатель языков.
+1. **Stage 1 (инфра)** — замена VitePress на Nuxt 4 + b24ui, конфиги, `docs/app/`, `docs/modules/`, `docs/server/`. ✅ PR #5.
+2. **Stage 2 (англ. контент)** — импорт `docs/content/**` из upstream вербатим. ✅ PR #7.
+3. **Stage 3 (перевод)** разбит на под-этапы:
+   - **Stage 3a (kit + механика)** — `docs/i18n/` (glossary, style-guide, prompt) + `scripts/add-anchors.mjs` + `scripts/swap-apidocs.mjs` + прогон скриптов на 87 файлах. PR #9.
+   - **Stage 3b (getting-started)** — перевод 12 файлов `docs/content/docs/1.getting-started/**` на русский.
+   - **Stage 3c (working-with-rest-api)** — перевод 53 файла `docs/content/docs/2.working-with-the-rest-api/**`.
+   - **Stage 3d (examples)** — перевод 22 файла `docs/content/docs/99.examples/**`.
+   - **Сайт RU-only**: переключатель языков, `alternate` frontmatter и дубли EN-версии — НЕ добавляются.
 4. **Stage 4 (CI)** — GitHub Actions (build + deploy на `gh-pages`), Dependabot, lint, broken-link checker, sync-from-upstream.
 
 ## Git workflow
