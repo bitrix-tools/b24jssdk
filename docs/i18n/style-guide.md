@@ -1,6 +1,6 @@
 # Стиль перевода EN → RU
 
-<sub>Last reviewed: 2026-06-02 (Stage 3a merge)</sub>
+<sub>Last reviewed: 2026-06-04 (Stage 3c PR-A merge)</sub>
 
 Этот документ — источник истины по стилю, тону и правилам при переводе `docs/content/**/*.md` на русский. Используется вместе с [`glossary.ru.yml`](./glossary.ru.yml) и [`prompt.md`](./prompt.md).
 
