@@ -1,6 +1,6 @@
 # Translation glossary EN → RU
 #
-# Last reviewed: 2026-06-02 (Stage 3a merge)
+# Last reviewed: 2026-06-04 (Stage 3c PR-B merge)
 #
 # Используется при переводе docs/content/**/*.md на русский.
 # AI или человек должен следовать этому словарю для консистентности.
@@ -87,6 +87,29 @@ terms:
     ru: событие
   - en: event handler
     ru: обработчик события
+
+  # —— Менеджеры и хелперы (Stage 3c PR-B) ——
+  - en: helper
+    ru: хелпер
+    note: |
+      «helper» в прозе → «хелпер» («through the helper» → «через хелпер»).
+      Имена классов SDK (`B24HelperManager`, `ProfileManager`, `AppManager` и пр.) — НЕ переводить.
+  - en: limiter
+    ru: лимитер
+    note: Компонент SDK (ограничитель частоты запросов). «limiter state» → «состояние лимитера». Сам термин «rate limit» — keep_en (см. раздел «Ограничения и ретраи»).
+  - en: handshake
+    ru: рукопожатие
+    note: OAuth/postMessage handshake → «рукопожатие». «getInitData handshake» → «рукопожатие getInitData».
+  - en: bucket
+    ru: корзина
+    note: В контексте `SelectedCRM` — массив элементов по типу сущности. «bucket» → «корзина».
+  - en: closure
+    ru: замыкание
+    note: JS-замыкание. «closure-based composable» → «composable на основе замыкания».
+  - en: self-hosted
+    ru: self-hosted
+    note: Коробочная версия Bitrix24. Оставляем английский («self-hosted», «self-hosted-портал»). Антоним — «облако» (cloud).
+    keep_en: true
 
   # —— Vue / Nuxt экосистема ——
   - en: composable
@@ -281,7 +304,7 @@ terms:
   - en: bundle
     ru: бандл
 
-  # —— Стандартные обороты docа ——
+  # —— Стандартные обороты doca ——
   - en: Note
     ru: Примечание
   - en: Tip
