@@ -149,8 +149,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          OPEN="$(gh issue list --state open --label upstream-sync --json number --jq 'length')"
-          if [ "$OPEN" -gt 0 ]; then
+          OPEN="$(gh issue list --state open --label upstream-sync --json number --jq 'length' 2>/dev/null || echo 0)"
+          if [ "${OPEN:-0}" -gt 0 ]; then
             echo "Уже есть открытый sync-issue — новый не создаём."
             echo "create=false" >> "$GITHUB_OUTPUT"
           else
