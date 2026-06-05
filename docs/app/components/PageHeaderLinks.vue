@@ -15,7 +15,7 @@ const { track } = useAnalytics()
 const mdPath = computed(() => `${withoutTrailingSlash(`${config.public.siteUrl}${config.public.baseUrl}/raw${route.path}`)}.md`)
 
 // @see docs/app/pages/docs/[...slug]/index.vue:164
-const aiPrompt = computed(() => `I'm looking at this Bitrix24 UI documentation: ${mdPath.value}\nHelp me understand how to use it. Be ready to explain concepts, give examples, or help debug based on it.`)
+const aiPrompt = computed(() => `I'm looking at this Bitrix24 JS SDK documentation: ${mdPath.value}\nHelp me understand how to use it. Be ready to explain concepts, give examples, or help debug based on it.`)
 
 const items = [
   {

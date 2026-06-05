@@ -35,7 +35,7 @@ useHead({
     ...link.value
   ]),
   style,
-  htmlAttrs: { lang: 'en', class: '' }
+  htmlAttrs: { lang: 'ru-RU', class: '' }
 })
 
 if (import.meta.server) {
@@ -65,10 +65,6 @@ provide('files', files)
         class="flex-1 min-w-0"
         :class="[
           route.path.startsWith('/docs/') && 'root'
-          // @memo this for docus
-          // 'transition-[margin-right] duration-200 ease-linear will-change-[margin-right]'
-          // { 'docus-sub-header': subNavigationMode === 'header' }
-          // !!! move to attr and add quotes :style={ marginRight: shouldPushContent ? `${assistantPanelWidth}px` : '0' } !!
         ]"
       >
         <template v-if="!route.path.startsWith('/examples')">
