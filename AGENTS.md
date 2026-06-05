@@ -1,6 +1,6 @@
 # AGENTS.md
 
-<sub>Last reviewed: 2026-06-02 (Stage 3a merge)</sub>
+<sub>Last reviewed: 2026-06-05 (PR #26 — вырезка AI-чат/MCP)</sub>
 
 Правила и конвенции для AI-агентов (Claude Code, Cursor, Codex и др.) при работе в этом репозитории.
 
@@ -31,7 +31,7 @@
   - **`docs/i18n/`** — translation-kit (glossary, style-guide, prompt) — нет в upstream;
   - **`scripts/`** — i18n/migration утилиты — нет в upstream.
 - **Тесты, JSDoc, security-фиксы api-routes** — это всё upstream-вопросы. Не наш скоуп.
-- **Развёртывание** — статика на GitHub Pages (`nuxt generate`). API-routes (`/api/ai`, `/api/component-example`) и MCP в prod **не работают** — это dev-only. Соответствующие security-риски касаются только локальной разработки.
+- **Развёртывание** — статика на GitHub Pages (`nuxt generate`). API-route `/api/component-example` и генерация `llms.txt`/`llms-full.txt` в prod **не работают** (dev-only при static export). Встроенный AI-чат-ассистент и MCP-сервер **удалены** (см. «При sync — НЕ восстанавливать»).
 
 ### При sync из upstream — НЕ восстанавливать
 
@@ -46,6 +46,7 @@
 - `LICENSE` — `Copyright (c) <год> Bitrix`. **Не возвращать на `Bitrix24`.**
 - `docs/i18n/` — translation-kit, **не сносить и не синхронизировать с upstream** (его там нет).
 - `scripts/add-anchors.mjs`, `scripts/swap-apidocs.mjs` — i18n утилиты, **не сносить**.
+- **AI-чат-ассистент и MCP-сервер — намеренно удалены** на зеркале (`docs/modules/bx-assistant/`, `docs/server/mcp/`, `docs/server/api/ai.post.ts`, чат-компоненты, зависимости `@ai-sdk/*` / `ai` / `@nuxtjs/mcp-toolkit`, блок `mcp:{}`). При sync **НЕ восстанавливать**. Генерация **llms.txt** (`nuxt-llms`, `server/plugins/llms.ts`, блок `llms:{}`) и ссылки **«Open in ChatGPT/Claude»** — ОСТАВЛЕНЫ. Полный список файлов — [`.github/AGENTS-SYNC-RUNBOOK.md` §5.1](.github/AGENTS-SYNC-RUNBOOK.md).
 
 ## Кастомные якоря заголовков (`{#anchor}`)
 
@@ -82,7 +83,7 @@ content: {
 Такие файлы агент НЕ пытается пушить сам. Алгоритм:
 
 1. **Агент формирует точный список** файлов, которые нужно добавить/обновить — пути, источник, размеры. Публикует список человеку в чате.
-2. **Человек выполняет доставку локально**: `cp` из исходника (напр. upstream-клон) или регенерация (напр. `pnpm install` → `pnpm-lock.yaml`) в своём клоне репозитория. Затем `git add` + `git commit` + `git push` на рабочую ветку.
+2. **Человек выполняет доставку локально**: `cp` из источника (напр. upstream-клон) или регенерация (напр. `pnpm install` → `pnpm-lock.yaml`) в своём клоне репозитория. Затем `git add` + `git commit` + `git push` на рабочую ветку.
 3. **Агент верифицирует результат** через MCP (`mcp__github__get_commit` / `get_file_contents`): все ли файлы из списка появились, не вкралось ли побочных изменений (напр. случайное удаление lockfile).
 
 ### Шаблон запроса от агента
@@ -191,7 +192,7 @@ content: {
   - `docs/content/` — markdown-контент (после Stage 3 — на русском; сейчас английский исходник в процессе перевода).
   - `docs/i18n/` — translation-kit: `glossary.ru.yml`, `style-guide.md`, `prompt.md`. Источник истины для переводчика (человек+AI).
   - `docs/modules/` — кастомные Nuxt-модули.
-  - `docs/server/` — SSR-маршруты, MCP-инструменты, raw-markdown routes (dev-only при static export).
+  - `docs/server/` — SSR-маршруты, raw-markdown routes, плагин `llms.txt` (dev-only при static export).
   - `docs/public/` — статические ассеты.
   - `docs/package.json` — зависимости Nuxt-приложения.
 - `scripts/` — одноразовые i18n/migration утилиты: `add-anchors.mjs`, `swap-apidocs.mjs`. Вызываются через `pnpm run i18n:*`. Не часть Nuxt-приложения.
