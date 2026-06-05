@@ -128,10 +128,30 @@ grep -rn 'Get started\|Edit this page\|Copy code\|Search' docs/app/ docs/server/
 | `schemaOrg.identity.sameAs` | `bitrix-tools` + `bitrix24` orgs | наши + upstream profile links |
 | `runtimeConfig.public.siteUrl` | `https://bitrix-tools.github.io` | прод-домен |
 | `runtimeConfig.public.gitUrl` | `github.com/bitrix-tools/b24jssdk` | наш репо для ссылок «редактировать» |
-| `llms.title` / `description` | на русском | LLM-поиск |
-| `llms.notes` | «Переводы синхронизируются с upstream...» | пояснение об источнике |
 
-Изменения из upstream принять можно только в `modules: [...]`, `nitro: {...}`, `routeRules: {...}` и `compatibilityDate`. Всё остальное — ручной merge.
+Изменения из upstream принять можно только в `nitro: {...}`, `routeRules: {...}` и `compatibilityDate`. Всё остальное — ручной merge. **`modules: [...]` — особый случай: см. §5.1 (не возвращать AI/MCP-модули).**
+
+## 5.1. Вырезанные на зеркале фичи (AI-ассистент + MCP + llms.txt) — НЕ восстанавливать
+
+На зеркале **намеренно удалены** фича AI-ассистента, MCP-сервер и генерация llms.txt (решение: не тащим AI-инфраструктуру и связанный Dependabot-чурн). При sync upstream вернёт их обратно — **НЕ восстанавливайте**. Контентные страницы (`docs/content/**`) при этом **остаются** (это документация, в т.ч. рецепты «AI-ассистент на SDK»).
+
+**Не возвращать в `docs/package.json`** (зависимости): `@ai-sdk/deepseek`, `@ai-sdk/mcp`, `@ai-sdk/vue`, `ai`, `@nuxtjs/mcp-toolkit`, `nuxt-llms`. (Оставляем `@comark/vue`, `@nuxtjs/mdc`, `shiki` — это ядро рендера.)
+
+**Не возвращать в `docs/nuxt.config.ts`:** модули `./modules/bx-assistant`, `@nuxtjs/mcp-toolkit`, `nuxt-llms`; блоки `llms: {}` и `mcp: {}`; optimizeDeps-записи `@ai-sdk/vue` и `ai`; Link-заголовки `</llms.txt>` / `</llms-full.txt>` на `routeRules['/']`.
+
+**Удалённые файлы/директории (если upstream принесёт обратно — снова удалить):**
+
+- `docs/server/api/ai.post.ts`
+- `docs/server/mcp/` (tools + prompts)
+- `docs/server/plugins/llms.ts`
+- `docs/modules/bx-assistant/` (модуль ассистента целиком)
+- `docs/app/components/chat/` (`Chat.vue`, `Comark.client.ts`)
+- `docs/app/composables/useAIChat.ts`, `docs/app/composables/useChat.ts`
+- `docs/app/components/content/DocsAside.vue`
+
+**Файлы, где держим AI-проводку вырезанной (при sync — повторно вычистить AI-куски):** `app/app.vue`, `app/app.config.ts` (`bxAssistant`), `app/composables/useSearch.ts`, `app/pages/docs/[...slug]/index.vue` (Explain-with-AI), `app/components/header/Header.vue` (Ask-AI), `app/components/PageHeaderLinks.vue` (Open-in-ChatGPT/Claude), `.env.example` (DeepSeek / `NUXT_PUBLIC_USE_AI`).
+
+**Ядро НЕ трогаем:** поиск (`@nuxt/content`), подсветка (`shiki` / `@shikijs/*`), `server/routes/raw/**`, `server/utils/transformMDC.ts`, `modules/md-rewrite.ts` (AI-bot user-agent negotiation — это инфра `/raw`, не фича ассистента).
 
 ## 6. Корневые конфиги — НЕ восстанавливать
 
