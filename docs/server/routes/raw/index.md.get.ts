@@ -53,8 +53,6 @@ Bitrix24 UI is a free and open source Vue UI library powered by [Reka UI](https:
 - Composables: <${DOMAIN}/raw/docs/composables/define-shortcuts.md>
 - Typography: <${DOMAIN}/raw/docs/typography.md>
 - Sitemap: <${DOMAIN}/sitemap.md>
-- LLMs index: <${DOMAIN}/llms.txt>
-- Full LLMs documentation: <${DOMAIN}/llms-full.txt>
 
 ## Links
 

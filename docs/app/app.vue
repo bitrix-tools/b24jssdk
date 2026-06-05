@@ -4,9 +4,6 @@ import type { ToasterProps } from '@bitrix24/b24ui-nuxt'
 const route = useRoute()
 const appConfig = useAppConfig()
 const { style, link } = useTheme()
-const { isEnabled: isAssistantEnabled } = useAssistant()
-// @memo this for docus
-// const { isEnabled: isAssistantEnabled, panelWidth: assistantPanelWidth, shouldPushContent } = useAssistant()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs', ['restApiVersion', 'category', 'description', 'badge']))
 const { data: files } = useLazyAsyncData(
@@ -89,21 +86,9 @@ provide('files', files)
 
           <ClientOnly>
             <Search :files="files" :navigation="navigationByRestApiVersion" />
-            <!-- @memo this for docus -->
-            <!-- template v-if="isAssistantEnabled">
-              <LazyAssistantPanel />
-              <LazyAssistantFloatingInput />
-            </template -->
           </ClientOnly>
         </template>
       </div>
-
-      <!-- @memo this for NUXT.UI.docs -->
-      <template v-if="isAssistantEnabled && !route.path.startsWith('/examples')">
-        <ClientOnly>
-          <Chat />
-        </ClientOnly>
-      </template>
     </div>
   </B24App>
 </template>
