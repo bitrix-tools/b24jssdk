@@ -87,13 +87,10 @@ export default defineNuxtConfig({
   modules: [
     '@bitrix24/b24jssdk-nuxt',
     '@bitrix24/b24ui-nuxt',
-    './modules/bx-assistant',
     '@nuxt/content',
     // '@nuxt/image',
     '@nuxt/a11y',
-    '@nuxtjs/mcp-toolkit',
     // 'nuxt-component-meta',
-    'nuxt-llms',
     // @memo off this
     'nuxt-og-image',
     'motion-v/nuxt',
@@ -178,8 +175,6 @@ export default defineNuxtConfig({
           '</sitemap.md>; rel="describedby"; type="text/markdown"',
           '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
           '</docs>; rel="service-doc"; type="text/html"',
-          '</llms.txt>; rel="describedby"; type="text/plain"',
-          '</llms-full.txt>; rel="describedby"; type="text/plain"',
           '</>; rel="alternate"; type="text/markdown"'
         ].join(', '),
         Vary: 'Accept, User-Agent'
@@ -226,7 +221,6 @@ export default defineNuxtConfig({
       // alphabetically sorted — duplicates here cost cold-start time and
       // make diff review harder.
       include: [
-        '@ai-sdk/vue',
         '@bitrix24/b24icons-vue/actions/BrushIcon',
         '@bitrix24/b24icons-vue/button/PageIcon',
         '@bitrix24/b24icons-vue/common-service/Bitrix24Icon',
@@ -279,7 +273,6 @@ export default defineNuxtConfig({
         '@comark/vue',
         '@comark/vue/plugins/highlight',
         '@vueuse/core',
-        'ai',
         'prettier',
         'remark-custom-heading-id',
         'tailwindcss/colors'
@@ -292,60 +285,6 @@ export default defineNuxtConfig({
   //   format: ['webp', 'jpeg', 'jpg', 'png', 'svg'],
   //   provider: 'ipx'
   // },
-
-  llms: {
-    domain: `${prodUrl}${baseUrl}`,
-    title: 'Bitrix24 JS SDK — документация (RU)',
-    description: 'Русскоязычная версия документации Bitrix24 JS SDK — полнофункциональной JavaScript-библиотеки для работы с REST API Bitrix24, включая вызовы методов, батчинг, фреймы, хуки и OAuth.',
-    // Disable content module's built-in raw markdown route - we use our own custom handler
-    // in server/routes/raw/[...slug].md.get.ts that applies MDC transformations
-    contentRawMarkdown: false,
-    full: {
-      title: 'Полная документация Bitrix24 JS SDK',
-      description: 'Полный корпус документации Bitrix24 JS SDK на русском в виде Markdown-файлов с MDC-синтаксисом.'
-    },
-    sections: [
-      {
-        title: 'Установка (Nuxt, Vue, React, Node.js, UMD)',
-        contentCollection: 'docs',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/docs/getting-started/installation%' }
-        ]
-      },
-      {
-        title: 'Начало работы',
-        contentCollection: 'docs',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/docs/getting-started%' }
-        ]
-      },
-      {
-        title: 'Работа с REST API',
-        contentCollection: 'docs',
-        contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/docs/working-with-the-rest-api/%' }
-        ]
-      }
-      // {
-      //   title: 'Examples',
-      //   contentCollection: 'docs',
-      //   contentFilters: [
-      //     { field: 'path', operator: 'LIKE', value: '/docs/examples/%' }
-      //   ]
-      // }
-    ],
-    notes: [
-      'Контент генерируется из того же источника, что и верстка публичной документации. Переводы синхронизируются с upstream `bitrix24/b24jssdk`.'
-    ]
-  },
-
-  mcp: {
-    enabled: import.meta.dev, // fix if you need
-    name: 'Bitrix24 JS SDK',
-    version: '1.0.0',
-    route: `/mcp/`, // ${baseUrl}
-    browserRedirect: '/docs/getting-started/' // '/docs/getting-started/ai/mcp'
-  },
 
   ogImage: {
     zeroRuntime: true,
