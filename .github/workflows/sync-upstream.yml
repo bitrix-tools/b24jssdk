@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout mirror
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -159,7 +159,7 @@ jobs:
 
       - name: Create drift issue
         if: steps.drift.outputs.has_changes == 'true' && steps.dedup.outputs.create == 'true'
-        uses: peter-evans/create-issue-from-file@v5
+        uses: peter-evans/create-issue-from-file@v6
         with:
           title: ${{ steps.drift.outputs.issue_title }}
           content-filepath: ${{ steps.drift.outputs.report_path }}
