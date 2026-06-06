@@ -44,6 +44,8 @@ export default defineNitroPlugin((nitroApp) => {
 
 function transformRawLink(href: string) {
   const config = useRuntimeConfig()
+  const prefix = `${config.public.canonicalUrl}${config.public.baseUrl}`
+  const rebased = href.startsWith(prefix) ? `${prefix}/raw${href.slice(prefix.length)}` : href
 
-  return `${withoutTrailingSlash(href.replace(new RegExp(`^${config.public.canonicalUrl}${config.public.baseUrl}`), `${config.public.canonicalUrl}${config.public.baseUrl}/raw`))}.md`
+  return `${withoutTrailingSlash(rebased)}.md`
 }

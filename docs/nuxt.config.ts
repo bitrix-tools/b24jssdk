@@ -87,11 +87,9 @@ export default defineNuxtConfig({
   modules: [
     '@bitrix24/b24jssdk-nuxt',
     '@bitrix24/b24ui-nuxt',
-    './modules/bx-assistant',
     '@nuxt/content',
     // '@nuxt/image',
     '@nuxt/a11y',
-    '@nuxtjs/mcp-toolkit',
     // 'nuxt-component-meta',
     'nuxt-llms',
     // @memo off this
@@ -226,7 +224,6 @@ export default defineNuxtConfig({
       // alphabetically sorted — duplicates here cost cold-start time and
       // make diff review harder.
       include: [
-        '@ai-sdk/vue',
         '@bitrix24/b24icons-vue/actions/BrushIcon',
         '@bitrix24/b24icons-vue/button/PageIcon',
         '@bitrix24/b24icons-vue/common-service/Bitrix24Icon',
@@ -279,7 +276,6 @@ export default defineNuxtConfig({
         '@comark/vue',
         '@comark/vue/plugins/highlight',
         '@vueuse/core',
-        'ai',
         'prettier',
         'remark-custom-heading-id',
         'tailwindcss/colors'
@@ -337,14 +333,6 @@ export default defineNuxtConfig({
     notes: [
       'Контент генерируется из того же источника, что и верстка публичной документации. Переводы синхронизируются с upstream `bitrix24/b24jssdk`.'
     ]
-  },
-
-  mcp: {
-    enabled: import.meta.dev, // fix if you need
-    name: 'Bitrix24 JS SDK',
-    version: '1.0.0',
-    route: `/mcp/`, // ${baseUrl}
-    browserRedirect: '/docs/getting-started/' // '/docs/getting-started/ai/mcp'
   },
 
   ogImage: {

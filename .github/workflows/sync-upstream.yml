@@ -1,0 +1,168 @@
+name: Sync upstream check
+
+# Еженедельно сверяет docs/ нашего зеркала с upstream bitrix24/b24jssdk.
+# НИЧЕГО не переводит и не коммитит в content — только детектит дрейф и
+# открывает issue с отчётом «что приехало в upstream с прошлой синхронизации».
+# Сам перевод делает человек/Claude-сессия по .github/AGENTS-SYNC-RUNBOOK.md.
+
+on:
+  schedule:
+    # Понедельник 06:30 UTC (через полчаса после broken-links, чтобы не толкаться)
+    - cron: '30 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      baseline_override:
+        description: 'Upstream SHA для разовой сверки (пусто — взять из .github/.upstream-sync-baseline)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  detect-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout mirror
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Add upstream remote and fetch
+        run: |
+          git remote add upstream https://github.com/bitrix24/b24jssdk.git 2>/dev/null || true
+          git fetch --quiet upstream main
+
+      - name: Compute drift
+        id: drift
+        run: |
+          set -euo pipefail
+
+          BASELINE="${{ github.event.inputs.baseline_override }}"
+          if [ -z "$BASELINE" ]; then
+            if [ -f .github/.upstream-sync-baseline ]; then
+              BASELINE="$(tr -d '[:space:]' < .github/.upstream-sync-baseline)"
+            fi
+          fi
+          UPSTREAM_SHA="$(git rev-parse upstream/main)"
+
+          if [ -z "$BASELINE" ]; then
+            echo "Нет baseline — нечего сравнивать. Засейте .github/.upstream-sync-baseline."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [ "$BASELINE" = "$UPSTREAM_SHA" ]; then
+            echo "Baseline == upstream HEAD ($UPSTREAM_SHA). Дрейфа нет."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          RANGE="${BASELINE}..upstream/main"
+
+          NEW_CONTENT="$(git diff --diff-filter=A --name-only "$BASELINE" upstream/main -- docs/content/ || true)"
+          MOD_CONTENT="$(git diff --diff-filter=M --name-only "$BASELINE" upstream/main -- docs/content/ || true)"
+          DEL_CONTENT="$(git diff --diff-filter=D --name-only "$BASELINE" upstream/main -- docs/content/ || true)"
+          UI_CHANGES="$(git diff --name-only "$BASELINE" upstream/main -- docs/app/ docs/server/ docs/modules/ || true)"
+          CONFIG_CHANGES="$(git diff --name-only "$BASELINE" upstream/main -- docs/nuxt.config.ts docs/package.json || true)"
+          COMMITS="$(git log --oneline "$RANGE" -- docs/ || true)"
+
+          if [ -z "$NEW_CONTENT$MOD_CONTENT$DEL_CONTENT$UI_CHANGES$CONFIG_CHANGES" ]; then
+            echo "Изменений в отслеживаемых путях нет."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          DATE="$(date -u +%Y-%m-%d)"
+          {
+            echo "## Дрейф upstream → нужна синхронизация"
+            echo ""
+            echo "Автоотчёт от \`sync-upstream.yml\`. Перевод — руками по [\`AGENTS-SYNC-RUNBOOK.md\`](../blob/main/.github/AGENTS-SYNC-RUNBOOK.md)."
+            echo ""
+            echo "| | |"
+            echo "|---|---|"
+            echo "| Baseline (с прошлой синхронизации) | \`$BASELINE\` |"
+            echo "| Upstream HEAD (цель) | \`$UPSTREAM_SHA\` |"
+            echo ""
+
+            if [ -n "$NEW_CONTENT" ]; then
+              echo "### 🆕 Новые файлы content — принести + перевести"
+              echo '```'
+              echo "$NEW_CONTENT"
+              echo '```'
+              echo ""
+            fi
+            if [ -n "$MOD_CONTENT" ]; then
+              echo "### ✏️ Изменены уже переведённые — ручной merge по блокам (§3 раннербука)"
+              echo "> НЕ перезаписывать целиком — перенести только новые абзацы/блоки."
+              echo '```'
+              echo "$MOD_CONTENT"
+              echo '```'
+              echo ""
+            fi
+            if [ -n "$DEL_CONTENT" ]; then
+              echo "### 🗑 Удалены в upstream — проверить (возможно переименование)"
+              echo '```'
+              echo "$DEL_CONTENT"
+              echo '```'
+              echo ""
+            fi
+            if [ -n "$UI_CHANGES" ]; then
+              echo "### 🧩 app/server/modules — проверить видимые UI-строки (§4)"
+              echo '```'
+              echo "$UI_CHANGES"
+              echo '```'
+              echo ""
+            fi
+            if [ -n "$CONFIG_CHANGES" ]; then
+              echo "### ⚙️ nuxt.config.ts / package.json — ОСТОРОЖНО, защищённые зоны (§5–§7)"
+              echo '```'
+              echo "$CONFIG_CHANGES"
+              echo '```'
+              echo ""
+            fi
+
+            echo "<details><summary>Upstream-коммиты в docs/ (${BASELINE:0:7}..${UPSTREAM_SHA:0:7})</summary>"
+            echo ""
+            echo '```'
+            echo "$COMMITS"
+            echo '```'
+            echo "</details>"
+            echo ""
+            echo "---"
+            echo "**После синхронизации:** в sync-PR в последней строке указать \`Upstream: $UPSTREAM_SHA\`,"
+            echo "а в \`.github/.upstream-sync-baseline\` записать \`$UPSTREAM_SHA\` (это станет точкой отсчёта)."
+          } > /tmp/sync-report.md
+
+          echo "report_path=/tmp/sync-report.md" >> "$GITHUB_OUTPUT"
+          echo "issue_title=Sync upstream: дрейф docs/ на $DATE" >> "$GITHUB_OUTPUT"
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
+
+      - name: Skip if open sync issue already exists
+        id: dedup
+        if: steps.drift.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          OPEN="$(gh issue list --state open --label upstream-sync --json number --jq 'length' 2>/dev/null || echo 0)"
+          if [ "${OPEN:-0}" -gt 0 ]; then
+            echo "Уже есть открытый sync-issue — новый не создаём."
+            echo "create=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "create=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create drift issue
+        if: steps.drift.outputs.has_changes == 'true' && steps.dedup.outputs.create == 'true'
+        uses: peter-evans/create-issue-from-file@v6
+        with:
+          title: ${{ steps.drift.outputs.issue_title }}
+          content-filepath: ${{ steps.drift.outputs.report_path }}
+          labels: |
+            upstream-sync
+            needs-translation

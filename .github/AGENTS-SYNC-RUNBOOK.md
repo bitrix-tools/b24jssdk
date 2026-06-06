@@ -128,10 +128,31 @@ grep -rn 'Get started\|Edit this page\|Copy code\|Search' docs/app/ docs/server/
 | `schemaOrg.identity.sameAs` | `bitrix-tools` + `bitrix24` orgs | наши + upstream profile links |
 | `runtimeConfig.public.siteUrl` | `https://bitrix-tools.github.io` | прод-домен |
 | `runtimeConfig.public.gitUrl` | `github.com/bitrix-tools/b24jssdk` | наш репо для ссылок «редактировать» |
-| `llms.title` / `description` | на русском | LLM-поиск |
-| `llms.notes` | «Переводы синхронизируются с upstream...» | пояснение об источнике |
 
-Изменения из upstream принять можно только в `modules: [...]`, `nitro: {...}`, `routeRules: {...}` и `compatibilityDate`. Всё остальное — ручной merge.
+Изменения из upstream принять можно только в `nitro: {...}`, `routeRules: {...}` и `compatibilityDate`. Всё остальное — ручной merge. **`modules: [...]` — особый случай: см. §5.1 (не возвращать AI/MCP-модули).**
+
+## 5.1. Вырезанные на зеркале фичи (AI-чат-ассистент + MCP-сервер) — НЕ восстанавливать
+
+На зеркале **намеренно удалены** встроенный AI-чат-ассистент (виджет «Ask AI», кнопка «Explain with AI») и MCP-сервер (решение: не тащим AI-чат-инфраструктуру и связанный Dependabot-чурн). При sync upstream вернёт их обратно — **НЕ восстанавливайте**.
+
+> **ОСТАВЛЕНО (НЕ удалять):** генерация **llms.txt** (`nuxt-llms`, блок `llms: {}`, `server/plugins/llms.ts`, Link-заголовки `</llms.txt>`) и ссылки **«Open in ChatGPT / Open in Claude»** в `PageHeaderLinks.vue` — это полезные внешние ссылки / AI-discoverability без тяжёлых зависимостей. Контентные страницы (`docs/content/**`) тоже остаются.
+
+**Не возвращать в `docs/package.json`** (зависимости): `@ai-sdk/deepseek`, `@ai-sdk/mcp`, `@ai-sdk/vue`, `ai`, `@nuxtjs/mcp-toolkit`. (Оставляем `@comark/vue`, `@nuxtjs/mdc`, `shiki`, `nuxt-llms` — ядро рендера и llms.txt.)
+
+**Не возвращать в `docs/nuxt.config.ts`:** модули `./modules/bx-assistant`, `@nuxtjs/mcp-toolkit`; блок `mcp: {}`; optimizeDeps-записи `@ai-sdk/vue` и `ai`. (Модуль `nuxt-llms`, блок `llms: {}` и Link-заголовки `</llms.txt>` — ОСТАВЛЯЕМ.)
+
+**Удалённые файлы/директории (если upstream принесёт обратно — снова удалить):**
+
+- `docs/server/api/ai.post.ts`
+- `docs/server/mcp/` (tools + prompts)
+- `docs/modules/bx-assistant/` (модуль ассистента целиком)
+- `docs/app/components/chat/` (`Chat.vue`, `Comark.client.ts`)
+- `docs/app/composables/useAIChat.ts`, `docs/app/composables/useChat.ts`
+- `docs/app/components/content/DocsAside.vue`
+
+**Файлы, где держим AI-чат-проводку вырезанной (при sync — повторно вычистить чат-куски):** `app/app.vue`, `app/app.config.ts` (`bxAssistant`), `app/composables/useSearch.ts`, `app/pages/docs/[...slug]/index.vue` (Explain-with-AI), `app/components/header/Header.vue` (Ask-AI), `.env.example` (DeepSeek / `NUXT_PUBLIC_USE_AI`).
+
+**Ядро и llms НЕ трогаем:** поиск (`@nuxt/content`), подсветка (`shiki` / `@shikijs/*`), `server/routes/raw/**`, `server/utils/transformMDC.ts`, `modules/md-rewrite.ts`, а также `server/plugins/llms.ts` и `nuxt-llms` (генерация llms.txt).
 
 ## 6. Корневые конфиги — НЕ восстанавливать
 
