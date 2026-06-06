@@ -1,4 +1,9 @@
 <script setup lang="ts">
+// mirror-custom: контент карточек (cookbookCards/catalogueRecipes) и весь блок
+// <B24PageSection> ниже — специфичны для RU-зеркала и переведены на русский.
+// При sync из upstream НЕ перезаписывать файл целиком: переносить только
+// изменения hero/hero.links (через docs/content/index.yml).
+// См. .github/AGENTS-SYNC-RUNBOOK.md §4.
 // import { joinURL } from 'ufo'
 import EncloseTextInCodeTagIcon from '@bitrix24/b24icons-vue/editor/EncloseTextInCodeTagIcon'
 import InfoCircleIcon from '@bitrix24/b24icons-vue/outline/InfoCircleIcon'
@@ -35,7 +40,20 @@ useSeoMeta({
   ogDescription: page.value.description
 })
 
-const cookbookCards = [
+interface CookbookCard {
+  title: string
+  to: string
+  description: string
+}
+
+interface CatalogueRecipe {
+  title: string
+  to: string
+  stack: string
+  scopes: string
+}
+
+const cookbookCards: CookbookCard[] = [
   { title: 'Smoke-тест вебхука в CLI', to: '/docs/examples/webhook-cli-node', description: 'Проверка только что созданного входящего вебхука за 30 строк. Всегда начинайте отсюда.' },
   { title: 'Экспорт сделок в CSV', to: '/docs/examples/dashboard-deals-csv', description: 'Потоковая выгрузка всех сделок за период в CSV через FetchListV2.make(). Память не растёт независимо от объёма результата.' },
   { title: 'Массовое обновление сделок', to: '/docs/examples/bulk-update-deals', description: 'Перенос тысяч сделок на новую стадию через BatchByChunkV2.make() с обработкой частичных ошибок.' },
@@ -43,7 +61,7 @@ const cookbookCards = [
   { title: 'Подписка на Pull-события', to: '/docs/examples/pull-subscribe-frame', description: 'Живые события во frame-приложении через useB24Helper и клиент Pull (WebSocket + long-polling).' }
 ]
 
-const catalogueRecipes = [
+const catalogueRecipes: CatalogueRecipe[] = [
   { title: 'Аналитика CRM — воронка продаж', to: '/docs/examples/crm-analytics', stack: 'Node', scopes: 'crm' },
   { title: 'Массовая рассылка', to: '/docs/examples/mass-messaging', stack: 'Node', scopes: 'crm, im' },
   { title: 'Автоматизация задач при смене стадии', to: '/docs/examples/task-automation', stack: 'Node', scopes: 'crm, task' },
@@ -53,9 +71,9 @@ const catalogueRecipes = [
   { title: 'Обработчик исходящего вебхука', to: '/docs/examples/webhook-handler', stack: 'Node, express', scopes: 'crm' },
   { title: 'AI-ассистент — разбор сделки и создание задачи', to: '/docs/examples/ai-assistant', stack: 'Node, openai', scopes: 'crm, task' },
   { title: 'Веб-поиск + LLM с записью в таймлайн', to: '/docs/examples/web-search-llm', stack: 'Node, BYOC', scopes: 'crm' },
-  { title: 'Рецепты обработки ошибок', to: '/docs/examples/error-handling', stack: 'Node', scopes: 'любые' },
+  { title: 'Рецепты обработки ошибок', to: '/docs/examples/error-handling', stack: 'Node', scopes: 'any' },
   { title: 'Регистрация исходящих событий', to: '/docs/examples/event-registration', stack: 'Node', scopes: 'crm' },
-  { title: 'Рукопожатие при установке OAuth', to: '/docs/examples/oauth-install', stack: 'Node, express', scopes: 'OAuth-приложение' }
+  { title: 'Рукопожатие при установке OAuth', to: '/docs/examples/oauth-install', stack: 'Node, express', scopes: 'OAuth app' }
 ]
 
 const iconFromIconName = (iconName?: string) => {
@@ -104,7 +122,7 @@ const iconFromIconName = (iconName?: string) => {
           Рецепты
         </h2>
         <p class="text-muted mb-6">
-          Подобранные точки входа — каждый рецепт это один готовый к копированию файл с переменными окружения, наброском ожидаемого вывода и блоком <code>Limitations</code>.
+          Подобранные точки входа: каждый рецепт — это один готовый к копированию файл с переменными окружения, наброском ожидаемого вывода и блоком <code>Limitations</code>.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <NuxtLink
@@ -161,7 +179,7 @@ const iconFromIconName = (iconName?: string) => {
                     Стек
                   </th>
                   <th class="text-left py-2.5 px-4 font-semibold text-muted hidden md:table-cell">
-                    Права
+                    Scopes
                   </th>
                 </tr>
               </thead>

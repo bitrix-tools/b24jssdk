@@ -1,8 +1,11 @@
+# mirror-custom: переведено для RU-зеркала. При sync из upstream НЕ перезаписывать
+# целиком — переносить только новые поля hero/links, текст оставлять на русском.
+# См. .github/AGENTS-SYNC-RUNBOOK.md §3.
 title: 'Bitrix24 JS SDK'
-description: Bitrix24 JS SDK для работы с Bitrix24 REST API в локальных, боевых приложениях или через вебхуки.
+description: Bitrix24 JS SDK для работы с Bitrix24 REST API в локальных, production-приложениях или через вебхуки.
 hero:
   title: '@bitrix24/b24jssdk'
-  description: для работы с Bitrix24 REST API в локальных, боевых приложениях или через вебхуки
+  description: для работы с Bitrix24 REST API в локальных, production-приложениях или через вебхуки
   links:
     - label: Начать
       to: /docs/getting-started/
