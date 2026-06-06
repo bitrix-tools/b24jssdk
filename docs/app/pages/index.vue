@@ -36,26 +36,26 @@ useSeoMeta({
 })
 
 const cookbookCards = [
-  { title: 'Webhook CLI smoke test', to: '/docs/examples/webhook-cli-node', description: 'Verify a freshly created inbound webhook in 30 lines. Always start here.' },
-  { title: 'Export deals to CSV', to: '/docs/examples/dashboard-deals-csv', description: 'Stream every deal in a date window into a CSV using FetchListV2.make(). Memory stays flat regardless of result size.' },
-  { title: 'Bulk update deals', to: '/docs/examples/bulk-update-deals', description: 'Migrate thousands of deals to a new stage using BatchByChunkV2.make() with partial-error handling.' },
-  { title: 'Frame app skeleton', to: '/docs/examples/frame-app-skeleton', description: 'A minimum viable Vue 3 iframe app: handshake, parent title, persisted options, slider open/close.' },
-  { title: 'Subscribe to Pull events', to: '/docs/examples/pull-subscribe-frame', description: 'Live events in a frame app via useB24Helper and the Pull client (WebSocket + long-polling).' }
+  { title: 'Smoke-тест вебхука в CLI', to: '/docs/examples/webhook-cli-node', description: 'Проверка только что созданного входящего вебхука за 30 строк. Всегда начинайте отсюда.' },
+  { title: 'Экспорт сделок в CSV', to: '/docs/examples/dashboard-deals-csv', description: 'Потоковая выгрузка всех сделок за период в CSV через FetchListV2.make(). Память не растёт независимо от объёма результата.' },
+  { title: 'Массовое обновление сделок', to: '/docs/examples/bulk-update-deals', description: 'Перенос тысяч сделок на новую стадию через BatchByChunkV2.make() с обработкой частичных ошибок.' },
+  { title: 'Каркас frame-приложения', to: '/docs/examples/frame-app-skeleton', description: 'Минимальное Vue 3 iframe-приложение: рукопожатие, заголовок родителя, сохранение настроек, открытие/закрытие слайдера.' },
+  { title: 'Подписка на Pull-события', to: '/docs/examples/pull-subscribe-frame', description: 'Живые события во frame-приложении через useB24Helper и клиент Pull (WebSocket + long-polling).' }
 ]
 
 const catalogueRecipes = [
-  { title: 'CRM analytics — sales funnel', to: '/docs/examples/crm-analytics', stack: 'Node', scopes: 'crm' },
-  { title: 'Mass messaging', to: '/docs/examples/mass-messaging', stack: 'Node', scopes: 'crm, im' },
-  { title: 'Task automation on stage transitions', to: '/docs/examples/task-automation', stack: 'Node', scopes: 'crm, task' },
-  { title: 'ERP / 1C contact sync', to: '/docs/examples/erp-sync', stack: 'Node, node-cron', scopes: 'crm' },
-  { title: 'Disk — storages, folders, files', to: '/docs/examples/disk-files', stack: 'Node', scopes: 'disk' },
-  { title: 'Telegram bot for new deals', to: '/docs/examples/telegram-bot', stack: 'Node, grammy, node-cron', scopes: 'crm' },
-  { title: 'Outbound webhook handler', to: '/docs/examples/webhook-handler', stack: 'Node, express', scopes: 'crm' },
-  { title: 'AI assistant — analyse a deal, create a task', to: '/docs/examples/ai-assistant', stack: 'Node, openai', scopes: 'crm, task' },
-  { title: 'Web search + LLM with timeline write-back', to: '/docs/examples/web-search-llm', stack: 'Node, BYOC', scopes: 'crm' },
-  { title: 'Error-handling cookbook', to: '/docs/examples/error-handling', stack: 'Node', scopes: 'any' },
-  { title: 'Outbound event registration', to: '/docs/examples/event-registration', stack: 'Node', scopes: 'crm' },
-  { title: 'OAuth install handshake', to: '/docs/examples/oauth-install', stack: 'Node, express', scopes: 'OAuth app' }
+  { title: 'Аналитика CRM — воронка продаж', to: '/docs/examples/crm-analytics', stack: 'Node', scopes: 'crm' },
+  { title: 'Массовая рассылка', to: '/docs/examples/mass-messaging', stack: 'Node', scopes: 'crm, im' },
+  { title: 'Автоматизация задач при смене стадии', to: '/docs/examples/task-automation', stack: 'Node', scopes: 'crm, task' },
+  { title: 'Синхронизация контактов с ERP / 1С', to: '/docs/examples/erp-sync', stack: 'Node, node-cron', scopes: 'crm' },
+  { title: 'Диск — хранилища, папки, файлы', to: '/docs/examples/disk-files', stack: 'Node', scopes: 'disk' },
+  { title: 'Telegram-бот для новых сделок', to: '/docs/examples/telegram-bot', stack: 'Node, grammy, node-cron', scopes: 'crm' },
+  { title: 'Обработчик исходящего вебхука', to: '/docs/examples/webhook-handler', stack: 'Node, express', scopes: 'crm' },
+  { title: 'AI-ассистент — разбор сделки и создание задачи', to: '/docs/examples/ai-assistant', stack: 'Node, openai', scopes: 'crm, task' },
+  { title: 'Веб-поиск + LLM с записью в таймлайн', to: '/docs/examples/web-search-llm', stack: 'Node, BYOC', scopes: 'crm' },
+  { title: 'Рецепты обработки ошибок', to: '/docs/examples/error-handling', stack: 'Node', scopes: 'любые' },
+  { title: 'Регистрация исходящих событий', to: '/docs/examples/event-registration', stack: 'Node', scopes: 'crm' },
+  { title: 'Рукопожатие при установке OAuth', to: '/docs/examples/oauth-install', stack: 'Node, express', scopes: 'OAuth-приложение' }
 ]
 
 const iconFromIconName = (iconName?: string) => {
@@ -101,10 +101,10 @@ const iconFromIconName = (iconName?: string) => {
       <!-- Cookbook -->
       <B24Container class="px-[22px] lg:px-8 pb-10">
         <h2 class="text-2xl font-bold mb-2 text-label">
-          Cookbook
+          Рецепты
         </h2>
         <p class="text-muted mb-6">
-          Curated entry points — each recipe is a single, copy-paste-friendly file with environment variables, an expected output sketch, and a <code>Limitations</code> block.
+          Подобранные точки входа — каждый рецепт это один готовый к копированию файл с переменными окружения, наброском ожидаемого вывода и блоком <code>Limitations</code>.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <NuxtLink
@@ -141,10 +141,10 @@ const iconFromIconName = (iconName?: string) => {
         >
           <template #header>
             <h2 class="text-2xl font-bold mb-1 text-legend">
-              Extended catalogue
+              Расширенный каталог
             </h2>
             <p class="text-description">
-              End-to-end TypeScript scripts — run with <code>tsx</code> after setting <code>B24_HOOK</code> to your incoming webhook URL.
+              Сквозные TypeScript-скрипты — запускайте через <code>tsx</code>, предварительно задав <code>B24_HOOK</code> с URL вашего входящего вебхука.
             </p>
           </template>
           <div class="overflow-x-auto">
@@ -155,13 +155,13 @@ const iconFromIconName = (iconName?: string) => {
                     #
                   </th>
                   <th class="text-left py-2.5 px-4 font-semibold text-muted">
-                    Recipe
+                    Рецепт
                   </th>
                   <th class="text-left py-2.5 px-4 font-semibold text-muted hidden sm:table-cell">
-                    Stack
+                    Стек
                   </th>
                   <th class="text-left py-2.5 px-4 font-semibold text-muted hidden md:table-cell">
-                    Scopes
+                    Права
                   </th>
                 </tr>
               </thead>
@@ -192,7 +192,7 @@ const iconFromIconName = (iconName?: string) => {
         </B24Card>
         <div class="mt-4">
           <B24Button to="/docs/examples">
-            View all examples →
+            Все примеры →
           </B24Button>
         </div>
       </B24Container>
