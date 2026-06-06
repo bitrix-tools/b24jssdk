@@ -1,6 +1,6 @@
 ---
 title: HealthCheck.make()
-description: 'Method for checking the availability of Bitrix24 REST API. Performs a simple request to the REST API to verify service health.'
+description: 'Метод для проверки доступности REST API Bitrix24. Выполняет простой запрос к REST API для проверки работоспособности сервиса.'
 category: 'tools'
 audited: 2026-05-05
 navigation.title: HealthCheck
@@ -10,12 +10,12 @@ links:
     to: https://github.com/bitrix24/b24jssdk/blob/main/packages/jssdk/src/core/tools/healthcheck.ts
 ---
 
-## Overview {#overview}
+## Обзор {#overview}
 
-Use `HealthCheck.make()`{lang="ts-type"} to check the availability of Bitrix24 REST API. The method returns a `Promise` with a boolean value indicating API availability.
+Используйте `HealthCheck.make()`{lang="ts-type"} для проверки доступности REST API Bitrix24. Метод возвращает `Promise` с булевым значением, указывающим на доступность API.
 
 ```ts
-// Basic usage
+// Базовое использование
 const isHealthy = await $b24.tools.healthCheck.make()
 
 if (isHealthy) {
@@ -25,7 +25,7 @@ if (isHealthy) {
 }
 ```
 
-## Method Signature {#method-signature}
+## Сигнатура метода {#method-signature}
 
 ```ts-type
 make(
@@ -33,26 +33,26 @@ make(
 ): Promise<boolean>
 ```
 
-### Parameters {#parameters}
+### Параметры {#parameters}
 
-| Parameter | Type | Required | Description |
+| Параметр | Тип | Обязательный | Описание |
 |----|----|----|----|
-| **`requestId`** | `string`{lang="ts-type"} | No | Unique request identifier for tracking. Used for request deduplication and debugging. |
+| **`requestId`** | `string`{lang="ts-type"} | Нет | Уникальный идентификатор запроса для отслеживания. Используется для дедупликации запросов и отладки. |
 
-### Return Value {#return-value}
+### Возвращаемое значение {#return-value}
 
-`Promise<boolean>`{lang="ts-type"} — a promise that resolves to a boolean value:
+`Promise<boolean>`{lang="ts-type"} — promise, который разрешается булевым значением:
 
-- **`true`** — REST API is available and responding, webhook is configured correctly.
-- **`false`** — REST API is unavailable, an error occurred, or necessary access rights are missing.
+- **`true`** — REST API доступен и отвечает, вебхук настроен корректно.
+- **`false`** — REST API недоступен, произошла ошибка или отсутствуют необходимые права доступа.
 
-## Error Handling {#error-handling}
+## Обработка ошибок {#error-handling}
 
-`HealthCheck.make()`{lang="ts-type"} never throws. Network failures, HTTP errors, missing scopes, and timeouts are all collapsed into a return value of `false`. The method is intentionally a black-box probe — for actionable error information, call the underlying method directly with [`CallV2.make()`](/docs/working-with-the-rest-api/call-rest-api-ver2/) and inspect `AjaxResult` (`isSuccess`, `getErrorMessages()`).
+`HealthCheck.make()`{lang="ts-type"} никогда не выбрасывает исключений. Сетевые сбои, HTTP-ошибки, отсутствующие scope и таймауты — всё сводится к возврату `false`. Метод намеренно сделан «чёрным ящиком» — для информации об ошибке, с которой можно работать, вызывайте нижележащий метод напрямую через [`CallV2.make()`](/docs/working-with-the-rest-api/call-rest-api-ver2/) и проверяйте `AjaxResult` (`isSuccess`, `getErrorMessages()`).
 
-## Examples {#examples}
+## Примеры {#examples}
 
-### Availability check {#availability-check}
+### Проверка доступности {#availability-check}
 
 ::code-example
 ---
@@ -60,8 +60,8 @@ name: 'tools-health-check'
 ---
 ::
 
-## Alternatives and Recommendations {#alternatives-and-recommendations}
+## Альтернативы и рекомендации {#alternatives-and-recommendations}
 
-* **For measuring response speed**: Use [`Ping`](/docs/working-with-the-rest-api/tools-ping/).
-* **For checking specific permissions**: Perform a test request to the required API method.
-* **On the client-side (browser):** Use the built-in [`B24Frame`](/docs/getting-started/installation/vue/#init) object.
+* **Для измерения скорости ответа**: используйте [`Ping`](/docs/working-with-the-rest-api/tools-ping/).
+* **Для проверки конкретных прав**: выполните тестовый запрос к нужному методу API.
+* **На клиентской стороне (браузер):** используйте встроенный объект [`B24Frame`](/docs/getting-started/installation/vue/#init).

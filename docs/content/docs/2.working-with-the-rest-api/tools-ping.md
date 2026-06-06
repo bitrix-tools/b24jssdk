@@ -1,6 +1,6 @@
 ---
 title: Ping.make()
-description: 'Method for measuring Bitrix24 REST API response speed. Performs a test request and returns response time in milliseconds.'
+description: 'Метод для измерения скорости ответа REST API Bitrix24. Выполняет тестовый запрос и возвращает время ответа в миллисекундах.'
 category: 'tools'
 audited: 2026-05-05
 navigation.title: Ping
@@ -10,12 +10,12 @@ links:
     to: https://github.com/bitrix24/b24jssdk/blob/main/packages/jssdk/src/core/tools/ping.ts
 ---
 
-## Overview {#overview}
+## Обзор {#overview}
 
-Use `Ping.make()`{lang="ts-type"} to measure the response time of Bitrix24 REST API. The method returns a `Promise` with a numeric value of the response time in milliseconds.
+Используйте `Ping.make()`{lang="ts-type"} для измерения времени ответа REST API Bitrix24. Метод возвращает `Promise` с числовым значением времени ответа в миллисекундах.
 
 ```ts
-// Basic usage
+// Базовое использование
 const responseTime = await $b24.tools.ping.make()
 
 if (responseTime >= 0) {
@@ -25,7 +25,7 @@ if (responseTime >= 0) {
 }
 ```
 
-## Method Signature {#method-signature}
+## Сигнатура метода {#method-signature}
 
 ```ts-type
 make(
@@ -33,26 +33,26 @@ make(
 ): Promise<number>
 ```
 
-### Parameters {#parameters}
+### Параметры {#parameters}
 
-| Parameter | Type | Required | Description |
+| Параметр | Тип | Обязательный | Описание |
 |----|----|----|----|
-| **`requestId`** | `string`{lang="ts-type"} | No | Unique request identifier for tracking. Used for request deduplication and debugging. |
+| **`requestId`** | `string`{lang="ts-type"} | Нет | Уникальный идентификатор запроса для отслеживания. Используется для дедупликации запросов и отладки. |
 
-### Return Value {#return-value}
+### Возвращаемое значение {#return-value}
 
-`Promise<number>`{lang="ts-type"} — a promise that resolves to a numeric value:
+`Promise<number>`{lang="ts-type"} — promise, который разрешается числовым значением:
 
-- **Positive number** — response time in milliseconds from sending the request to receiving the response.
-- **`-1`** — in case of error or timeout.
+- **Положительное число** — время ответа в миллисекундах от отправки запроса до получения ответа.
+- **`-1`** — в случае ошибки или таймаута.
 
-## Error Handling {#error-handling}
+## Обработка ошибок {#error-handling}
 
-`Ping.make()`{lang="ts-type"} never throws. Network failures, HTTP errors, invalid credentials, and timeouts are all swallowed internally and surfaced as a return value of `-1`. There is no way to distinguish between failure modes from the call site — for that, use [`HealthCheck.make()`](/docs/working-with-the-rest-api/tools-health-check/) or call the underlying method directly with [`CallV2.make()`](/docs/working-with-the-rest-api/call-rest-api-ver2/) and inspect `AjaxResult`.
+`Ping.make()`{lang="ts-type"} никогда не выбрасывает исключений. Сетевые сбои, HTTP-ошибки, неверные учётные данные и таймауты — всё проглатывается внутри и возвращается как `-1`. Со стороны вызова нет способа различить виды сбоев — для этого используйте [`HealthCheck.make()`](/docs/working-with-the-rest-api/tools-health-check/) или вызывайте нижележащий метод напрямую через [`CallV2.make()`](/docs/working-with-the-rest-api/call-rest-api-ver2/) и проверяйте `AjaxResult`.
 
-## Examples {#examples}
+## Примеры {#examples}
 
-### Measuring response time {#measuring-response-time}
+### Измерение времени ответа {#measuring-response-time}
 
 ::code-example
 ---
@@ -60,8 +60,8 @@ name: 'tools-ping'
 ---
 ::
 
-## Alternatives and Recommendations {#alternatives-and-recommendations}
+## Альтернативы и рекомендации {#alternatives-and-recommendations}
 
-* **For availability check**: Use [`HealthCheck`](/docs/working-with-the-rest-api/tools-health-check/).
-* **For measuring operation performance**: Perform time measurements for specific API methods.
-* **On the client-side (browser):** Use the built-in [`B24Frame`](/docs/getting-started/installation/vue/#init) object.
+* **Для проверки доступности**: используйте [`HealthCheck`](/docs/working-with-the-rest-api/tools-health-check/).
+* **Для измерения производительности операций**: выполняйте замеры времени для конкретных методов API.
+* **На клиентской стороне (браузер):** используйте встроенный объект [`B24Frame`](/docs/getting-started/installation/vue/#init).

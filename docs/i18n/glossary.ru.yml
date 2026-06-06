@@ -1,6 +1,6 @@
 # Translation glossary EN → RU
 #
-# Last reviewed: 2026-06-04 (Stage 3c PR-B merge)
+# Last reviewed: 2026-06-04 (Stage 3c PR-C merge)
 #
 # Используется при переводе docs/content/**/*.md на русский.
 # AI или человек должен следовать этому словарю для консистентности.
@@ -110,6 +110,29 @@ terms:
     ru: self-hosted
     note: Коробочная версия Bitrix24. Оставляем английский («self-hosted», «self-hosted-портал»). Антоним — «облако» (cloud).
     keep_en: true
+
+  # —— Core / ошибки / логирование (Stage 3c PR-C) ——
+  - en: singleton
+    ru: синглтон
+    note: Паттерн. «Browser/Text/Type — синглтон».
+  - en: type guard
+    ru: type guard
+    note: TypeScript type guard. Не переводим. «каждый метод — type guard».
+    keep_en: true
+  - en: redaction
+    ru: редактирование
+    note: |
+      В контексте логов — «редактирование учётных данных» (вырезание секретов).
+      «redact» → «редактировать», «redacted» → «отредактированный».
+  - en: sink
+    ru: sink
+    note: Приёмник логов (log sink). Оставляем английский — «удалённый sink».
+    keep_en: true
+  - en: hard error
+    ru: hard-ошибка
+    note: «hard» (выбрасывается) / «soft» (возвращается в AjaxResult) — оставляем английские hard/soft.
+  - en: soft error
+    ru: soft-ошибка
 
   # —— Vue / Nuxt экосистема ——
   - en: composable

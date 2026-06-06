@@ -14,7 +14,7 @@ jobs:
   lychee:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Restore lychee cache
         uses: actions/cache@v4
@@ -61,7 +61,7 @@ jobs:
 
       - name: Create issue from failure
         if: steps.lychee.outputs.exit_code != '0'
-        uses: peter-evans/create-issue-from-file@v5
+        uses: peter-evans/create-issue-from-file@v6
         with:
           title: 'Broken internal links detected (weekly check)'
           content-filepath: ./lychee/issue-body.md
