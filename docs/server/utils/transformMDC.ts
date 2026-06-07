@@ -18,7 +18,6 @@ type Document = {
 }
 
 const B24_DOCS = {
-  ui: 'https://bitrix24.github.io/b24ui/',
   jsSdk: 'https://bitrix24.github.io/b24jssdk/'
 }
 
@@ -154,11 +153,6 @@ function prepareHref(
     return anchor ? `${base}raw/${processedPath}#${anchor}` : `${base}raw/${processedPath}`
   }
 
-  if (href.startsWith(B24_DOCS.ui) && href.includes('/docs/')) {
-    const path = href.replace(B24_DOCS.ui, '')
-    return processUrlWithAnchor(path, B24_DOCS.ui)
-  }
-
   if (href.startsWith(B24_DOCS.jsSdk) && href.includes('/docs/')) {
     const path = href.replace(B24_DOCS.jsSdk, '')
     return processUrlWithAnchor(path, B24_DOCS.jsSdk)
@@ -208,7 +202,7 @@ export async function transformMDC(event: H3Event, doc: Document): Promise<Docum
         replaceNodeWithPre(node, lang, `// example not found: ${name}`, `${propsName}.${lang}`)
         return
       }
-      const code = b24Instance.prepareCode(examples[name]?.content || '')
+      const code = b24Instance.prepareCode(examples.code || '')
       replaceNodeWithPre(node, lang, code, `${propsName}.${lang}`)
     } catch (error) {
       console.warn('[code-example] error processing:', name, error)
