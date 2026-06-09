@@ -336,10 +336,7 @@ export default defineNuxtConfig({
   },
 
   ogImage: {
-    zeroRuntime: true,
-    security: {
-      renderTimeout: 60000
-    }
+    zeroRuntime: true
   },
 
   schemaOrg: {

@@ -34,8 +34,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Gate the deploy on the same checks as CI: a push to main that breaks
+      # lint/typecheck must NOT reach production (deploy.yml runs independently
+      # of ci.yml, so we re-run them here before building the artifact).
+      - name: Lint
+        run: pnpm run lint
+
       - name: Prepare Nuxt
         run: pnpm run docs:prepare
+
+      - name: Typecheck
+        run: pnpm run typecheck
 
       - name: Build static site
         run: pnpm run docs:generate
