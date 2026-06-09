@@ -1,6 +1,6 @@
 # AGENTS.md
 
-<sub>Last reviewed: 2026-06-05 (PR #26 — вырезка AI-чат/MCP)</sub>
+<sub>Last reviewed: 2026-06-09 (banner закомментирован; chrome-ссылки сайта → bitrix-tools. Ранее: PR #26 — вырезка AI-чат/MCP)</sub>
 
 Правила и конвенции для AI-агентов (Claude Code, Cursor, Codex и др.) при работе в этом репозитории.
 
@@ -47,6 +47,8 @@
 - `docs/i18n/` — translation-kit, **не сносить и не синхронизировать с upstream** (его там нет).
 - `scripts/add-anchors.mjs`, `scripts/swap-apidocs.mjs` — i18n утилиты, **не сносить**.
 - **AI-чат-ассистент и MCP-сервер — намеренно удалены** на зеркале (`docs/modules/bx-assistant/`, `docs/server/mcp/`, `docs/server/api/ai.post.ts`, чат-компоненты, зависимости `@ai-sdk/*` / `ai` / `@nuxtjs/mcp-toolkit`, блок `mcp:{}`). При sync **НЕ восстанавливать**. Генерация **llms.txt** (`nuxt-llms`, `server/plugins/llms.ts`, блок `llms:{}`) и ссылки **«Open in ChatGPT/Claude»** — ОСТАВЛЕНЫ. Полный список файлов — [`.github/AGENTS-SYNC-RUNBOOK.md` §5.1](.github/AGENTS-SYNC-RUNBOOK.md).
+- **Баннер `<Banner />`** — на зеркале **закомментирован** (`<!-- <Banner /> -->`) в `docs/app/app.vue` и `docs/app/error.vue`. При sync держать закомментированным в **обоих** файлах (upstream поставляет его активным).
+- **Chrome-ссылки самого сайта указывают на зеркало `bitrix-tools`, а не на upstream `bitrix24`**: пункт навигации «GitHub» в `docs/app/composables/useHeader.ts` → `https://github.com/bitrix-tools/b24jssdk`; `config.public.gitUrl` (footer-репозиторий, `/releases`, «edit this page») по умолчанию `bitrix-tools`. При sync **не возвращать на `bitrix24`**. NB: это НЕ противоречит правилу «`github.com/bitrix24/...` не переписывать» — то правило про **контентные ссылки на исходники SDK**, а здесь UI-chrome самого сайта.
 
 ## Кастомные якоря заголовков (`{#anchor}`)
 
