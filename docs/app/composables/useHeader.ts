@@ -31,48 +31,48 @@ const _useHeader = () => {
 
   const desktopLinks = computed<NavigationMenuItem[]>(() => [
     {
-      label: 'Docs',
+      label: 'Документация',
       to: '/docs/getting-started',
       active: route.path.startsWith('/docs/getting-started')
     },
     {
-      label: 'Working',
+      label: 'Работа с REST API',
       to: '/docs/working-with-the-rest-api',
       active: route.path.startsWith('/docs/working-with-the-rest-api')
     },
     {
-      label: 'Examples',
+      label: 'Примеры',
       to: '/docs/examples',
       active: route.path === '/docs/examples' || route.path.startsWith('/docs/examples/')
     },
     {
-      label: 'Resources',
+      label: 'Ресурсы',
       type: 'trigger',
       children: [
         {
           label: 'B24 UI',
-          description: 'for REST API web-application development',
+          description: 'для разработки веб-приложений на REST API',
           icon: BrowserIcon,
           to: 'https://bitrix24.github.io/b24ui/',
           target: '_blank'
         },
         {
           label: 'B24 Icons',
-          description: 'Design your applications in the Bitrix24 style.',
+          description: 'Оформляйте приложения в стиле Bitrix24.',
           icon: BarcodeIcon,
           to: 'https://bitrix24.github.io/b24icons/',
           target: '_blank'
         },
         {
-          label: 'Community',
-          description: 'Bitrix24 UI on Telegram',
+          label: 'Сообщество',
+          description: 'Bitrix24 UI в Telegram',
           icon: EarthIcon,
           to: tgLink.value,
           target: '_blank'
         },
         {
           label: 'REST API',
-          description: 'Bitrix24 REST API and Marketplace Applications',
+          description: 'REST API Bitrix24 и приложения Маркетплейса',
           icon: Bitrix24Icon,
           to: b24DocsLink.value,
           target: '_blank'
@@ -83,26 +83,26 @@ const _useHeader = () => {
 
   const mobileLinks = computed<NavigationMenuItem[]>(() => [
     {
-      label: 'Get Started',
+      label: 'Начало работы',
       to: '/docs/getting-started',
       icon: PlayLIcon,
       active: route.path.startsWith('/docs/getting-started')
     },
     {
-      label: 'Working',
+      label: 'Работа с REST API',
       to: '/docs/working-with-the-rest-api',
       icon: TerminalIcon,
       active: route.path.startsWith('/docs/working-with-the-rest-api')
     },
     {
-      label: 'Examples',
+      label: 'Примеры',
       to: '/docs/examples',
       icon: ItemIcon,
       active: route.path === '/docs/examples' || route.path.startsWith('/docs/examples/')
     },
     {
       label: 'GitHub',
-      to: 'https://github.com/bitrix24/b24jssdk',
+      to: 'https://github.com/bitrix-tools/b24jssdk',
       icon: GitHubIcon,
       target: '_blank',
       b24ui: {
