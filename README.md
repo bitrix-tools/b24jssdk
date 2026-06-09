@@ -40,10 +40,10 @@ pnpm run typecheck       # nuxt typecheck (вызов в docs/)
 │   ├── app/             # компоненты, layouts, plugins
 │   ├── content/         # markdown-контент (после Stage 3 — на русском)
 │   ├── i18n/            # translation-kit: glossary, style-guide, prompt
-│   ├── modules/         # кастомные Nuxt-модули (bx-assistant, md-rewrite)
+│   ├── modules/         # кастомные Nuxt-модули (md-rewrite, component-example)
 │   ├── nuxt.config.ts   # конфигурация Nuxt
 │   ├── public/          # статические ассеты
-│   └── server/          # SSR-маршруты, MCP-инструменты
+│   └── server/          # SSR-маршруты, raw-markdown endpoints, генерация llms.txt
 ├── scripts/             # i18n / migration утилиты (add-anchors, swap-apidocs)
 └── package.json         # docs:* + i18n:* скрипты
 ```
