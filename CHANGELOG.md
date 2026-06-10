@@ -10,7 +10,7 @@
 - fix Http -> check error_.response & check window
 - add dependencies @types/luxon
 - add docs/guide/example-hook-node-work
-- 
+
 ## 0.1.5 (2024-11-20)
 
 - add warning about client-side query execution
