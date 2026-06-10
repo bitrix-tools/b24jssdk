@@ -179,7 +179,7 @@ const iconFromIconName = (iconName?: string) => {
                     Стек
                   </th>
                   <th class="text-left py-2.5 px-4 font-semibold text-muted hidden md:table-cell">
-                    Scopes
+                    Права
                   </th>
                 </tr>
               </thead>
