@@ -1,23 +1,14 @@
 version: 2
 updates:
-  # Корневой package.json: только remark-custom-heading-id + devDeps
+  # pnpm-workspace: единый lockfile в КОРНЕ. Поэтому все npm-зависимости
+  # (корневые и docs/) обновляет одна корневая экосистема — она workspace-aware
+  # и правит корневой pnpm-lock.yaml.
+  #
+  # Отдельная "/docs"-экосистема здесь НЕ работает: она меняет docs/package.json,
+  # но корневой lockfile не трогает → `pnpm install --frozen-lockfile` в CI падает.
+  # Не заводить её обратно.
   - package-ecosystem: "npm"
     directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "06:00"
-      timezone: "Europe/Moscow"
-    labels:
-      - "dependencies"
-    commit-message:
-      prefix: "chore(deps)"
-      include: "scope"
-    open-pull-requests-limit: 3
-
-  # docs/package.json: основное Nuxt-приложение — группируем по логике
-  - package-ecosystem: "npm"
-    directory: "/docs"
     schedule:
       interval: "weekly"
       day: "monday"
