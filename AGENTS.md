@@ -1,6 +1,6 @@
 # AGENTS.md
 
-<sub>Last reviewed: 2026-06-09 (banner закомментирован; chrome-ссылки сайта → bitrix-tools. Ранее: PR #26 — вырезка AI-чат/MCP)</sub>
+<sub>Last reviewed: 2026-07-02 (Stage 4 CI смержён: ci.yml + deploy-гейт + dependabot + broken-links + sync-upstream; экшены на Node 24. Ранее: 2026-06-09 — banner off + chrome→bitrix-tools; PR #26 — вырезка AI-чат/MCP)</sub>
 
 Правила и конвенции для AI-агентов (Claude Code, Cursor, Codex и др.) при работе в этом репозитории.
 
@@ -247,7 +247,7 @@ pnpm run i18n:swap-apidocs:dry # сухой прогон
    - **Stage 3c (working-with-rest-api)** — перевод 53 файла `docs/content/docs/2.working-with-the-rest-api/**`.
    - **Stage 3d (examples)** — перевод 22 файла `docs/content/docs/99.examples/**`.
    - **Сайт RU-only**: переключатель языков, `alternate` frontmatter и дубли EN-версии — НЕ добавляются.
-4. **Stage 4 (CI)** — GitHub Actions (build + deploy на `gh-pages`), Dependabot, lint, broken-link checker, sync-from-upstream.
+4. **Stage 4 (CI)** — ✅ GitHub Actions: `ci.yml` (lint+typecheck на PR), `deploy.yml` (build + deploy на GitHub Pages с lint/typecheck-гейтом и smoke-тестом), `dependabot.yml`, `broken-links.yml` (lychee), `sync-upstream.yml`. Экшены закреплены на Node-24-мажорах.
 
 ## Git workflow
 
