@@ -11,24 +11,24 @@ export function useSearch() {
 
   const links = computed(() => [
     {
-      label: 'Get Started',
-      description: 'Learn how to get started with Bitrix24 UI.',
+      label: 'Начало работы',
+      description: 'Узнайте, как начать работу с Bitrix24 JS SDK.',
       icon: PlayLIcon,
       to: '/docs/getting-started/',
       active: route.path.startsWith('/docs/getting-started')
     },
     {
-      label: 'Working',
-      description: 'Introduction to working with Bitrix24 REST API',
+      label: 'Работа с REST API',
+      description: 'Введение в работу с REST API Bitrix24',
       icon: DeveloperResourcesIcon,
       to: '/docs/working-with-the-rest-api/',
       active: route.path.startsWith('/docs/working-with-the-rest-api')
     },
     {
       label: 'GitHub',
-      description: 'Check out the Bitrix24 JS SDK repository and follow development on GitHub.',
+      description: 'Загляните в репозиторий Bitrix24 JS SDK и следите за разработкой на GitHub.',
       icon: GitHubIcon,
-      to: 'https://github.com/bitrix24/b24ui',
+      to: 'https://github.com/bitrix-tools/b24jssdk',
       target: '_blank'
     }
   ] as ContentSearchLink[])

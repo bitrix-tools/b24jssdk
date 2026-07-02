@@ -21,12 +21,12 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 11.4.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: pnpm
@@ -34,8 +34,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Gate the deploy on the same checks as CI: a push to main that breaks
+      # lint/typecheck must NOT reach production (deploy.yml runs independently
+      # of ci.yml, so we re-run them here before building the artifact).
+      - name: Lint
+        run: pnpm run lint
+
       - name: Prepare Nuxt
         run: pnpm run docs:prepare
+
+      - name: Typecheck
+        run: pnpm run typecheck
 
       - name: Build static site
         run: pnpm run docs:generate
@@ -44,7 +53,7 @@ jobs:
         uses: actions/configure-pages@v6
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: docs/.output/public
 
@@ -61,7 +70,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       # Smoke-test — убеждаемся, что сайт реально доступен в prod (с retry на propagation).
       - name: Smoke test deployed site

@@ -22,25 +22,25 @@ const categories = {
   'working-with-the-rest-api': [
     {
       id: 'actions',
-      title: 'Actions',
+      title: 'Действия',
       // @todo ! insert icon
       icon: LayersIcon
     },
     {
       id: 'tools',
-      title: 'Tools',
+      title: 'Инструменты',
       // @todo ! insert icon
       icon: ItemIcon
     },
     {
       id: 'logger',
-      title: 'Logger',
+      title: 'Логирование',
       // @todo ! insert icon
       icon: ItemIcon
     },
     {
       id: 'limiters',
-      title: 'Limiters',
+      title: 'Лимитеры',
       // @todo ! insert icon
       icon: ItemIcon
     },
@@ -66,19 +66,19 @@ const categories = {
   'getting-started': [
     {
       id: 'integrations',
-      title: 'Integrations',
+      title: 'Интеграции',
       icon: undefined
     },
     {
       id: 'aiTools',
-      title: 'AI Tools',
+      title: 'AI-инструменты',
       icon: undefined
     }
   ],
   'examples': [
     {
       id: 'examples',
-      title: 'Recipes',
+      title: 'Рецепты',
       // @todo ! insert icon
       icon: ItemIcon
     }
@@ -113,7 +113,7 @@ function groupChildrenByCategory(items: ContentNavigationItem[], slug: string): 
 
     if (withoutChildren.length) {
       groups.push({
-        title: 'Overview',
+        title: 'Обзор',
         type: 'trigger' as const,
         /** @memo this path */
         path: `/docs/${slug}`,

@@ -35,7 +35,7 @@ const { b24DocsLink, tgLink } = useHeader()
         size="md"
       />
       <B24Button
-        label="Releases"
+        label="Релизы"
         :icon="RocketIcon"
         :to="`${config.public.gitUrl}/releases`"
         target="_blank"

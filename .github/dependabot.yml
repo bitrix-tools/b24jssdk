@@ -49,10 +49,6 @@ updates:
           - "@vue/*"
           - "vue-*"
           - "@vueuse/*"
-      ai-sdk:
-        patterns:
-          - "@ai-sdk/*"
-          - "ai"
       content-tooling:
         patterns:
           - "remark-*"

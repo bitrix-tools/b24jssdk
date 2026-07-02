@@ -1,6 +1,6 @@
 # Translation glossary EN → RU
 #
-# Last reviewed: 2026-06-04 (Stage 3c PR-C merge)
+# Last reviewed: 2026-06-10 (i18n term + typo fixes)
 #
 # Используется при переводе docs/content/**/*.md на русский.
 # AI или человек должен следовать этому словарю для консистентности.
@@ -363,6 +363,6 @@ terms:
   - en: Usage
     ru: Использование
   - en: Installation
-    ru: Настройка
+    ru: Установка
   - en: Configuration
     ru: Настройка
