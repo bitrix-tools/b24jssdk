@@ -2,7 +2,7 @@
 title: Ping.make()
 description: 'Метод для измерения скорости ответа REST API Bitrix24. Выполняет тестовый запрос и возвращает время ответа в миллисекундах.'
 category: 'tools'
-audited: 2026-05-05
+audited: 2026-06-25
 navigation.title: Ping
 links:
   - label: Ping
