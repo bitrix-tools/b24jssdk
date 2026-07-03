@@ -2,7 +2,7 @@
 title: HealthCheck.make()
 description: 'Метод для проверки доступности REST API Bitrix24. Выполняет простой запрос к REST API для проверки работоспособности сервиса.'
 category: 'tools'
-audited: 2026-05-05
+audited: 2026-06-25
 navigation.title: HealthCheck
 links:
   - label: HealthCheck
