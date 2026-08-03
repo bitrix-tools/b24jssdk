@@ -38,7 +38,7 @@
     "i18n:prep": "pnpm run i18n:add-anchors && pnpm run i18n:swap-apidocs"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^1.15.2",
+    "@nuxt/eslint-config": "^1.16.0",
     "@types/node": "^25.3.0",
     "dotenv": "^17.4.2",
     "eslint": "^10.3.0",
