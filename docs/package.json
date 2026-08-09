@@ -29,7 +29,7 @@
     "@takumi-rs/core": "^1.1.2",
     "@vueuse/core": "^14.3.0",
     "@vueuse/integrations": "^14.3.0",
-    "reka-ui": "^2.9.7",
+    "reka-ui": "^2.9.9",
     "better-sqlite3": "^12.9.0",
     "joi": "^18.1.2",
     "motion-v": "^2.2.1",
